@@ -1,0 +1,25 @@
+{
+  "name": "my-flowbite-pro-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "flowbite": "^3.1.2"
+  },
+  "devDependencies": {
+    "flowbite-typography": "^1.0.5",
+    "live-server": "^1.2.2",
+    "tailwindcss": "^3.4.14"
+  },
+  "resolutions": {
+  "braces": "3.0.3", 
+  "micromatch": "4.0.8"
+}
+}
