@@ -1,0 +1,284 @@
+/* ============================================================
+   PORTFOLIO WIDGET — CSS Module
+   The central dark card on the homepage hero.
+   Always dark by design — not a themed surface.
+   Colors use rgba/white intentionally (not token-flipped).
+   ============================================================ */
+
+/* ── Widget shell ── */
+.widget {
+  position: relative;
+  z-index: 2;
+  width: 720px;
+  background: var(--color-bg-dark);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-xl);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Header row ── */
+.widgetHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.widgetLogo {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.widgetNameGroup {
+  flex: 1;
+  min-width: 0;
+}
+
+.widgetName {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+.widgetSubtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0.15rem 0 0;
+}
+
+.widgetMoreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.widgetMoreLink:hover {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.widgetMoreLink:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-full);
+}
+
+/* ── View area — fixed height shared by all three views ── */
+.viewArea {
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Visually hidden heading for screen readers */
+.viewHeading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ── Navigation pills ── */
+.pillNav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pill {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0 1.125rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast), border var(--transition-fast);
+}
+.pill:hover { background: rgba(255, 255, 255, 0.16); }
+.pill:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.pillActive {
+  composes: pill;
+  color: var(--color-ink);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-white);
+  cursor: default;
+}
+.pillActive:hover { background: var(--color-white); opacity: 0.92; }
+
+/* ── Availability strip ── */
+.ctaBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.125rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.availableDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-available);
+  flex-shrink: 0;
+}
+
+.locationText {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Contact view ── */
+.contactWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.linkedinLink {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
+  min-height: 56px;
+  transition: background var(--transition-fast);
+}
+.linkedinLink:hover { background: rgba(255, 255, 255, 0.1); }
+.linkedinLink:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.linkedinText {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  flex: 1;
+}
+
+.contactEmailBox {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-height: 56px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contactEmail {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-white);
+  flex: 1;
+  word-break: break-all;
+  margin: 0;
+}
+
+.contactActions {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.btnCopy {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  cursor: pointer;
+  min-height: var(--min-touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background var(--transition-base);
+}
+.btnCopy[data-copied="true"] { background: var(--color-green); }
+.btnCopy:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.btnSendEmail {
+  flex: 1;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 1rem;
+  text-decoration: none;
+  min-height: var(--min-touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity var(--transition-fast);
+}
+.btnSendEmail:hover { opacity: 0.9; }
+.btnSendEmail:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .widget {
+    width: calc(100vw - 2.5rem);
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 520px) {
+  .widget { padding: 1.25rem; }
+  .pillNav { flex-wrap: wrap; }
+}

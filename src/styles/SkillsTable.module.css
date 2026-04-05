@@ -1,0 +1,242 @@
+/* ============================================================
+   SKILLS & EXPERTISE — pillar grid + chips (no bullets)
+   Aligns with About / Home: brand dot eyebrow, paper surfaces.
+   ============================================================ */
+
+.section {
+  background: var(--primitive-secondary-100);
+  padding: clamp(3.5rem, 9vw, 5.5rem) var(--section-x, 1.5rem);
+  border-top: 1px solid color-mix(in srgb, var(--primitive-brand-300) 14%, var(--primitive-gray-200) 86%);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  max-width: 42rem;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin: 0 0 var(--space-3);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-10);
+    max-width: none;
+  }
+
+  .title {
+    flex: 0 1 auto;
+  }
+
+  .lead {
+    flex: 1 1 18rem;
+    max-width: 26rem;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: clamp(1.65rem, 2.8vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.12;
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+/* ── Three pillars ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    align-items: stretch;
+  }
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--primitive-white);
+  border: 1px solid color-mix(in srgb, var(--primitive-gray-300) 45%, var(--primitive-brand-200) 55%);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--primitive-black) 4%, transparent),
+    0 18px 40px color-mix(in srgb, var(--primitive-brand-900) 5%, transparent);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.pillar:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-500) 22%, var(--primitive-gray-300) 78%);
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--primitive-black) 5%, transparent),
+    0 22px 48px color-mix(in srgb, var(--primitive-brand-800) 8%, transparent);
+}
+
+.pillarTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.pillarIndex {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--primitive-brand-600);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--primitive-brand-100) 65%, var(--primitive-white) 35%);
+  border: 1px solid color-mix(in srgb, var(--primitive-brand-300) 30%, transparent);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.pillarTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.pillarBlurb {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  margin: 0;
+  flex: 1;
+}
+
+.chipCluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  color: var(--primitive-brand-800);
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--primitive-brand-050) 88%, var(--primitive-white) 12%);
+  border: 1px solid color-mix(in srgb, var(--primitive-brand-400) 20%, var(--primitive-secondary-200) 80%);
+}
+
+/* ── Dark mode ── */
+:global(html.dark) .section {
+  background: color-mix(in srgb, var(--primitive-gray-950) 88%, var(--primitive-brand-950) 12%);
+  border-top-color: color-mix(in srgb, var(--primitive-brand-800) 25%, var(--primitive-gray-800) 75%);
+}
+
+:global(html.dark) .title {
+  color: var(--color-ink);
+}
+
+:global(html.dark) .lead,
+:global(html.dark) .eyebrow {
+  color: var(--primitive-gray-400);
+}
+
+:global(html.dark) .pillar {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+:global(html.dark) .pillar:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-600) 35%, var(--primitive-gray-700) 65%);
+}
+
+:global(html.dark) .pillarTitle {
+  color: var(--primitive-gray-100);
+}
+
+:global(html.dark) .pillarBlurb {
+  color: var(--primitive-gray-400);
+}
+
+:global(html.dark) .pillarIndex {
+  color: var(--primitive-brand-300);
+  background: color-mix(in srgb, var(--primitive-brand-900) 55%, var(--primitive-gray-900) 45%);
+  border-color: color-mix(in srgb, var(--primitive-brand-700) 40%, var(--primitive-gray-700) 60%);
+}
+
+:global(html.dark) .chip {
+  color: var(--primitive-brand-200);
+  background: color-mix(in srgb, var(--primitive-brand-950) 70%, var(--primitive-gray-900) 30%);
+  border-color: color-mix(in srgb, var(--primitive-brand-700) 30%, var(--primitive-gray-700) 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillar {
+    transition: none;
+  }
+
+  .pillar:hover {
+    transform: none;
+  }
+}

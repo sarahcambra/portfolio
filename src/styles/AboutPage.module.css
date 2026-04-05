@@ -1,0 +1,591 @@
+/* ============================================================
+   ABOUT PAGE — CSS Module
+   Three distinct section identities, one cohesive page.
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.main {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  padding-top: var(--nav-height);
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO — always dark
+   ════════════════════════════════════════════════════════════ */
+.hero {
+  background: var(--color-bg-dark);
+  padding: var(--space-12) var(--space-10) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.heroInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-16);
+  position: relative;
+  z-index: 1;
+}
+
+.heroText {
+  flex: 1 1 480px;
+  padding-bottom: var(--space-10);
+}
+
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-green-accent);
+  margin-bottom: var(--space-6);
+}
+.heroEyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-green-accent);
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-body);
+  font-size: var(--type-page-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin: 0 0 var(--space-4);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+.heroTitleAccent { color: var(--color-green-accent); }
+
+/* Role line — mono, quiet, sits between name and bio */
+.heroRole {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 400;
+  /* 0.72 — clearer “Product Designer / Accessibility Specialist” on hero */
+  color: var(--primitive-white);
+  letter-spacing: var(--tracking-wide);
+  margin: 0 0 var(--space-8);
+}
+
+.heroRoleDot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.heroBio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* rgba(255,255,255,0.85) = 11:1 on #0f0f0e — AAA ✓ */
+.heroBioText {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: var(--leading-loose);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 300;
+}
+
+.heroLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.heroLinkPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-warm-canvas);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  transition: opacity var(--transition-fast);
+}
+.heroLinkPrimary:hover { opacity: 0.88; }
+.heroLinkPrimary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: var(--radius-full);
+}
+
+.heroLinkGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  /* rgba(255,255,255,0.75) = 9.3:1 — AAA ✓ */
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.heroLinkGhost:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+}
+.heroLinkGhost:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: var(--radius-full);
+}
+
+.heroImgWrap {
+  flex: 0 0 340px;
+  height: 480px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-green) 18%, transparent),
+    color-mix(in srgb, var(--primitive-secondary-800) 12%, transparent)
+  );
+  align-self: flex-end;
+  position: relative;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.heroImgOverlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to top, var(--color-bg-dark), transparent);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SHARED SECTION UTILITIES
+   ════════════════════════════════════════════════════════════ */
+.sectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  margin-bottom: var(--space-10);
+}
+
+.sectionEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+/* ════════════════════════════════════════════════════════════
+   MY PATH — milestone cards + visual column (matches Skills rhythm)
+   ════════════════════════════════════════════════════════════ */
+.pathSection {
+  background: var(--color-bg);
+  padding: clamp(3.5rem, 9vw, 5.5rem) var(--section-x);
+  border-top: 1px solid color-mix(in srgb, var(--primitive-brand-300) 12%, var(--primitive-gray-200) 88%);
+}
+
+.pathHeader {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  max-width: 48rem;
+}
+
+.pathHeaderRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .pathHeaderRow {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-10);
+    max-width: none;
+  }
+
+  .pathTitle {
+    flex: 0 1 auto;
+  }
+
+  .pathLead {
+    flex: 1 1 18rem;
+    max-width: 26rem;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.pathTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.65rem, 2.8vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.12;
+}
+
+.pathLead {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.pathGrid {
+  display: grid;
+  grid-template-columns: 1.55fr minmax(0, 360px);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.pathStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.pathCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--primitive-white);
+  border: 1px solid color-mix(in srgb, var(--primitive-gray-300) 45%, var(--primitive-brand-200) 55%);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--primitive-black) 4%, transparent),
+    0 16px 36px color-mix(in srgb, var(--primitive-brand-900) 5%, transparent);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.pathCard:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-500) 22%, var(--primitive-gray-300) 78%);
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--primitive-black) 5%, transparent),
+    0 20px 44px color-mix(in srgb, var(--primitive-brand-800) 7%, transparent);
+}
+
+.pathCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.pathStep {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--primitive-brand-600);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--primitive-brand-100) 65%, var(--primitive-white) 35%);
+  border: 1px solid color-mix(in srgb, var(--primitive-brand-300) 30%, transparent);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.pathCardTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.pathCardText {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.pathVisual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: calc(var(--nav-height, 72px) + 1rem);
+}
+
+.pathFigure {
+  margin: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primitive-gray-300) 50%, var(--primitive-brand-200) 50%);
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--primitive-black) 6%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-white) 70%, transparent) inset;
+  background: color-mix(in srgb, var(--primitive-secondary-100) 80%, var(--primitive-white) 20%);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pathFigure:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 32px color-mix(in srgb, var(--primitive-black) 8%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-white) 80%, transparent) inset;
+}
+
+.pathPhoto {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+:global(html.dark) .pathCard {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+:global(html.dark) .pathCard:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-600) 35%, var(--primitive-gray-700) 65%);
+}
+
+:global(html.dark) .pathTitle {
+  color: var(--primitive-gray-100);
+}
+
+:global(html.dark) .pathLead,
+:global(html.dark) .pathCardText {
+  color: var(--primitive-gray-400);
+}
+
+:global(html.dark) .pathCardTitle {
+  color: var(--primitive-gray-100);
+}
+
+:global(html.dark) .pathStep {
+  color: var(--primitive-brand-300);
+  background: color-mix(in srgb, var(--primitive-brand-900) 55%, var(--primitive-gray-900) 45%);
+  border-color: color-mix(in srgb, var(--primitive-brand-700) 40%, var(--primitive-gray-700) 60%);
+}
+
+:global(html.dark) .pathFigure {
+  border-color: var(--color-border);
+  background: var(--primitive-gray-900);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+:global(html.dark) .pathSection {
+  border-top-color: color-mix(in srgb, var(--primitive-brand-800) 22%, var(--primitive-gray-800) 78%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pathCard,
+  .pathFigure {
+    transition: none;
+  }
+
+  .pathFigure:hover {
+    transform: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   A LITTLE MORE
+   ════════════════════════════════════════════════════════════ */
+.moreSection {
+  background: var(--color-bg-alt);
+  border-top: none;
+  padding: var(--section-y) var(--section-x);
+}
+
+.moreHeader {
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-10);
+}
+
+.moreGrid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 380px) 1.6fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* Left — 2 photos stacked, capped width */
+.morePhotoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.morePhotoImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-slow);
+}
+
+.morePhotoImg:hover { transform: scale(1.02); }
+
+/* Right — pull quote + body */
+.moreTextCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.morePullQuote {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--sys-fg-brand-strong);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  padding-left: 0;
+  border-radius: 0;
+}
+
+.moreBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.moreBody p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.masonry {
+  columns: 2;
+  column-gap: var(--space-2);
+  padding: var(--space-2);
+}
+
+.masonryItem {
+  break-inside: avoid;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-warm-border);
+}
+
+.masonryImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+.masonryImg:hover { transform: scale(1.04); }
+
+:global(html.dark) .masonryItem {
+  background: var(--primitive-gray-700);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .heroInner     { flex-direction: column; align-items: stretch; }
+  .heroImgWrap   { width: 100%; height: 320px; flex: none; }
+  .heroRole      { flex-wrap: wrap; }
+  .pathGrid      { grid-template-columns: 1fr; gap: var(--space-10); }
+  .moreGrid      { grid-template-columns: 1fr; }
+  .morePhotoCol  { flex-direction: row; }
+  .morePhotoImg  { flex: 1; }
+  .hero          { padding: var(--space-12) var(--space-6) 0; }
+  .pathSection   { padding: var(--space-16) var(--space-6); }
+  .moreHeader    { padding: var(--space-12) var(--space-6) var(--space-6); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   REDUCED MOTION — WCAG 2.3.3
+   ════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .masonryImg,
+  .masonryImg:hover {
+    transition: none;
+    transform: none;
+  }
+}

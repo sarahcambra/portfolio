@@ -1,0 +1,245 @@
+/* ============================================================
+   HOME PAGE — CSS Module
+   Page-level styles only: hero shell, float cards, sections.
+   Widget styles live in PortfolioWidget.module.css.
+   Dark mode is automatic via tokens.css (html.dark {}).
+   ============================================================ */
+
+/* ── Page root ── */
+.main {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+}
+
+/* ── Hero section shell ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* ── Floating decoration cards ── */
+.floatCard {
+  /* display:none on mobile handled in media query below */
+}
+
+.floatCardBtn {
+  all: unset;
+  display: block;
+  cursor: pointer;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  padding: 0.875rem;
+  width: 100%;
+  transition: border var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+.floatCardBtn:hover {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+.floatCardBtn[aria-expanded="true"] {
+  border: 1.5px solid var(--color-green);
+  box-shadow: 0 8px 32px rgba(61, 107, 53, 0.18);
+  transform: scale(1.04);
+}
+.floatCardBtn:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-lg);
+}
+
+.floatCardDetail {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.floatCardDetailText {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-green);
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+/* Shared typography for float card content */
+.floatLabel {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  margin: 0 0 0.35rem;
+}
+
+.floatMono {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  color: var(--color-ink-muted);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* ── Page sections ──
+   Background tokens flip automatically in dark mode. */
+.sectionPaper { background: var(--color-bg); }
+.sectionWhite { background: var(--color-bg-alt); }
+
+.sectionInner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 5rem 2.5rem;
+}
+
+.sectionEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-ink-muted);
+  flex-shrink: 0;
+}
+
+.sectionTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  min-height: var(--min-touch);
+  transition: border-color var(--transition-fast);
+}
+.seeAll:hover { border-color: var(--color-ink-muted); }
+.seeAll:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ── Projects grid ── */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+  gap: 1.25rem;
+}
+
+.cardLift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cardLift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Testimonials ── */
+.testiGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.testimonialCard {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.testimonialQuote {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  margin: 0;
+  flex: 1;
+}
+
+.testimonialFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+}
+
+.testimonialAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  flex-shrink: 0;
+}
+
+.testimonialName {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.testimonialRole {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .floatCard { display: none !important; }
+}
+
+@media (max-width: 860px) {
+  .sectionInner { padding: 4rem 1.5rem; }
+  .testiGrid { grid-template-columns: 1fr; }
+}

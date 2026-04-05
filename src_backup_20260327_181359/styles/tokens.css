@@ -1,0 +1,201 @@
+/* ============================================================
+   TOKENS.CSS
+   Single source of truth for fonts, colors, spacing, and
+   dark mode. Import this FIRST in App.jsx.
+
+   To use a token anywhere:  color: var(--color-ink);
+   To change the brand green: edit --color-green once here.
+   ============================================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap');
+
+/*
+  FONTS IN USE:
+  --font-body  →  DM Sans       (UI, body text, buttons)
+  --font-mono  →  DM Mono       (labels, tags, eyebrows, code)
+
+  HOW TO ADD IMAGES:
+  Put files in  web/public/assets/
+  Reference as  src="/assets/your-file.jpg"
+  No import needed — Vite serves /public at the root URL.
+
+  Expected image paths:
+    /assets/Logo_sarah.png
+    /assets/sarah-hero.jpg
+    /assets/sarah-about.jpg
+    /assets/projects/axesslab.png
+    /assets/projects/arcanimal.png
+    /assets/projects/intelligyn.png
+    /assets/projects/mentatt.png
+    /assets/sarah-resume.pdf
+*/
+
+/* ── Light mode (default) ── */
+:root {
+
+  /* Fonts */
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  /* Font sizes */
+  --text-xs:      0.7rem;
+  --text-sm:      0.8rem;
+  --text-base:    0.875rem;
+  --text-md:      1rem;
+  --text-lg:      1.125rem;
+  --text-xl:      clamp(1.75rem, 3vw, 2.5rem);
+  --text-2xl:     clamp(2rem, 4vw, 3rem);
+
+  /* Line heights */
+  --leading-tight:   1.1;
+  --leading-snug:    1.3;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.7;
+  --leading-loose:   1.8;
+
+  /* Letter spacing */
+  --tracking-tight:   -0.03em;
+  --tracking-normal:   0;
+  --tracking-wide:     0.08em;
+  --tracking-wider:    0.12em;
+  --tracking-widest:   0.18em;
+
+  /* Spacing scale */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-28: 7rem;
+  --space-32: 8rem;
+
+  /* Border radii */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 100px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.07);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.22);
+
+  /* Layout */
+  --nav-height:      68px;
+  --max-width:       1080px;
+  --max-width-prose: 720px;
+  --section-x:       2.5rem;
+  --section-y:       var(--space-20);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.22s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Touch targets — WCAG 2.5.8 */
+  --min-touch: 44px;
+
+  /* ── Focus ring tokens ──
+     Use --focus-ring-on-light on white/frosted backgrounds (Navbar, cards, light pages).
+     Use --focus-ring-on-dark  on dark backgrounds (Footer, hero strip, dark sections).
+     Both share the same width and offset so keyboard nav looks uniform everywhere. */
+  --focus-ring-on-light: 2px solid var(--color-green);        /* #064e3b — high contrast on white */
+  --focus-ring-on-dark:  2px solid var(--color-green-accent); /* #10b981 — high contrast on dark  */
+  --focus-ring-offset:   3px;
+
+  /* ── Brand colors ── */
+  --color-green:        #064e3b;
+  --color-green-hover:  #053d2e;
+  --color-green-light:  #dcfce7;
+  --color-green-text:   #16a34a;
+  --color-green-accent: #10b981;   /* teal/emerald for dark-mode accents */
+  --color-green-subtle: rgba(6, 78, 59, 0.1);
+  --color-available:    #4ade80;
+
+  /* ── Semantic page colors (light mode) ──
+     These are what your components should USE.
+     They flip automatically in dark mode below. */
+  --color-bg:        #f0f0ee;   /* page background */
+  --color-bg-alt:    #ffffff;   /* alternate sections (white) */
+  --color-bg-card:   #f0f0ee;   /* card backgrounds */
+  --color-bg-dark:   #0f0f0e;   /* dark sections (about strip, footer) */
+
+  --color-ink:       #0f0f0e;   /* primary text */
+  --color-ink-soft:  #374151;   /* body text */
+  --color-ink-muted: #6b7280;   /* secondary text */
+  --color-ink-faint: #9ca3af;   /* placeholder / disabled */
+
+  --color-border:    #e2e1dc;   /* default border */
+  --color-border-dark: rgba(255,255,255,0.07); /* border on dark bg */
+
+  --color-white:     #ffffff;
+  --color-surface:   #1a1a19;
+
+  /* ── Legacy aliases (keeps index.css classes working) ──
+     Your existing components use --green-primary, --paper, --ink etc.
+     These point to the new tokens so nothing breaks. */
+  --green-primary:  var(--color-green);
+  --green-hover:    var(--color-green-hover);
+  --green-light:    #eef2ea;
+  --green-subtle:   var(--color-green-subtle);
+  --paper:          var(--color-bg);
+  --paper-warm:     #f0ede6;
+  --ink:            var(--color-ink);
+  --ink-muted:      var(--color-ink-muted);
+  --ink-faint:      var(--color-ink-faint);
+  --white:          var(--color-white);
+  --radius-sm:      var(--radius-sm);
+  --radius-md:      var(--radius-md);
+  --radius-lg:      var(--radius-lg);
+  --font-display:   var(--font-body);
+  --transition:     var(--transition-base);
+
+  /* ── Tailwind bridge tokens (used by bg-page-bg etc.) ── */
+  --page-bg:       #f0f0ee;
+  --page-bg-alt:   #ffffff;
+  --page-text:     #0f0f0e;
+  --page-muted:    #6b7280;
+  --page-border:   #e2e1dc;
+  --page-card-bg:  #f0f0ee;
+}
+
+/* ── Dark mode ──
+   ThemeContext adds class="dark" to <html>.
+   Every semantic token flips here.
+   Your components automatically get dark colors
+   just by using var(--color-bg), var(--color-ink) etc. */
+html.dark {
+  --color-bg:        #111110;
+  --color-bg-alt:    #1a1a19;
+  --color-bg-card:   #1a1a19;
+
+  --color-ink:       #f0f0ee;
+  --color-ink-soft:  #d1d5db;
+  --color-ink-muted: #9ca3af;
+  --color-ink-faint: #6b7280;
+
+  --color-border:    rgba(255,255,255,0.1);
+
+  /* Legacy aliases — dark mode */
+  --paper:      #111110;
+  --ink:        #f0f0ee;
+  --ink-muted:  #9ca3af;
+
+  /* Tailwind bridge — dark mode */
+  --page-bg:       #111110;
+  --page-bg-alt:   #1a1a19;
+  --page-text:     #f0f0ee;
+  --page-muted:    #9ca3af;
+  --page-border:   rgba(255,255,255,0.1);
+  --page-card-bg:  #1a1a19;
+}

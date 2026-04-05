@@ -1,0 +1,225 @@
+/* ============================================================
+   BUTTON — design-system variants (primary / secondary / ghost)
+   Tokens: --sys-button-* , --sys-shadow-button*
+   Optional [data-surface="inverse"] for dark panels (hero widget)
+   ============================================================ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font-family: var(--sys-font-sans);
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--radius-full);
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+.root:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Sizes */
+.md {
+  font-size: var(--sys-font-size-base);
+  min-height: var(--min-touch);
+  padding: 0 var(--spacing-5);
+}
+
+.sm {
+  font-size: var(--sys-font-size-sm);
+  min-height: var(--min-touch);
+  padding: 0 var(--spacing-4);
+}
+
+/* ── Primary (Figma: filled brand) ── */
+.primary {
+  background: var(--sys-button-primary-bg);
+  color: var(--sys-button-primary-fg);
+  border-color: var(--sys-button-primary-border);
+  box-shadow: var(--sys-shadow-button);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--sys-button-primary-bg-hover);
+  box-shadow: var(--sys-shadow-button-hover);
+  transform: translateY(-1px);
+}
+
+.primary:active:not(:disabled) {
+  background: color-mix(in srgb, var(--sys-button-primary-bg-hover) 88%, black);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--primitive-brand-950) 35%, transparent);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.primary:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+html.dark .primary:focus-visible {
+  outline: var(--focus-ring-on-dark);
+}
+
+/* ── Secondary (outline) — same motion language as primary ── */
+.secondary {
+  background: var(--sys-button-secondary-bg);
+  color: var(--sys-button-secondary-fg);
+  border-color: var(--sys-button-secondary-border);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--sys-button-secondary-border) 14%, transparent);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--sys-button-secondary-bg-hover);
+  box-shadow: 0 var(--spacing-2) var(--spacing-3) color-mix(in srgb, var(--sys-button-secondary-border) 22%, transparent);
+  transform: translateY(-1px);
+}
+
+.secondary:active:not(:disabled) {
+  background: color-mix(in srgb, var(--sys-button-secondary-border) 14%, var(--sys-button-secondary-bg-hover));
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--sys-button-secondary-border) 12%, transparent);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.secondary:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+html.dark .secondary:focus-visible {
+  outline: var(--focus-ring-on-dark);
+}
+
+/* ── Ghost — subtle lift + press like primary ── */
+.ghost {
+  background: var(--sys-button-ghost-bg);
+  color: var(--sys-button-ghost-fg);
+  border-color: var(--sys-button-ghost-border);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--sys-button-ghost-bg-hover);
+  box-shadow: 0 var(--spacing-2) var(--spacing-3) rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+.ghost:active:not(:disabled) {
+  background: color-mix(in srgb, var(--primitive-gray-600) 12%, var(--sys-button-ghost-bg-hover));
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.ghost:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+html.dark .ghost:focus-visible {
+  outline: var(--focus-ring-on-dark);
+}
+
+/* ── On inverse / dark glass (portfolio widget header) ── */
+.root[data-surface='inverse'].primary {
+  background: var(--primitive-white);
+  color: var(--primitive-brand-900);
+  border-color: transparent;
+  box-shadow: 0 var(--spacing-1) var(--spacing-3) rgba(0, 0, 0, 0.2);
+}
+
+.root[data-surface='inverse'].primary:hover:not(:disabled) {
+  background: var(--primitive-gray-100);
+  filter: none;
+  box-shadow: 0 var(--spacing-2) var(--spacing-4) rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
+}
+
+.root[data-surface='inverse'].primary:active:not(:disabled) {
+  background: var(--primitive-gray-200);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.root[data-surface='inverse'].secondary {
+  background: transparent;
+  color: var(--primitive-white);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.root[data-surface='inverse'].secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 var(--spacing-2) var(--spacing-4) rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.root[data-surface='inverse'].secondary:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.root[data-surface='inverse'].ghost {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.root[data-surface='inverse'].ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 var(--spacing-2) var(--spacing-3) rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+}
+
+.root[data-surface='inverse'].ghost:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.root[data-surface='inverse']:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover:not(:disabled),
+  .primary:active:not(:disabled),
+  .secondary:hover:not(:disabled),
+  .secondary:active:not(:disabled),
+  .ghost:hover:not(:disabled),
+  .ghost:active:not(:disabled),
+  .root[data-surface='inverse'].primary:hover:not(:disabled),
+  .root[data-surface='inverse'].primary:active:not(:disabled),
+  .root[data-surface='inverse'].secondary:hover:not(:disabled),
+  .root[data-surface='inverse'].secondary:active:not(:disabled),
+  .root[data-surface='inverse'].ghost:hover:not(:disabled),
+  .root[data-surface='inverse'].ghost:active:not(:disabled) {
+    transform: none;
+  }
+}

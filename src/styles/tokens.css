@@ -1,0 +1,486 @@
+/* ============================================================
+   TOKENS.CSS
+   DTCG-style primitives + semantic (--sys-*) tokens, with
+   legacy aliases (--color-*, --space-*, --font-*) for the app.
+
+   Import this FIRST in App.jsx.
+   ============================================================ */
+
+/* ── Google Fonts (DM Sans variable opsz + DM Mono) ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   PRIMITIVES — color (from design tokens JSON)
+   Gray scale = Tailwind Slate-compatible ramp (--primitive-gray-*)
+   Brand      = olive/sage (--primitive-brand-*)
+   Secondary  = warm stone / paper (--primitive-secondary-*)
+   ============================================================ */
+:root {
+  /* Pure white — mint (#eefffd) read as nursery on large surfaces; brand lives in --primitive-brand-* */
+  --primitive-white:       #ffffff;
+  --primitive-black:       #0f0f0e;
+
+  --primitive-brand-050:   #fefefe;
+  --primitive-brand-100:   #e1e8e1;
+  --primitive-brand-200:   #c2d1c1;
+  --primitive-brand-300:   #a1b5a0;
+  --primitive-brand-400:   #7d967c;
+  --primitive-brand-500:   #5b785a;
+  --primitive-brand-600:   #4a6149;
+  --primitive-brand-700:   #436a45;
+  --primitive-brand-800:   #2b3a2c;
+  --primitive-brand-900:   #1e291f;
+  --primitive-brand-950:   #0f140f;
+
+  --primitive-secondary-050: #faf9f6;
+  --primitive-secondary-100: #f4f1e8;
+  --primitive-secondary-200: #e8e0c4;
+  --primitive-secondary-300: #d9cba0;
+  --primitive-secondary-400: #c9b88a;
+  --primitive-secondary-500: #b3a070;
+  --primitive-secondary-600: #928156;
+  --primitive-secondary-700: #716342;
+  --primitive-secondary-800: #50462f;
+  --primitive-secondary-900: #3b271c;
+  --primitive-secondary-950: #1f140e;
+
+  --primitive-gray-050:    #f8fafc;
+  --primitive-gray-50:     var(--primitive-gray-050); /* alias: same value, no leading zero */
+  --primitive-gray-100:    #f1f5f9;
+  --primitive-gray-200:    #e2e8f0;
+  --primitive-gray-300:    #cbd5e1;
+  --primitive-gray-400:    #94a3b8;
+  --primitive-gray-500:    #64748b;
+  --primitive-gray-600:    #475569;
+  --primitive-gray-700:    #334155;
+  --primitive-gray-800:    #1e293b;
+  --primitive-gray-900:    #0f172a;
+  --primitive-gray-950:    #020617;
+
+  --primitive-emerald-050: #f0fdf4;
+  --primitive-emerald-100: #dcfce7;
+  --primitive-emerald-400: #4ade80;
+  --primitive-emerald-500: #22c55e;
+  --primitive-emerald-600: #16a34a;
+  --primitive-emerald-700: #15803d;
+}
+
+/* ============================================================
+   PRIMITIVES — spacing (px → rem, 16px base) up to 384px
+   JSON keys 0, 0.5, 1 … 96, px
+   ============================================================ */
+:root {
+  --spacing-0:     0;
+  --spacing-px:    1px;
+  --spacing-0-5:   0.125rem;   /* 2 */
+  --spacing-1:     0.25rem;    /* 4 */
+  --spacing-1-5:   0.375rem;   /* 6 */
+  --spacing-2:     0.5rem;     /* 8 */
+  --spacing-2-5:   0.625rem;   /* 10 */
+  --spacing-3:     0.75rem;    /* 12 */
+  --spacing-3-5:   0.875rem;   /* 14 */
+  --spacing-4:     1rem;       /* 16 */
+  --spacing-4-5:   1.125rem;   /* 18 */
+  --spacing-5:     1.25rem;    /* 20 */
+  --spacing-6:     1.5rem;     /* 24 */
+  --spacing-7:     1.75rem;    /* 28 */
+  --spacing-8:     2rem;       /* 32 */
+  --spacing-9:     2.25rem;    /* 36 */
+  --spacing-10:    2.5rem;     /* 40 */
+  --spacing-11:    2.75rem;    /* 44 */
+  --spacing-12:    3rem;       /* 48 */
+  --spacing-14:    3.5rem;     /* 56 */
+  --spacing-16:    4rem;       /* 64 */
+  --spacing-20:    5rem;       /* 80 */
+  --spacing-24:    6rem;       /* 96 */
+  --spacing-28:    7rem;       /* 112 */
+  --spacing-32:    8rem;       /* 128 */
+  --spacing-36:    9rem;       /* 144 */
+  --spacing-40:    10rem;      /* 160 */
+  --spacing-44:    11rem;      /* 176 */
+  --spacing-48:    12rem;      /* 192 */
+  --spacing-52:    13rem;      /* 208 */
+  --spacing-56:    14rem;      /* 224 */
+  --spacing-60:    15rem;      /* 240 */
+  --spacing-64:    16rem;      /* 256 */
+  --spacing-72:    18rem;      /* 288 */
+  --spacing-80:    20rem;      /* 320 */
+  --spacing-96:    24rem;      /* 384 */
+}
+
+/* ============================================================
+   PRIMITIVES — typography (font JSON: DM Sans / DM Mono + sizes)
+   ============================================================ */
+:root {
+  /* Families — semantic */
+  --sys-font-sans:   'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sys-font-mono:   'DM Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
+
+  /*
+   * Sizes — UI floor 14px (uses max() so sub-16px browser defaults still meet minimum).
+   * xs/sm = compact UI; base+ = body & headings.
+   */
+  --sys-font-size-xs:    max(14px, 0.875rem);  /* 14px */
+  --sys-font-size-sm:    max(14px, 0.9375rem); /* 15px */
+  --sys-font-size-base:  1rem;                  /* 16px */
+  --sys-font-size-lg:    1.125rem;  /* 18 */
+  --sys-font-size-xl:    1.25rem;   /* 20 */
+  --sys-font-size-2xl:   1.5rem;    /* 24 */
+  --sys-font-size-3xl:   1.875rem;  /* 30 */
+  --sys-font-size-4xl:   2.25rem;   /* 36 */
+  --sys-font-size-5xl:   3rem;      /* 48 */
+  --sys-font-size-6xl:   3.75rem;   /* 60 */
+  --sys-font-size-7xl:   4.5rem;    /* 72 */
+  --sys-font-size-8xl:   6rem;      /* 96 */
+  --sys-font-size-9xl:   8rem;      /* 128 */
+
+  /* Line-height primitives (ratios from JSON intent) */
+  --sys-leading-none:    1;
+  --sys-leading-tight:   1.25;
+  --sys-leading-snug:    1.375;
+  --sys-leading-normal:  1.5;
+  --sys-leading-relaxed: 1.625;
+  --sys-leading-loose:   1.75;
+
+  /* Letter-spacing (em) */
+  --sys-tracking-tighter: -0.05em;
+  --sys-tracking-tight:   -0.025em;
+  --sys-tracking-normal:  0;
+  --sys-tracking-wide:    0.025em;
+  --sys-tracking-wider:   0.05em;
+  --sys-tracking-widest:  0.1em;
+}
+
+/* ============================================================
+   SYSTEM SEMANTICS — LIGHT (theme JSON + contrast-safe)
+   ============================================================ */
+:root {
+  --sys-text-heading:       var(--primitive-gray-900);
+  --sys-text-body:          var(--primitive-gray-700);
+  /* gray.600 on canvas: ~5.8:1 on brand-050 / gray-050 — AA body */
+  --sys-text-body-subtle:   var(--primitive-gray-600);
+  --sys-text-on-inverse:    var(--primitive-white);
+  --sys-text-inverse:       var(--primitive-black);
+
+  --sys-bg-canvas:          var(--primitive-brand-050);
+  /* Warm paper bands (testimonials, alt sections) — pairs with olive canvas */
+  --sys-bg-surface:         var(--primitive-secondary-050);
+  --sys-bg-surface-muted:   var(--primitive-secondary-100);
+  --sys-bg-inverse:         var(--primitive-black);
+
+  --sys-border-default:     var(--primitive-gray-200);
+  --sys-border-strong:      var(--primitive-gray-300);
+
+  --sys-fg-brand:           var(--primitive-brand-700);
+  --sys-fg-brand-strong:    var(--primitive-brand-900);
+  /* Warm accent text / chips (use on secondary-050–200 backgrounds) */
+  --sys-fg-secondary:       var(--primitive-secondary-800);
+  --sys-fg-secondary-muted: var(--primitive-secondary-600);
+  --sys-fg-success:         var(--primitive-emerald-700);
+  --sys-fg-success-soft:    var(--primitive-emerald-600);
+
+  /* Interactive elevation (light surfaces) */
+  --sys-shadow-button:       0 var(--spacing-1) var(--spacing-3) color-mix(in srgb, var(--primitive-brand-900) 18%, transparent);
+  --sys-shadow-button-hover: 0 var(--spacing-2) var(--spacing-4) color-mix(in srgb, var(--primitive-brand-900) 22%, transparent);
+
+  /* Buttons — semantic fills (Figma-aligned variants) */
+  --sys-button-primary-bg:         var(--primitive-brand-800);
+  --sys-button-primary-bg-hover:   var(--primitive-brand-900);
+  --sys-button-primary-fg:         var(--primitive-white);
+  --sys-button-primary-border:     transparent;
+
+  --sys-button-secondary-bg:       transparent;
+  --sys-button-secondary-bg-hover: var(--primitive-secondary-100);
+  --sys-button-secondary-fg:       var(--primitive-brand-800);
+  /* Outline = olive ledge + stone undertone (secondary palette visible) */
+  --sys-button-secondary-border:   color-mix(in srgb, var(--primitive-brand-800) 68%, var(--primitive-secondary-700) 32%);
+
+  --sys-button-ghost-bg:           transparent;
+  --sys-button-ghost-bg-hover:     var(--primitive-secondary-100);
+  --sys-button-ghost-fg:           var(--primitive-gray-700);
+  --sys-button-ghost-border:       transparent;
+}
+
+/* ============================================================
+   LEGACY + COMPONENT ALIASES — LIGHT
+   Maps existing variables → sys / primitives
+   ============================================================ */
+:root {
+  --font-body:    var(--sys-font-sans);
+  --font-mono:    var(--sys-font-mono);
+  --font-display: var(--sys-font-sans);
+
+  --text-xs:      var(--sys-font-size-xs);
+  --text-sm:      var(--sys-font-size-sm);
+  --text-base:    var(--sys-font-size-base);
+  --text-md:      var(--sys-font-size-base);
+  --text-lg:      var(--sys-font-size-lg);
+
+  /*
+   * Heading scale — H1 capped (~30–40px); H2/H3 stepped for long-form.
+   */
+  --type-page-hero:  clamp(1.875rem, 2.75vw, 2.5rem);
+  --type-section-h2: clamp(1.4375rem, 2.1vw, 1.75rem);
+  --type-subhead-h3: clamp(1.125rem, 1.5vw, 1.3125rem);
+
+  /* Section titles on About / Skills; generic case-study article H2 */
+  --text-xl:      clamp(1.375rem, 2vw, 1.625rem);
+  --text-2xl:     var(--type-section-h2);
+
+  --leading-tight:   var(--sys-leading-tight);
+  --leading-snug:    var(--sys-leading-snug);
+  --leading-normal:  var(--sys-leading-normal);
+  --leading-relaxed: var(--sys-leading-relaxed);
+  --leading-loose:   var(--sys-leading-loose);
+
+  --tracking-tight:   var(--sys-tracking-tight);
+  --tracking-normal:  var(--sys-tracking-normal);
+  --tracking-wide:    var(--sys-tracking-wide);
+  --tracking-wider:   var(--sys-tracking-wider);
+  --tracking-widest:  var(--sys-tracking-widest);
+
+  /* Spacing — legacy numeric scale → primitive spacing tokens */
+  --space-1:  var(--spacing-1);
+  --space-2:  var(--spacing-2);
+  --space-3:  var(--spacing-3);
+  --space-4:  var(--spacing-4);
+  --space-5:  var(--spacing-5);
+  --space-6:  var(--spacing-6);
+  --space-8:  var(--spacing-8);
+  --space-10: var(--spacing-10);
+  --space-12: var(--spacing-12);
+  --space-16: var(--spacing-16);
+  --space-20: var(--spacing-20);
+  --space-24: var(--spacing-24);
+  --space-28: var(--spacing-28);
+  --space-32: var(--spacing-32);
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 100px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.22);
+
+  --nav-height:      68px;
+  --max-width:       1080px;
+  --max-width-prose: 720px;
+  /* Case study heroes, breadcrumbs — one readable column */
+  --max-width-hero:  800px;
+  --section-x:       var(--spacing-10);
+  --section-y:       var(--spacing-20);
+  /* Routed pages: alias section padding for clarity in modules */
+  --page-pad-x:      var(--section-x);
+  --page-pad-y:      var(--section-y);
+
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.22s ease;
+  --transition-slow: 0.4s ease;
+  --transition:      var(--transition-base);
+
+  --min-touch: var(--spacing-11);
+
+  /* Focus — brand greens tuned for contrast on light / dark */
+  --focus-ring-on-light: 2px solid var(--primitive-brand-800);
+  --focus-ring-on-dark:  2px solid var(--primitive-emerald-400);
+  --focus-ring-offset:   3px;
+
+  /* Brand (UI) — aligned to primitive brand + emerald accents */
+  --color-green:        var(--primitive-brand-800);
+  --color-green-hover:  var(--primitive-brand-900);
+  --color-green-light:  var(--primitive-emerald-100);
+  --color-green-text:   var(--primitive-emerald-600);
+  --color-green-accent: var(--primitive-emerald-400);
+  --color-green-subtle: color-mix(in srgb, var(--primitive-brand-800) 12%, transparent);
+  --color-available:    var(--primitive-emerald-400);
+
+  /* ── Legacy semantic colors → system tokens (light) ── */
+  --color-bg:          var(--sys-bg-canvas);
+  --color-bg-alt:      var(--sys-bg-surface);
+  --color-bg-card:     var(--sys-bg-surface-muted);
+  --color-bg-dark:     var(--sys-bg-inverse);
+
+  --color-ink:         var(--sys-text-inverse);
+  --color-ink-soft:    var(--sys-text-body);
+  --color-ink-muted:   var(--sys-text-body-subtle);
+  /* Was gray-400 (~2.5:1 on canvas) — gray-500 ≥4.5:1 on #fefefe for normal text */
+  --color-ink-faint:   var(--primitive-gray-500);
+
+  --color-border:      var(--sys-border-default);
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+
+  --color-white:       var(--primitive-white);
+  --color-surface:     var(--primitive-gray-900);
+
+  --green-primary:  var(--color-green);
+  --green-hover:    var(--color-green-hover);
+  --green-light:    var(--primitive-brand-050);
+  --green-subtle:   var(--color-green-subtle);
+  --paper:          var(--color-bg);
+  --paper-warm:     var(--primitive-secondary-100);
+
+  /* Secondary ramp — use for warm UI, borders on cream, illustration fills */
+  --color-secondary-050: var(--primitive-secondary-050);
+  --color-secondary-100: var(--primitive-secondary-100);
+  --color-secondary-200: var(--primitive-secondary-200);
+  --color-secondary-300: var(--primitive-secondary-300);
+  --color-secondary-400: var(--primitive-secondary-400);
+  --color-secondary-500: var(--primitive-secondary-500);
+  --color-secondary-600: var(--primitive-secondary-600);
+  --color-secondary-700: var(--primitive-secondary-700);
+  --color-secondary-800: var(--primitive-secondary-800);
+  --color-secondary-900: var(--primitive-secondary-900);
+  --color-secondary-950: var(--primitive-secondary-950);
+  /* Aliases for modules that prefer “warm” naming */
+  --color-warm-canvas:   var(--primitive-secondary-050);
+  --color-warm-muted:    var(--primitive-secondary-100);
+  --color-warm-border:   var(--primitive-secondary-200);
+  --ink:            var(--color-ink);
+  --ink-muted:      var(--color-ink-muted);
+  --ink-faint:      var(--color-ink-faint);
+  --white:          var(--color-white);
+
+  --page-bg:       var(--color-bg);
+  --page-bg-alt:   var(--color-bg-alt);
+  --page-text:     var(--color-ink);
+  --page-muted:    var(--color-ink-muted);
+  --page-border:   var(--color-border);
+  --page-card-bg:  var(--color-bg-card);
+
+  /* Body alias (shared.css) */
+  --color-paper:   var(--color-bg);
+
+  /* ── Shell — homepage hero, nav, footer (designer × AI studio, olive + precision) ── */
+  --shell-hero-base: var(--color-bg);
+  --shell-hero-wash:
+    radial-gradient(ellipse 115% 70% at 50% -5%, color-mix(in srgb, var(--primitive-brand-100) 65%, transparent) 0%, transparent 55%),
+    radial-gradient(ellipse 48% 40% at 6% 72%, color-mix(in srgb, var(--primitive-brand-200) 32%, transparent) 0%, transparent 100%),
+    radial-gradient(ellipse 44% 36% at 94% 32%, color-mix(in srgb, var(--primitive-secondary-200) 38%, transparent) 0%, transparent 100%);
+  --shell-nav-fill: color-mix(in srgb, var(--primitive-brand-050) 38%, var(--primitive-secondary-050) 35%, var(--primitive-gray-100) 27%);
+  --shell-nav-border: color-mix(in srgb, var(--primitive-brand-300) 20%, var(--primitive-gray-300) 80%);
+  --shell-drawer-fill: color-mix(in srgb, var(--primitive-brand-050) 22%, var(--color-bg-alt) 78%);
+  --shell-grid-line: color-mix(in srgb, var(--primitive-gray-400) 7%, transparent);
+  --shell-footer-overlay: radial-gradient(
+    ellipse 100% 75% at 50% 0%,
+    color-mix(
+      in srgb,
+      color-mix(in srgb, var(--primitive-brand-500) 72%, var(--primitive-secondary-600) 28%) 12%,
+      transparent
+    ) 0%,
+    transparent 58%
+  );
+  --shell-widget-shadow:
+    0 28px 72px color-mix(in srgb, var(--primitive-black) 42%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-brand-400) 14%, rgba(255, 255, 255, 0.06) 86%),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   SYSTEM SEMANTICS — DARK
+   Slate elevations: 950 canvas → 900 surface → 800 raised/muted
+   --sys-text-body-subtle = Slate-400 for AA on 950
+   ============================================================ */
+html.dark {
+  --sys-bg-canvas:         var(--primitive-gray-950);
+  --sys-bg-surface:        var(--primitive-gray-900);
+  --sys-bg-surface-raised: var(--primitive-gray-800);
+  --sys-bg-surface-muted:  var(--primitive-gray-800);
+  /* Inverse / hero / footer strips */
+  --sys-bg-inverse:        var(--primitive-black);
+
+  --sys-text-heading:      var(--primitive-white);
+  --sys-text-body:         var(--primitive-gray-300);
+  --sys-text-body-subtle:  var(--primitive-gray-400);
+  --sys-text-on-inverse:   var(--primitive-gray-900);
+  --sys-text-inverse:      var(--primitive-white);
+
+  --sys-border-default:    var(--primitive-gray-800);
+  --sys-border-strong:     var(--primitive-gray-700);
+
+  --sys-fg-brand:          var(--primitive-brand-400);
+  --sys-fg-brand-strong:   var(--primitive-brand-300);
+  --sys-fg-secondary:      var(--primitive-secondary-300);
+  --sys-fg-secondary-muted: var(--primitive-secondary-500);
+  --sys-fg-success:        var(--primitive-emerald-400);
+  --sys-fg-success-soft:   var(--primitive-emerald-500);
+
+  --sys-shadow-button:       0 var(--spacing-1) var(--spacing-4) rgba(0, 0, 0, 0.35);
+  --sys-shadow-button-hover: 0 var(--spacing-2) var(--spacing-5) rgba(0, 0, 0, 0.4);
+
+  --sys-button-primary-bg:         var(--primitive-brand-600);
+  --sys-button-primary-bg-hover:   var(--primitive-brand-500);
+  --sys-button-primary-fg:         var(--primitive-white);
+  --sys-button-primary-border:     transparent;
+
+  --sys-button-secondary-bg:       transparent;
+  --sys-button-secondary-bg-hover: color-mix(in srgb, var(--primitive-secondary-950) 55%, var(--primitive-gray-800) 45%);
+  --sys-button-secondary-fg:       var(--primitive-brand-300);
+  --sys-button-secondary-border:   color-mix(in srgb, var(--primitive-brand-400) 58%, var(--primitive-secondary-500) 42%);
+
+  --sys-button-ghost-bg:           transparent;
+  --sys-button-ghost-bg-hover:     var(--primitive-gray-800);
+  --sys-button-ghost-fg:           var(--primitive-gray-300);
+  --sys-button-ghost-border:      transparent;
+
+  /* Legacy semantic colors → system (dark) */
+  --color-bg:        var(--sys-bg-canvas);
+  --color-bg-alt:    var(--sys-bg-surface);
+  --color-bg-card:   var(--sys-bg-surface-raised);
+  --color-bg-dark:   var(--sys-bg-inverse);
+
+  --color-ink:       var(--sys-text-heading);
+  --color-ink-soft:  var(--sys-text-body);
+  --color-ink-muted: var(--sys-text-body-subtle);
+  /* Same luminance as body-subtle (gray-400) for AA on 950; use weight/size for hierarchy */
+  --color-ink-faint: var(--primitive-gray-400);
+
+  --color-border:    var(--sys-border-default);
+
+  --color-green:        var(--primitive-brand-500);
+  --color-green-hover:  var(--primitive-brand-400);
+  --color-green-text:   var(--primitive-emerald-400);
+  --color-green-accent: var(--primitive-emerald-400);
+  --color-green-subtle: color-mix(in srgb, var(--primitive-emerald-500) 18%, transparent);
+
+  --focus-ring-on-light: 2px solid var(--primitive-emerald-500);
+  --focus-ring-on-dark:  2px solid var(--primitive-emerald-400);
+
+  --paper:     var(--color-bg);
+  --ink:       var(--color-ink);
+  --ink-muted: var(--color-ink-muted);
+
+  --page-bg:      var(--color-bg);
+  --page-bg-alt:  var(--color-bg-alt);
+  --page-text:    var(--color-ink);
+  --page-muted:   var(--color-ink-muted);
+  --page-border:  var(--color-border);
+  --page-card-bg: var(--color-bg-card);
+
+  --color-paper: var(--color-bg);
+
+  --shell-hero-wash:
+    radial-gradient(ellipse 115% 65% at 50% 0%, color-mix(in srgb, var(--primitive-brand-800) 22%, transparent) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 42% at 12% 68%, color-mix(in srgb, var(--primitive-brand-900) 35%, transparent) 0%, transparent 100%),
+    radial-gradient(ellipse 46% 38% at 88% 38%, color-mix(in srgb, var(--primitive-secondary-900) 22%, var(--primitive-gray-800) 78%) 40%, transparent 100%);
+  --shell-nav-fill: color-mix(in srgb, var(--primitive-gray-900) 72%, var(--primitive-brand-950) 28%);
+  --shell-nav-border: color-mix(in srgb, var(--primitive-brand-700) 22%, var(--primitive-gray-700) 78%);
+  --shell-drawer-fill: color-mix(in srgb, var(--primitive-gray-900) 94%, transparent);
+  --shell-grid-line: color-mix(in srgb, var(--primitive-gray-500) 10%, transparent);
+  --shell-footer-overlay: radial-gradient(
+    ellipse 95% 70% at 50% 0%,
+    color-mix(
+      in srgb,
+      color-mix(in srgb, var(--primitive-brand-600) 70%, var(--primitive-secondary-500) 30%) 16%,
+      transparent
+    ) 0%,
+    transparent 55%
+  );
+  --shell-widget-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px color-mix(in srgb, var(--primitive-brand-500) 18%, rgba(255, 255, 255, 0.05) 82%),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}

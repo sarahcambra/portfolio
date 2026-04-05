@@ -1,0 +1,56 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .stage {
+    width: 100%;
+    position: relative;
+  }
+  
+  .image {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Keeps all photos uniform */
+    object-fit: cover;
+    border-radius: 4px; /* Or 0, depending on your vibe */
+    background: var(--color-bg-alt, #f5f5f5);
+  }
+  
+  .caption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--color-ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .navBtn {
+    background: none;
+    border: 1px solid var(--color-ink-faint);
+    color: var(--color-ink);
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .navBtn:hover {
+    background: var(--color-ink);
+    color: white;
+  }
+  
+  .counter {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }

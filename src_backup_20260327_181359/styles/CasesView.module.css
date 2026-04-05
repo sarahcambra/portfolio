@@ -1,0 +1,37 @@
+/* ============================================================
+   CASES VIEW — horizontal scroll, 2 cards visible at a time.
+   Scrollbar sits at the bottom inside the fixed viewArea.
+   ============================================================ */
+
+.scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0.75rem;
+  height: 100%;
+  padding-bottom: 8px;          /* room for the scrollbar */
+
+  /* Scrollbar — Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+/* Scrollbar — Chrome / Safari */
+.scroll::-webkit-scrollbar        { height: 4px; }
+.scroll::-webkit-scrollbar-track  { background: transparent; }
+.scroll::-webkit-scrollbar-thumb  {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+}
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Each card slot — exactly half the container width */
+.cardSlot {
+  flex: 0 0 calc(50% - 0.375rem);
+  scroll-snap-align: start;
+  height: calc(100% - 8px);     /* match the padding-bottom above */
+  min-width: 0;
+}

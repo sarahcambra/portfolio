@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fills the widget */
+    gap: 1rem;
+  }
+  
+  .chatLog {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: 0.5rem;
+  }
+  
+  .bubble {
+    max-width: 85%;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .userBubble {
+    align-self: flex-end;
+    background: #10b981; /* Your Brand Green */
+    color: white;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .botBubble {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    color: #efefef;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-left-radius: 2px;
+  }
+  
+  .inputArea {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .inputField {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  .inputField:focus-visible {
+    outline: var(--focus-ring-on-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .srOnly {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+  }
+  
+  .sendBtn {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  
+  .sendBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .sendBtn:focus-visible {
+    outline: var(--focus-ring-on-dark);
+    outline-offset: var(--focus-ring-offset);
+  }
+  
+  /* Typing Dots Animation */
+  .typingIndicator {
+    display: flex;
+    gap: 4px;
+  }
+  .typingIndicator span {
+    width: 6px; height: 6px;
+    background: #aaa; border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+  }

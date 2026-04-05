@@ -1,0 +1,462 @@
+/* ============================================================
+   ABOUT PAGE — CSS Module
+   Three distinct section identities, one cohesive page.
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.main {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  padding-top: var(--nav-height);
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO — always dark
+   ════════════════════════════════════════════════════════════ */
+.hero {
+  background: var(--color-bg-dark);
+  padding: var(--space-12) var(--space-10) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.heroInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-16);
+  position: relative;
+  z-index: 1;
+}
+
+.heroText {
+  flex: 1 1 480px;
+  padding-bottom: var(--space-10);
+}
+
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-green-accent);
+  margin-bottom: var(--space-6);
+}
+.heroEyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-green-accent);
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-body);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  color: var(--color-white);
+  margin: 0 0 var(--space-4);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+.heroTitleAccent { color: var(--color-green-accent); }
+
+/* Role line — mono, quiet, sits between name and bio */
+.heroRole {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 400;
+  /* rgba(255,255,255,0.55) = 6.4:1 on #0f0f0e — AA ✓ */
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: var(--tracking-wide);
+  margin: 0 0 var(--space-8);
+}
+
+.heroRoleDot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.heroBio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* rgba(255,255,255,0.85) = 11:1 on #0f0f0e — AAA ✓ */
+.heroBioText {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: var(--leading-loose);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 300;
+}
+
+.heroLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.heroLinkPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-white);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  transition: opacity var(--transition-fast);
+}
+.heroLinkPrimary:hover { opacity: 0.88; }
+.heroLinkPrimary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: var(--radius-full);
+}
+
+.heroLinkGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 500;
+  /* rgba(255,255,255,0.75) = 9.3:1 — AAA ✓ */
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.heroLinkGhost:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+}
+.heroLinkGhost:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: var(--radius-full);
+}
+
+.heroImgWrap {
+  flex: 0 0 340px;
+  height: 480px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-green) 20%, transparent),
+    color-mix(in srgb, var(--color-green) 5%, transparent)
+  );
+  align-self: flex-end;
+  position: relative;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.heroImgOverlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to top, var(--color-bg-dark), transparent);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SHARED SECTION UTILITIES
+   ════════════════════════════════════════════════════════════ */
+.sectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  margin-bottom: var(--space-10);
+}
+
+.sectionEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-3);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+/* ════════════════════════════════════════════════════════════
+   MY PATH — light section with timeline
+   ════════════════════════════════════════════════════════════ */
+.pathSection {
+  background: var(--color-bg);
+  padding: var(--section-y) var(--section-x);
+  border-top: 1px solid var(--color-border);
+}
+
+.pathGrid {
+  display: grid;
+  grid-template-columns: 1.6fr minmax(0, 380px);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.tlItem {
+  position: relative;
+  margin-bottom: var(--space-12);
+  display: flex;
+  gap: var(--space-5);
+}
+
+.tlItem:last-child { margin-bottom: 0; }
+
+.tlDotFilled {
+  position: absolute;
+  left: calc(var(--space-8) * -1 + 3px);
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-green);
+  border: 1.5px solid var(--color-green);
+  flex-shrink: 0;
+}
+
+.tlContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+
+.tlTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+.tlText {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  /* var(--color-ink-soft) = #374151 = 9.4:1 on #f0f0ee — AAA ✓ */
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   A LITTLE MORE
+   ════════════════════════════════════════════════════════════ */
+.moreSection {
+  background: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  padding: var(--section-y) var(--section-x);
+}
+
+.moreHeader {
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-10);
+}
+
+.moreGrid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 380px) 1.6fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* Left — 2 photos stacked, capped width */
+.morePhotoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.morePhotoImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-slow);
+}
+
+.morePhotoImg:hover { transform: scale(1.02); }
+
+/* Right — pull quote + body */
+.moreTextCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.morePullQuote {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--color-green);
+  border-radius: 0;
+}
+
+.moreBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.moreBody p {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.pathMasonry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pathMasonryImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-slow);
+}
+
+.pathMasonryImg:hover { transform: scale(1.02); }
+.masonry {
+  columns: 2;
+  column-gap: var(--space-2);
+  padding: var(--space-2);
+}
+
+.masonryItem {
+  break-inside: avoid;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.masonryImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+.masonryImg:hover { transform: scale(1.04); }
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .heroInner     { flex-direction: column; align-items: stretch; }
+  .heroImgWrap   { width: 100%; height: 320px; flex: none; }
+  .heroRole      { flex-wrap: wrap; }
+  .pathGrid      { grid-template-columns: 1fr; gap: var(--space-10); }
+  .moreGrid      { grid-template-columns: 1fr; }
+  .morePhotoCol  { flex-direction: row; }
+  .morePhotoImg  { flex: 1; }
+  .hero          { padding: var(--space-12) var(--space-6) 0; }
+  .pathSection   { padding: var(--space-16) var(--space-6); }
+  .moreHeader    { padding: var(--space-12) var(--space-6) var(--space-6); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   REDUCED MOTION — WCAG 2.3.3
+   ════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .masonryImg,
+  .masonryImg:hover {
+    transition: none;
+    transform: none;
+  }
+}

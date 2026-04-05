@@ -1,0 +1,69 @@
+/* ============================================================
+   ANIMATIONS
+   All @keyframes live here — imported once in App.jsx.
+   Use animation-name directly in component CSS modules.
+   ============================================================ */
+
+/* ── Float animations (decorative cards) ── */
+@keyframes float-a {
+    0%, 100% { transform: rotate(-5deg) translateY(0);  }
+    50%       { transform: rotate(-5deg) translateY(-7px); }
+  }
+  @keyframes float-b {
+    0%, 100% { transform: rotate(4deg) translateY(0);   }
+    50%       { transform: rotate(4deg) translateY(-9px); }
+  }
+  @keyframes float-c {
+    0%, 100% { transform: rotate(7deg) translateY(0);   }
+    50%       { transform: rotate(7deg) translateY(-6px); }
+  }
+  @keyframes float-d {
+    0%, 100% { transform: rotate(-4deg) translateY(0);  }
+    50%       { transform: rotate(-4deg) translateY(-8px); }
+  }
+  @keyframes float-e {
+    0%, 100% { transform: rotate(-8deg) translateY(0);  }
+    50%       { transform: rotate(-8deg) translateY(-5px); }
+  }
+  
+  /* ── Chat typing dots ── */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0);   }
+    50%       { transform: translateY(-4px); }
+  }
+  
+  /* ── Fade up (used in staggered reveals) ── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+  
+  /* ── Fade in ── */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  /* ── Pulse (used for availability dot) ── */
+  @keyframes pulse {
+    0%, 100% { opacity: 1;   }
+    50%       { opacity: 0.5; }
+  }
+  
+  /* ── Float class utilities (apply to elements) ── */
+  .anim-float-a { animation: float-a 5.2s ease-in-out infinite; }
+  .anim-float-b { animation: float-b 6.1s ease-in-out infinite; }
+  .anim-float-c { animation: float-c 4.8s ease-in-out infinite; }
+  .anim-float-d { animation: float-d 5.7s ease-in-out infinite; }
+  .anim-float-e { animation: float-e 6.4s ease-in-out infinite; }
+  
+  /* ── Reduced motion: disable all animations ── */
+  @media (prefers-reduced-motion: reduce) {
+    .anim-float-a,
+    .anim-float-b,
+    .anim-float-c,
+    .anim-float-d,
+    .anim-float-e {
+      animation: none !important;
+    }
+  }

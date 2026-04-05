@@ -1,0 +1,110 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.75rem;
+    min-height: 0;
+  }
+
+  .panelSectionTitle {
+    margin: 0;
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  
+  .chatLog {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: 0.5rem;
+  }
+  
+  .bubble {
+    max-width: 85%;
+    padding: 0.65rem 0.875rem;
+    border-radius: 14px;
+    font-size: var(--text-base);
+    line-height: 1.4;
+  }
+  
+  .userBubble {
+    align-self: flex-end;
+    background: var(--primitive-brand-700);
+    color: var(--primitive-white);
+    border-bottom-right-radius: 2px;
+  }
+  
+  .botBubble {
+    align-self: flex-start;
+    background: color-mix(in srgb, var(--primitive-brand-900) 35%, rgba(255, 255, 255, 0.06) 65%);
+    color: rgba(255, 255, 255, 0.92);
+    border: 1px solid color-mix(in srgb, var(--primitive-brand-500) 15%, rgba(255, 255, 255, 0.1) 85%);
+    border-bottom-left-radius: 2px;
+  }
+  
+  .inputArea {
+    display: flex;
+    gap: 0.5rem;
+    background: color-mix(in srgb, var(--primitive-brand-950) 55%, rgba(255, 255, 255, 0.04) 45%);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--primitive-brand-600) 12%, rgba(255, 255, 255, 0.1) 88%);
+  }
+  
+  .inputField {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    font-size: var(--text-base);
+  }
+  .inputField::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+    opacity: 1;
+  }
+  .inputField:focus-visible {
+    outline: var(--focus-ring-on-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .srOnly {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+  }
+  
+  .sendBtn {
+    width: var(--min-touch);
+    min-width: var(--min-touch);
+    height: var(--min-touch);
+    padding: 0;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  
+  /* Typing Dots Animation */
+  .typingIndicator {
+    display: flex;
+    gap: 4px;
+  }
+  .typingIndicator span {
+    width: 6px; height: 6px;
+    background: color-mix(in srgb, var(--primitive-brand-400) 70%, var(--primitive-gray-400) 30%);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+  }

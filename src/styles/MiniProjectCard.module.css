@@ -1,0 +1,67 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+  
+  .card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--mini-accent, #34d399);
+    transform: translateY(-4px);
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #121212;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .content {
+    padding: 0.75rem;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--mini-accent, #34d399);
+    border-radius: 50%;
+  }
+  
+  /* Brand accent on dot only — project accent hex is often dark-on-dark vs widget */
+  .company {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--primitive-gray-300);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .title {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--primitive-gray-50);
+    margin: 0;
+    line-height: 1.3;
+  }

@@ -1,0 +1,147 @@
+/* ============================================================
+   PROJECT CARD — CSS Module
+   --card-bg is set as an inline CSS custom property from JSX
+   so each card can have its unique project color dynamically.
+   ============================================================ */
+
+/* UA `a:link` / `a:visited` (0,1,1) beats a lone `.link` class — without this, the
+   anchor can stay default link blue and pollute inherited text color. */
+.link:link,
+.link:visited,
+.link:hover,
+.link:active {
+  color: inherit;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: 16px;
+}
+.link:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 18px;
+}
+
+.card {
+  background: var(--card-bg, #f0f0eb);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(.22,.68,0,1.2), box-shadow 0.28s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px color-mix(in srgb, var(--card-accent, var(--color-green)) 22%, transparent);
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.04);
+}
+.imageWrap.placeholder {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--card-accent, var(--color-green)) 12%, transparent),
+    color-mix(in srgb, var(--card-accent, var(--color-green)) 5%, transparent)
+  );
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.card:hover .image { transform: scale(1.04); }
+
+.body {
+  padding: 1.5rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  font-weight: 500;
+}
+
+.companyDot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-green);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  /* Fixed dark grey: cards keep light --card-bg in dark site theme */
+  color: #374151;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.tag {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  background: color-mix(in srgb, var(--card-accent, var(--color-green)) 12%, transparent);
+  color: var(--card-accent, var(--color-green));
+  padding: 0.3rem 0.65rem;
+  border-radius: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.tagMore {
+  background: rgba(0, 0, 0, 0.06);
+  color: #374151;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--card-accent, var(--color-green));
+  margin-top: auto;
+  padding-top: 1.125rem;
+  border-top: none;
+  transition: gap 0.2s;
+}
+.card:hover .cta { gap: 0.8rem; }

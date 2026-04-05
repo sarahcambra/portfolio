@@ -1,0 +1,162 @@
+.footer {
+  background: var(--color-bg-dark, #0f0f0e); 
+  padding: 6rem 2.5rem 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-white, #ffffff);
+}
+
+.inner {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brandName {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+.brandSub {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  /* Using your bright teal/emerald for contrast on dark */
+  color: var(--color-green-accent); 
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.brandDesc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9); /* Pure white with soft opacity for text reading */
+  max-width: 38ch;
+}
+
+.colTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6); /* Clear title visibility */
+  margin-bottom: 1.8rem;
+  font-weight: 600;
+}
+
+/* ── Harmonized Link Stack ── */
+.linkStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.linkItem {
+  color: #ffffff; /* High contrast text start */
+  text-decoration: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: color var(--transition-base), transform var(--transition-base);
+  min-height: 1.5rem;
+}
+
+.linkItem:hover {
+  color: var(--color-green-accent); /* Hover flips to emerald */
+  transform: translateX(6px);
+}
+
+.linkItem:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+  color: var(--color-green-accent);
+}
+
+/* ── Bottom Bar ── */
+.bottom {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  padding-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomLeft {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.copy {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.available {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.availableDot {
+  width: 10px;
+  height: 10px;
+  background: var(--color-available); /* Pulling your bright lime/green */
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-available);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* ── Back to Top ── */
+.backToTop {
+  background: transparent;
+  border: 1.5px solid var(--color-green-accent);
+  color: var(--color-green-accent);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border-radius: var(--radius-full, 9999px);
+}
+
+.backToTop:hover {
+  background: rgba(16, 185, 129, 0.1); /* Transparent emerald fallback */
+  transform: translateY(-3px);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.backToTop:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (max-width: 860px) {
+  .inner { grid-template-columns: 1fr; gap: 3.5rem; }
+  .bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .bottomLeft { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .backToTop { width: 100%; justify-content: center; }
+}

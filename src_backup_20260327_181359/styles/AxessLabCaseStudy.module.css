@@ -1,0 +1,586 @@
+/* ============================================================
+   AXESSLAB CASE STUDY — CSS Module
+   ============================================================ */
+
+.page {
+  --accent:       #064e3b;
+  --accent-light: #e8f0e6;
+  --accent-mid:   #dcfce7;
+  --accent-text:  #16a34a;
+
+  padding-top: 68px;
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem 0;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-decoration: none;
+  text-transform: uppercase;
+  min-height: var(--min-touch);
+  transition: opacity var(--transition-fast);
+}
+.backLink:hover { opacity: 0.7; }
+.backLink:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 4px;
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--accent-light);
+  padding: 4.5rem 2.5rem 3.5rem;
+}
+html.dark .hero { background: rgba(6,78,59,0.15); }
+
+.heroInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+.heroTitle {
+  font-family: var(--font-body);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0 0 1.125rem;
+  line-height: 1.05;
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--color-ink-soft);
+  line-height: 1.65;
+  margin: 0 0 2rem;
+  font-weight: 300;
+  max-width: 580px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  background: rgba(6,78,59,0.1);
+  color: var(--accent);
+  padding: 0.3rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.heroRole {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-muted);
+}
+
+/* ── Stat bar ── */
+.statBar {
+  background: var(--color-bg-dark);
+  padding: 1.5rem 2.5rem;
+}
+
+.statBarInner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stat { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.statValue {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ── Layout containers ── */
+
+/* Prose — max 760px, centred */
+.prose {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* Wide — max 1080px, centred — for full-width images */
+.wide {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* Section spacing */
+.section { margin-bottom: 5rem; }
+.sectionSm { margin-bottom: 3rem; }
+
+/* Section heading group */
+.sectionEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: 0.875rem;
+}
+.sectionEyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.h2 {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin: 0 0 1.25rem;
+  line-height: 1.2;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--accent-light);
+}
+html.dark .h2 { border-color: rgba(6,78,59,0.25); }
+
+.h3 {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-ink-soft);
+  margin: 0 0 1.25rem;
+}
+.body:last-child { margin-bottom: 0; }
+
+.list {
+  margin: 0.75rem 0 1.25rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.listItem {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+/* ── Image blocks ── */
+
+/* Single full-width image */
+.imgWrap {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 2-column image grid */
+.imgGrid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* 3-column image grid */
+.imgGrid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.875rem;
+  margin-top: 2rem;
+}
+
+/* 2-col, first item takes 3/5 */
+.imgGridAsym {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  display: block;
+  box-shadow: var(--shadow-md);
+}
+
+.imgCaption {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-faint);
+  text-align: center;
+  margin-top: 0.625rem;
+}
+
+/* ── Placeholder (shown when image is missing) ── */
+.placeholder {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+  background: var(--color-bg-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  min-height: 220px;
+  box-sizing: border-box;
+}
+html.dark .placeholder {
+  background: var(--color-bg-card);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.placeholderIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 0.125rem;
+  flex-shrink: 0;
+}
+html.dark .placeholderIcon { background: rgba(6,78,59,0.2); }
+
+.placeholderFile {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(6,78,59,0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
+.placeholderLabel {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-ink-muted);
+  max-width: 260px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Taller placeholder for cover/hero images */
+.placeholderTall { min-height: 360px; }
+
+/* Short placeholder for grid cells */
+.placeholderShort { min-height: 160px; padding: 1.5rem 1rem; }
+
+/* ── Challenge cards ── */
+.challengeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.challengeCard {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+html.dark .challengeCard { background: var(--color-bg-card); }
+
+.challengeNum {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
+  text-transform: uppercase;
+}
+
+.challengeTitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.challengeBody {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+/* ── Process phases ── */
+.phases {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+html.dark .phase { background: var(--color-bg-card); }
+.phase:last-child { border-bottom: none; }
+
+.phaseNum {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.375rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
+  border-right: 1px solid var(--color-border);
+}
+
+.phaseContent { padding: 1.25rem 1.5rem; }
+
+.phaseTitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0 0 0.5rem;
+}
+
+.phaseDesc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-ink-muted);
+  margin: 0 0 0.75rem;
+}
+
+.phaseTools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.phaseTool {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(6,78,59,0.07);
+  border: 1px solid rgba(6,78,59,0.15);
+  padding: 0.18rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* ── Callout quote ── */
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  background: var(--accent-light);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+html.dark .callout { background: rgba(6,78,59,0.12); }
+
+.calloutText {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* ── Outcome metrics ── */
+.outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.outcomeStat {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+html.dark .outcomeStat { background: var(--color-bg-card); }
+
+.outcomeNum {
+  font-family: var(--font-body);
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.outcomeLabel {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-ink-soft);
+  line-height: 1.4;
+}
+
+/* ── Dark divider between major acts ── */
+.divider {
+  background: var(--color-bg-dark);
+  margin: 5rem 0 0;
+  padding: 3rem 2.5rem;
+}
+
+.dividerInner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.dividerLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.375rem;
+}
+
+.dividerTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 2.5vw, 1.875rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+/* ── Next project strip ── */
+.nextProject {
+  background: var(--color-bg-dark);
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.nextLink {
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.nextLink:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 4px;
+}
+
+.nextLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.nextTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 3vw, 1.875rem);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .challengeGrid  { grid-template-columns: 1fr 1fr; }
+  .outcomes       { grid-template-columns: 1fr 1fr; }
+  .imgGrid3       { grid-template-columns: 1fr 1fr; }
+  .imgGridAsym    { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .hero           { padding: 3rem 1.5rem 2.5rem; }
+  .prose          { padding: 0 1.5rem; }
+  .wide           { padding: 0 1.5rem; }
+  .breadcrumb     { padding: 1rem 1.5rem 0; }
+  .statBarInner   { gap: 1.25rem; }
+  .challengeGrid  { grid-template-columns: 1fr; }
+  .outcomes       { grid-template-columns: 1fr; }
+  .imgGrid2       { grid-template-columns: 1fr; }
+  .imgGrid3       { grid-template-columns: 1fr; }
+  .phase          { grid-template-columns: 40px 1fr; }
+}

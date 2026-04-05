@@ -1,0 +1,189 @@
+/* ============================================================
+   CASE STUDY PAGE — CSS Module
+   --hero-bg is set as an inline CSS custom property from JSX
+   so each project's hero uses its unique brand color.
+   ============================================================ */
+
+.main {
+  padding-top: 68px;
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem 0;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--color-green);
+  text-decoration: none;
+  text-transform: uppercase;
+  min-height: var(--min-touch);
+}
+.backLink:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 4px;
+}
+
+/* ── Hero — background comes from project.color via --hero-bg ── */
+.hero {
+  background: var(--hero-bg, var(--color-bg));
+  padding: 4rem 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.heroInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.company {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  font-weight: 300;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  background: rgba(61, 107, 53, 0.12);
+  color: var(--color-green);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Cover image ── */
+.coverWrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2.5rem 3rem;
+}
+
+.cover {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Article body ── */
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2.5rem 5rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(61, 107, 53, 0.15);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+/* ── Next project strip ── */
+.nextProject {
+  background: var(--color-bg-dark);
+  padding: 3rem 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nextLink {
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.nextLink:focus-visible {
+  outline: var(--focus-ring-on-dark);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 4px;
+}
+
+.nextLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.nextTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero        { padding: 3rem 1.5rem; }
+  .coverWrap   { padding: 0 1.5rem 2rem; }
+  .article     { padding: 0 1.5rem 4rem; }
+  .breadcrumb  { padding: 1rem 1.5rem 0; }
+}

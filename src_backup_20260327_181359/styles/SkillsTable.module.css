@@ -1,0 +1,195 @@
+/* ============================================================
+   SKILLS — Accordion
+   WCAG 2.2 compliant. All tokens from tokens.css.
+   ============================================================ */
+
+   .section {
+    background: var(--color-bg-alt);
+    padding: var(--section-y) var(--section-x);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  /* ── Header ── */
+  .header {
+    margin-bottom: var(--space-10);
+  }
+  
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-md);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-3);
+  }
+  
+  .eyebrowLine {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-border);
+    flex-shrink: 0;
+  }
+  
+  .title {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-ink);
+    margin: 0;
+    line-height: var(--leading-tight);
+  }
+  
+  /* ── Accordion wrapper ── */
+  .accordion {
+    border-top: 1px solid var(--color-border);
+  }
+  
+  /* ── Each item ── */
+  .item {
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-fast);
+  }
+  
+  .itemOpen {
+    background: color-mix(in srgb, var(--color-green) 3%, var(--color-bg-alt));
+  }
+  
+  /* ── Trigger button ──
+     Full-width, min 44px height — WCAG 2.5.8
+     No default button styles
+  */
+  .trigger {
+    width: 100%;
+    min-height: var(--min-touch);
+    background: none;
+    border: none;
+    padding: var(--space-5) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    cursor: pointer;
+    text-align: left;
+    /* Inherit focus ring from shared.css :focus-visible */
+  }
+  
+  .trigger:hover .triggerCat {
+    color: var(--color-green);
+  }
+  
+  /* WCAG 2.4.11 — visible focus indicator */
+  .trigger:focus-visible {
+    outline: 3px solid var(--color-green);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+  
+  .triggerLeft {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .triggerCat {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: var(--leading-snug);
+    transition: color var(--transition-fast);
+  }
+  
+  .triggerRight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+  
+  .triggerCount {
+    font-family: var(--font-mono);
+    font-size: var(--text-md);
+    color: var(--color-ink-faint);
+    letter-spacing: var(--tracking-wide);
+  }
+  
+  /* Caret rotates when open — CSS only, no JS needed */
+  .caret {
+    color: var(--color-ink);
+    transition: transform var(--transition-base), color var(--transition-fast);
+    flex-shrink: 0;
+  }
+  
+  .caretOpen {
+    transform: rotate(180deg);
+    color: var(--color-green);
+  }
+  
+  /* ── Panel — shown/hidden via hidden attribute ── */
+  .panel {
+    padding: 0 0 var(--space-6);
+  }
+  
+  /* hidden attribute handled natively — no display:none needed */
+  
+  /* ── Skill list inside panel ── */
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .listItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    /* var(--color-ink-soft) = 9.4:1 on white — AAA ✓ */
+    color: var(--color-ink-soft);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    line-height: var(--leading-normal);
+  }
+  
+  .listItem:last-child {
+    border-bottom: none;
+  }
+  
+  .listDot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-green);
+    flex-shrink: 0;
+  }
+  
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .triggerCount { display: none; }
+    .triggerCat   { font-size: var(--text-md); }
+  }
+  
+  /* ── Reduced motion — WCAG 2.3.3 ── */
+  @media (prefers-reduced-motion: reduce) {
+    .caret     { transition: none; }
+    .item      { transition: none; }
+    .trigger   { transition: none; }
+    .triggerCat { transition: none; }
+  }
