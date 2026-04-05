@@ -9,7 +9,9 @@
 .widget {
   position: relative;
   z-index: 2;
-  width: 720px;
+  width: min(720px, calc(100vw - 2rem));
+  max-width: 100%;
+  box-sizing: border-box;
   background: linear-gradient(
     165deg,
     color-mix(
@@ -123,13 +125,10 @@
   white-space: nowrap;
 }
 
-/* ── Navigation — Button tabs + resume (inverse surface) ── */
+/* ── Navigation — tab row + Resume share one flex row (tabList) ──
+   tabRow = role="tablist" (tabs only). Resume is a sibling link, not a tab. */
 .pillNav {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-  list-style: none;
+  display: block;
   margin: 0;
   padding: 0;
 }
@@ -139,18 +138,17 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  flex: 1 1 auto;
   min-width: 0;
 }
 
-.resumeHeading {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  line-height: 1.2;
-  color: rgba(255, 255, 255, 0.88);
-  white-space: nowrap;
+/* No flex-grow — otherwise the tab group stretches and Resume sits far right */
+.tabRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .widgetTab {
@@ -159,6 +157,25 @@
 
 .resumeBtn {
   flex-shrink: 0;
+}
+
+/* ── Smaller screens: logo above name + subtitle (stacked header) ── */
+@media (max-width: 640px) {
+  .widgetHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .widgetNameGroup {
+    width: 100%;
+    flex: none;
+  }
+
+  .widgetHeaderBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ── Availability strip ── */
@@ -262,14 +279,22 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 860px) {
+@media (max-width: 520px) {
   .widget {
-    width: calc(100vw - 2.5rem);
-    max-width: 520px;
+    padding: 1.25rem;
+    width: min(720px, calc(100vw - 1.5rem));
+    padding-inline: max(1rem, env(safe-area-inset-left, 0px))
+      max(1rem, env(safe-area-inset-right, 0px));
+  }
+  .viewArea {
+    height: clamp(240px, 48vh, 280px);
   }
 }
 
-@media (max-width: 520px) {
-  .widget { padding: 1.25rem; }
-  .pillNav { flex-wrap: wrap; }
+@media (max-width: 480px) {
+  .ctaBar {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }

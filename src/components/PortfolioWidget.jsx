@@ -130,6 +130,10 @@ const VIEWS = [
    view / onViewChange: controlled tab state (parent owns floats in hero).
 ───────────────────────────────────────────────────────── */
 export default function PortfolioWidget({ view, onViewChange }) {
+  const widgetProjects = useMemo(
+    () => projects.filter((p) => p.widget !== false),
+    []
+  );
   const viewIds = useMemo(() => VIEWS.map((v) => v.id), []);
 
   const selectView = useCallback(
@@ -213,40 +217,41 @@ export default function PortfolioWidget({ view, onViewChange }) {
           <p className={s.casesPanelHeading}>Accessible Design System</p>
         )}
         <div className={s.viewPanelBody}>
-          {view === 'cases' && <CasesView projects={projects} />}
+          {view === 'cases' && <CasesView projects={widgetProjects} />}
           {view === 'chat' && <ChatView />}
           {view === 'contact' && <ContactView />}
         </div>
       </div>
 
       <nav className={s.pillNav} aria-label="Dashboard navigation">
-        <div role="tablist" aria-label="Dashboard views" className={s.tabList}>
-          {VIEWS.map(({ id, label, icon }) => (
-            <WidgetTab
-              key={id}
-              id={id}
-              active={view === id}
-              onSelect={selectView}
-              onKeyDown={handleTabKey}
-              icon={icon}
-            >
-              {label}
-            </WidgetTab>
-          ))}
+        <div className={s.tabList}>
+          <div role="tablist" aria-label="Dashboard views" className={s.tabRow}>
+            {VIEWS.map(({ id, label, icon }) => (
+              <WidgetTab
+                key={id}
+                id={id}
+                active={view === id}
+                onSelect={selectView}
+                onKeyDown={handleTabKey}
+                icon={icon}
+              >
+                {label}
+              </WidgetTab>
+            ))}
+          </div>
+          <Button
+            as="a"
+            href={resolvePublicUrl('/assets/sarah-resume-pdf/sarah-resume.pdf')}
+            download="sarah-resume.pdf"
+            variant="secondary"
+            surface="inverse"
+            size="md"
+            className={s.resumeBtn}
+          >
+            <DownloadSimple size={16} weight="bold" aria-hidden="true" />
+            Resume
+          </Button>
         </div>
-        <div className={s.resumeHeading}>Resume / CV</div>
-        <Button
-          as="a"
-          href={resolvePublicUrl('/assets/sarah-resume.pdf')}
-          download
-          variant="secondary"
-          surface="inverse"
-          size="md"
-          className={s.resumeBtn}
-        >
-          <DownloadSimple size={16} weight="bold" aria-hidden="true" />
-          Resume
-        </Button>
       </nav>
 
       <div className={s.ctaBar}>

@@ -11,10 +11,11 @@ export default function MiniProjectCard({ project, className, ...rest }) {
       {...rest}
     >
       <div className={s.imageWrapper}>
-        <img 
-          src={resolvePublicUrl(project.imageUrl)} 
-          alt="" 
+        <img
+          src={resolvePublicUrl(project.imageUrl)}
+          alt=""
           className={s.image}
+          style={project.imageObjectPosition ? { objectPosition: project.imageObjectPosition } : undefined}
           onError={(e) => { 
             e.target.style.display = 'none'; 
             e.target.parentElement.style.background = 'rgba(255,255,255,0.05)';

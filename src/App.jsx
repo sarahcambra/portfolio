@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './ThemeContext.jsx';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,16 +12,22 @@ import { caseStudyRoutes } from './data/caseStudyRegistry';
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <DocumentTitle />
+      {/* 1. The Basename handles the /portfolio/ sub-folder */}
+      <Router basename={import.meta.env.BASE_URL}>
+                <DocumentTitle />
         <div className="flex flex-col min-h-screen bg-page-bg text-page-text transition-colors duration-300">
           <Navbar />
 
           <div className="flex-grow">
             <Routes>
-              <Route path="/"               element={<HomePage />} />
-              <Route path="/projects"       element={<ProjectsPage />} />
-              <Route path="/about"          element={<AboutPage />} />
+              {/* 2. Index route ensures HomePage loads immediately on the base URL */}
+              <Route index element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
+              
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+
+              {/* 3. Mapping your specific case studies */}
               {caseStudyRoutes.map(({ slug, component: CaseStudy }) => (
                 <Route
                   key={slug}
@@ -29,7 +35,12 @@ function App() {
                   element={<CaseStudy />}
                 />
               ))}
+
+              {/* 4. Catch-all for dynamic slugs or broken links */}
               <Route path="/projects/:slug" element={<CaseStudyPage />} />
+              
+              {/* 5. Emergency Redirect: If the user gets lost, send them Home */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
 

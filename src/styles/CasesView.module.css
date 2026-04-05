@@ -35,3 +35,12 @@
   height: calc(100% - 8px);     /* match the padding-bottom above */
   min-width: 0;
 }
+
+@media (max-width: 480px) {
+  .scroll {
+    gap: 0.625rem;
+  }
+  .cardSlot {
+    flex: 0 0 100%;
+  }
+}

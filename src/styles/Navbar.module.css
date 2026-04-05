@@ -31,13 +31,20 @@
   align-items: center;
   gap: clamp(1rem, 3vw, 2rem);
   padding: 0.65rem clamp(1.25rem, 3vw, 2.5rem);
-  /* Warm studio glass — ties to homepage shell (--shell-nav-*) */
-  background: color-mix(in srgb, var(--shell-nav-fill) 88%, transparent);
-  backdrop-filter: blur(22px) saturate(1.08);
-  -webkit-backdrop-filter: blur(22px) saturate(1.08);
+  /* Warm studio glass — blend shell tint with a light frost so the bar
+     stays readable on the hero (plain 88% shell + transparent read as empty). */
+  background: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--shell-nav-fill) 92%, var(--primitive-secondary-100)) 88%,
+    color-mix(in srgb, var(--primitive-white) 42%, transparent)
+  );
+  backdrop-filter: blur(22px) saturate(1.12);
+  -webkit-backdrop-filter: blur(22px) saturate(1.12);
   border-radius: var(--radius-full);
   border: 1px solid color-mix(in srgb, var(--shell-nav-border) 58%, transparent);
-  box-shadow: var(--shadow-md);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 color-mix(in srgb, var(--primitive-white) 55%, transparent);
   transition: top var(--transition-base), box-shadow var(--transition-base);
   min-width: fit-content;
   /* Keep the pill inside the viewport — otherwise flex row overflows and
@@ -52,9 +59,15 @@
 }
 
 .navDark {
-  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.5);
-  background: color-mix(in srgb, var(--shell-nav-fill) 84%, transparent);
-  border-color: color-mix(in srgb, var(--shell-nav-border) 42%, transparent);
+  box-shadow:
+    0 4px 28px color-mix(in srgb, var(--primitive-black) 45%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--primitive-white) 10%, transparent);
+  background: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--shell-nav-fill) 96%, var(--primitive-gray-800)) 90%,
+    color-mix(in srgb, var(--primitive-black) 22%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--shell-nav-border) 48%, transparent);
 }
 
 /* ── Logo ─────────────────────────────────────────────────── */

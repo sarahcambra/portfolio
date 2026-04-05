@@ -233,7 +233,7 @@ export default function HomePage() {
                   </li>
                 ))}
                 <li>
-                  <a href={resolvePublicUrl('/assets/sarah-resume.pdf')} download style={{ color: '#fff', background: 'rgba(255,255,255,0.09)', padding: '0 1.125rem', borderRadius: '100px', display: 'flex', alignItems: 'center', height: '44px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <a href={resolvePublicUrl('/assets/sarah-resume-pdf/sarah-resume.pdf')} download style={{ color: '#fff', background: 'rgba(255,255,255,0.09)', padding: '0 1.125rem', borderRadius: '100px', display: 'flex', alignItems: 'center', height: '44px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)' }}>
                     <DownloadSimple size={16} weight="bold" /> Resume
                   </a>
                 </li>

@@ -28,6 +28,8 @@ export const projects = [
       'Designed a multi-sided platform supporting shelter operations, adoption workflows, and public sector data insights. Implemented AI-assisted design-to-code workflows using Flowbite, Figma MCP, and Cursor — improving UI consistency and reducing handoff time.',
     tags: ['Product Design', 'AI Workflows', 'Figma MCP', 'Flowbite', 'Co-founder'],
     imageUrl: '/assets/projects/arcanimal.png',
+    /* Mini widget card (16/10 crop): nudge focal point vs full ProjectCard (16/9) */
+    imageObjectPosition: '50% 18%',
     color: '#fff7ed',
     accent: '#c2410c',
     year: '2024–Present',
@@ -63,6 +65,7 @@ export const projects = [
   },
   {
     slug: 'axl-v2',
+    widget: false,
     company: 'AxessLab',
     title: 'AXL Design System',
     subtitle: 'An accessibility-focused design system for mobile and desktop',

@@ -81,7 +81,7 @@ export default function AboutPage() {
 
             <div className={s.heroLinks}>
               <a
-                href={resolvePublicUrl('/assets/sarah-resume.pdf')}
+                href={resolvePublicUrl('/assets/sarah-resume-pdf/sarah-resume.pdf')}
                 download
                 aria-label="Download Sarah's résumé"
                 className={s.heroLinkPrimary}
