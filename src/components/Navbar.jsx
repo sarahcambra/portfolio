@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../ThemeContext';
 import Button from './Button';
 import s from '../styles/Navbar.module.css';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 const links = [
   { label: 'Case Studies', to: '/projects' },
@@ -105,7 +106,7 @@ export default function Navbar() {
         <Link to="/" className={s.logoLink}>
           {!logoError ? (
             <img
-              src={dark ? '/assets/sarah-logo-white.png' : '/assets/sarah-logo.png'}
+              src={dark ? resolvePublicUrl('/assets/sarah-logo-white.png') : resolvePublicUrl('/assets/sarah-logo.png')}
               alt="Sarah Beú"
               className={s.logoImg}
               onError={() => setLogoError(true)}

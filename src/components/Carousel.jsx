@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import Button from './Button';
 import s from '../styles/Carousel.module.css';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 export default function Carousel({ photos }) {
   const [index, setIndex] = useState(0);
@@ -14,7 +15,8 @@ export default function Carousel({ photos }) {
   // Plain strings or { src, alt } — always provide non-empty alt (WCAG 1.1.1)
   const item = photos[index];
   const isString = typeof item === 'string';
-  const src = isString ? item : item.src;
+  const raw = isString ? item : item.src;
+  const src = /^https?:\/\//i.test(raw) ? raw : resolvePublicUrl(raw);
   const authorAlt = isString ? '' : (item.alt ?? '');
   const altText = authorAlt.trim()
     ? authorAlt

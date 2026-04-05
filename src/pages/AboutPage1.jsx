@@ -3,6 +3,7 @@ import { LinkedinLogo, DownloadSimple } from '@phosphor-icons/react';
 import SkillsTable from '../components/SkillsTable';
 import s from '../styles/Aboutpage.module.css';
 import Carousel from '../components/carousel';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 /* ── Timeline milestones ── */
 const MILESTONES = [
@@ -21,13 +22,13 @@ const MILESTONES = [
 ];
 
 const PATH_PHOTOS = [
-  { src: '/assets/about/path-1.png', alt: 'Post-it notes workshop at Hyper Island' },
-  { src: '/assets/about/path-2.png', alt: 'Presenting research insights' },
+  { src: resolvePublicUrl('/assets/about/path-1.png'), alt: 'Post-it notes workshop at Hyper Island' },
+  { src: resolvePublicUrl('/assets/about/path-2.png'), alt: 'Presenting research insights' },
 ];
 
 const MORE_PHOTOS = [
-  { src: '/assets/about/more-1.png', alt: 'Arcanimal — system to support abandoned animals' },
-  { src: '/assets/about/more-2.png', alt: 'Volunteering with ice skating club in Karlskrona' },
+  { src: resolvePublicUrl('/assets/about/more-1.png'), alt: 'Arcanimal — system to support abandoned animals' },
+  { src: resolvePublicUrl('/assets/about/more-2.png'), alt: 'Volunteering with ice skating club in Karlskrona' },
 ];
 
 export default function AboutPage() {
@@ -80,7 +81,7 @@ export default function AboutPage() {
 
             <div className={s.heroLinks}>
               <a
-                href="/assets/sarah-resume.pdf"
+                href={resolvePublicUrl('/assets/sarah-resume.pdf')}
                 download
                 aria-label="Download Sarah's résumé"
                 className={s.heroLinkPrimary}
@@ -102,7 +103,7 @@ export default function AboutPage() {
 
           <div className={s.heroImgWrap}>
             <img
-              src="/assets/about/sarah-photo.png"
+              src={resolvePublicUrl('/assets/about/sarah-photo.png')}
               alt="Sarah Beú"
               className={s.heroImg}
               onError={e => { e.target.style.display = 'none'; }}

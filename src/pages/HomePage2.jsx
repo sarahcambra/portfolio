@@ -22,6 +22,7 @@ import { useTheme } from '../ThemeContext.jsx';
 
 import ChatView from '../components/ChatView';
 import CasesView from '../components/CasesView';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 const testimonials = [
   { quote: "Sarah takes the initiative to identify problems and devise solutions. She has shown strong communication skills and the ability to inspire respect and cooperation in teammates.", name: "Afonso Caetano", role: "IT Director / CIO/CTG", initials: "AC" },
@@ -210,7 +211,7 @@ export default function HomePage() {
           {/* CENTRAL WIDGET */}
           <div className="hero-widget" style={{ width: '720px', background: '#0f0f0e', borderRadius: '24px', padding: '1.75rem', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 32px 80px rgba(0,0,0,0.28)', zIndex: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-              <img src="/assets/Logo_sarah.png" style={{ height: '32px' }} alt="Sarah Logo" />
+              <img src={resolvePublicUrl('/assets/sarah-logo.png')} style={{ height: '32px' }} alt="Sarah Logo" />
               <div style={{ flex: 1 }}>
                 <h1 style={{ color: '#fff', fontSize: '1.1rem', margin: 0 }}>Sarah Beú</h1>
                 <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0 }}>Sr. Product Designer · Accessibility & Design Systems</p>
@@ -232,7 +233,7 @@ export default function HomePage() {
                   </li>
                 ))}
                 <li>
-                  <a href="/assets/sarah-resume.pdf" download style={{ color: '#fff', background: 'rgba(255,255,255,0.09)', padding: '0 1.125rem', borderRadius: '100px', display: 'flex', alignItems: 'center', height: '44px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <a href={resolvePublicUrl('/assets/sarah-resume.pdf')} download style={{ color: '#fff', background: 'rgba(255,255,255,0.09)', padding: '0 1.125rem', borderRadius: '100px', display: 'flex', alignItems: 'center', height: '44px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)' }}>
                     <DownloadSimple size={16} weight="bold" /> Resume
                   </a>
                 </li>

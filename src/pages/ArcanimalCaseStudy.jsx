@@ -4,6 +4,7 @@ import s from '../styles/ArcanimalCaseStudy.module.css';
 import CaseStudyBreadcrumb from '../components/caseStudy/CaseStudyBreadcrumb';
 import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 const project = projects.find(p => p.slug === 'arcanimal-platform');
 const next = getNextCaseStudy('arcanimal-platform');
@@ -54,7 +55,7 @@ function Img({ src, filename, alt, tall, caption }) {
 export default function ArcanimalCaseStudy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const img = (name) => `/assets/projects/arcanimal/${name}`;
+  const img = (name) => resolvePublicUrl(`/assets/projects/arcanimal/${name}`);
 
   return (
     <main className={s.page} id="main-content">

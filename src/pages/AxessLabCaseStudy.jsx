@@ -4,6 +4,7 @@ import s from '../styles/AxessLabCaseStudy.module.css';
 import CaseStudyBreadcrumb from '../components/caseStudy/CaseStudyBreadcrumb';
 import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 const project = projects.find(p => p.slug === 'axesslab-design-system');
 const next = getNextCaseStudy('axesslab-design-system');
@@ -53,7 +54,7 @@ function Img({ src, filename, alt, tall, caption }) {
 export default function AxessLabCaseStudy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const img = (name) => `/assets/projects/axesslab/${name}`;
+  const img = (name) => resolvePublicUrl(`/assets/projects/axesslab/${name}`);
 
   return (
     <main className={s.page} id="main-content">

@@ -17,6 +17,7 @@ import CasesView from './CasesView';
 import Button from './Button';
 import { projects } from '../data';
 import s from '../styles/PortfolioWidget.module.css';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 /* ─────────────────────────────────────────────────────────
    ContactView — lives on the always-dark widget.
@@ -178,7 +179,7 @@ export default function PortfolioWidget({ view, onViewChange }) {
     >
       <div className={s.widgetHeader}>
         <img
-          src="/assets/Logo_sarah.png"
+          src={resolvePublicUrl('/assets/sarah-logo.png')}
           alt=""
           className={s.widgetLogo}
           onError={(e) => {
@@ -236,7 +237,7 @@ export default function PortfolioWidget({ view, onViewChange }) {
         <div className={s.resumeHeading}>Resume / CV</div>
         <Button
           as="a"
-          href="/assets/sarah-resume.pdf"
+          href={resolvePublicUrl('/assets/sarah-resume.pdf')}
           download
           variant="secondary"
           surface="inverse"

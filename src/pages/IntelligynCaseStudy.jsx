@@ -4,6 +4,7 @@ import s from '../styles/IntelligynCaseStudy.module.css';
 import CaseStudyBreadcrumb from '../components/caseStudy/CaseStudyBreadcrumb';
 import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
+import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
 const project = projects.find(p => p.slug === 'intelligyn-redesign');
 const next = getNextCaseStudy('intelligyn-redesign');
@@ -54,7 +55,7 @@ function Img({ src, filename, alt, tall, caption }) {
 export default function IntelligynCaseStudy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const img = (name) => `/assets/projects/intelligyn/${name}`;
+  const img = (name) => resolvePublicUrl(`/assets/projects/intelligyn/${name}`);
 
   return (
     <main className={s.page} id="main-content">
