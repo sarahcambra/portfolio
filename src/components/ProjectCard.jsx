@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import s from '../styles/ProjectCard.module.css';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, className, style, ...rest }) {
   return (
-    <Link to={`/projects/${project.slug}`} className={s.link}>
+    <Link
+      to={`/projects/${project.slug}`}
+      className={[s.link, className].filter(Boolean).join(' ')}
+      style={style}
+      {...rest}
+    >
       <article
         className={s.card}
         style={{

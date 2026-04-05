@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import s from '../styles/MiniProjectCard.module.css';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 
-export default function MiniProjectCard({ project }) {
+export default function MiniProjectCard({ project, className, ...rest }) {
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className={s.card}
+      className={[s.card, className].filter(Boolean).join(' ')}
       style={{ '--mini-accent': project.accent ?? '#34d399' }}
+      {...rest}
     >
       <div className={s.imageWrapper}>
         <img 

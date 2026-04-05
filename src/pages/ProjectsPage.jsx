@@ -30,9 +30,13 @@ export default function ProjectsPage() {
 
       <section className={s.grid} aria-label="All projects">
         {projects.map((project, i) => (
-          <div key={project.slug} className="reveal" style={{ animationDelay: `${i * 0.1}s` }}>
-            <ProjectCard project={project} index={i} />
-          </div>
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            index={i}
+            className="reveal"
+            style={{ animationDelay: `${i * 0.1}s` }}
+          />
         ))}
       </section>
     </main>

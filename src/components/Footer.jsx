@@ -36,32 +36,40 @@ export default function Footer() {
         {/* ── Column 2: Navigation ── */}
         <nav className={s.navCol} aria-label="Footer navigation">
           <p className={s.colTitle}>Navigation</p>
-          <div className={s.linkStack}>
+          <ul className={s.linkStack}>
             {navLinks.map(({ label, to }) => (
-              <Link key={to} to={to} className={s.linkItem}>
-                {label}
-              </Link>
+              <li key={to}>
+                <Link to={to} className={s.linkItem}>
+                  {label}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </nav>
 
         {/* ── Column 3: Connect ── */}
         <div className={s.contactCol}>
           <p className={s.colTitle}>Connect</p>
-          <div className={s.linkStack}>
-            <a href="mailto:sarahborgesbeu@gmail.com" className={s.linkItem}>
-              <EnvelopeSimple size={20} /> 
-              <span>Email</span>
-            </a>
-            <a href="https://linkedin.com/in/sarahbeu/" target="_blank" rel="noreferrer" className={s.linkItem}>
-              <LinkedinLogo size={20} /> 
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/sarahbeu" target="_blank" rel="noreferrer" className={s.linkItem}>
-              <GithubLogo size={20} /> 
-              <span>GitHub</span>
-            </a>
-          </div>
+          <ul className={s.linkStack}>
+            <li>
+              <a href="mailto:sarahborgesbeu@gmail.com" className={s.linkItem}>
+                <EnvelopeSimple size={20} />
+                <span>Email</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/sarahbeu/" target="_blank" rel="noreferrer" className={s.linkItem}>
+                <LinkedinLogo size={20} />
+                <span>LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/sarahbeu" target="_blank" rel="noreferrer" className={s.linkItem}>
+                <GithubLogo size={20} />
+                <span>GitHub</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 

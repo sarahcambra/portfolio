@@ -1,18 +1,15 @@
-import path from "node:path";
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from "@tailwindcss/vite";
+import path from 'node:path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
+// Local dev: base defaults to '/'. For GitHub Pages project sites
+// (https://<user>.github.io/<repo>/), run: npm run build:gh-pages
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(), // Adiciona o suporte ao Tailwind v4
-  ],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      // Isso permite que você use "@/componentes" em vez de "../../componentes"
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
-})
+});

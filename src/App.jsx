@@ -9,13 +9,6 @@ import CaseStudyPage from './pages/CaseStudyPage';
 import DocumentTitle from './components/DocumentTitle';
 import { caseStudyRoutes } from './data/caseStudyRegistry';
 
-// ── Global styles (order matters) ──
-import './styles/tokens.css';
-import './styles/animations.css';
-import './styles/shared.css';
-// Keep your existing Tailwind/index.css too
-import './index.css';
-
 function App() {
   return (
     <ThemeProvider>

@@ -5,9 +5,12 @@ export default function CasesView({ projects }) {
   return (
     <div className={s.scroll} role="list" aria-label="Case study links">
       {projects.map((project) => (
-        <div key={project.slug} className={s.cardSlot} role="listitem">
-          <MiniProjectCard project={project} />
-        </div>
+        <MiniProjectCard
+          key={project.slug}
+          project={project}
+          className={s.cardSlot}
+          role="listitem"
+        />
       ))}
     </div>
   );

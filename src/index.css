@@ -1,37 +1,7 @@
+@import "tailwindcss";
+
 /* ============================================================
    INDEX.CSS
-   Only contains what isn't already in tokens.css:
-   - Dark mode class overrides for existing components
-   - Footer component classes
-   - Testimonial grid
-
-   Fonts, colors, variables → tokens.css
-   Resets, buttons, sections → shared.css
-   Animations               → animations.css
+   Tailwind loads first; App.jsx then imports tokens, animations,
+   shared — see import order there.
    ============================================================ */
-
-/* ── Dark mode section overrides ──
-   ThemeContext adds html.dark to <html>.
-   These flip each section to dark colors automatically. */
-   html.dark body             { background: var(--color-bg);       color: var(--color-ink); }
-   html.dark .home-section    { background: var(--color-bg)        !important; }
-   html.dark .home-section-alt{ background: var(--color-bg-alt)    !important; }
-   html.dark .section-title-text { color: var(--color-ink)         !important; }
-   html.dark .section-muted-text { color: var(--color-ink-muted)   !important; }
-   html.dark .testi-card-dark    { background: var(--color-bg-card) !important; border-color: var(--color-border) !important; }
-   html.dark .testi-quote-dark   { color: var(--color-ink-soft)     !important; }
-   html.dark .see-all-dark       { color: var(--color-ink)          !important; border-color: var(--color-border) !important; }
-   
-   /* ── Testimonials 2×2 grid ── */
-   .testimonials-grid {
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
-     gap: 1.25rem;
-     max-width: var(--max-width);
-     margin: 0 auto;
-   }
-   @media (max-width: 600px) {
-     .testimonials-grid { grid-template-columns: 1fr; }
-   }
-   
-   /* Footer styles → src/styles/Footer.module.css */

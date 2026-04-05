@@ -222,9 +222,12 @@ export default function HomePage() {
             </div>
             <div className={`${s.projectsGrid} reveal`}>
               {homeFeaturedProjects.map((project, i) => (
-                <div key={project.slug} className={s.cardLift}>
-                  <ProjectCard project={project} index={i} />
-                </div>
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                  index={i}
+                  className={s.cardLift}
+                />
               ))}
             </div>
           </div>

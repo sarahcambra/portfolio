@@ -209,9 +209,7 @@ export default function PortfolioWidget({ view, onViewChange }) {
         className={s.viewArea}
       >
         {view === 'cases' && (
-          <div className={s.casesIntro}>
-            <p className={s.casesPanelHeading}>Accessible Design System</p>
-          </div>
+          <p className={s.casesPanelHeading}>Accessible Design System</p>
         )}
         <div className={s.viewPanelBody}>
           {view === 'cases' && <CasesView projects={projects} />}
