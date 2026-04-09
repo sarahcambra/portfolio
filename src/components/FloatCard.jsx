@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { CaretDown } from '@phosphor-icons/react';
 import s from '../styles/FloatCard.module.css';
 
 export default function FloatCard({
@@ -45,13 +44,17 @@ export default function FloatCard({
           aria-label={label}
           className={s.floatCardBtn}
         >
-          {/* Closed state */}
-          {!isOpen && <div className="p-5">{children}</div>}
+          {/* Closed: summary only — no extra flex gap below the title */}
+          {!isOpen && (
+            <div className={s.floatCardInner}>
+              <div className={s.floatCardSummary}>{children}</div>
+            </div>
+          )}
 
-          {/* Expanded state */}
+          {/* Open: summary + detail with a single modest gap between them */}
           {isOpen && (
-            <div className="p-5 space-y-4">
-              {children}
+            <div className={s.floatCardInner}>
+              <div className={s.floatCardSummary}>{children}</div>
               {detail && (
                 <div className={s.floatCardDetail}>
                   <p className={s.floatCardDetailText}>{detail}</p>
