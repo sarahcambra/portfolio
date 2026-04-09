@@ -9,8 +9,8 @@ import {
 } from '../data';
 
 /**
- * Three well-separated deck indices so slots rarely feel like duplicates
- * when the deck has many minimal cards (30+).
+ * Three well-separated deck indices so the three fixed slots rarely show
+ * the same card when the deck is large.
  */
 function pickDeckIndices(deckLength, scrollProgress) {
   if (deckLength <= 0) return [];
@@ -38,102 +38,55 @@ function scrollProgressBelowAnchor(anchorEl) {
 /** Shared by hero floats and scroll layer — renders deck item inner content. */
 export function renderFloatDeckCardBody(item) {
   switch (item.variant) {
-    case 'tokens':
+    case 'contrast':
       return (
         <>
-          <span className={s.floatCardHeader}>
-            <span className={s.floatBadge}>{item.badge}</span>
-            <span className={s.floatCardHeading}>{item.title}</span>
-          </span>
-          <span className={s.floatSwatchRow} aria-hidden="true">
-            {item.swatches.map((c) => (
-              <span key={c} className={s.floatSwatch} style={{ background: c }} title={c} />
+          <div className={s.floatBadge}>{item.badge}</div>
+          <h3 className={s.floatCardHeading}>{item.title}</h3>
+          <div className={s.floatSwatchRow} aria-hidden="true">
+            {['#f8f8f8', '#525252', '#9ca3af', '#e2e1dc', '#f0f0ee'].map(c => (
+              <span key={c} className={s.floatSwatch} style={{ background: c }} />
             ))}
-          </span>
-          <span className={s.floatCode}>{item.codeLine}</span>
+          </div>
         </>
       );
-    case 'wcag':
+
+    case 'focus':
       return (
         <>
-          <span className={s.floatCardHeader}>
-            <span className={s.floatBadge}>{item.badge}</span>
-            <span className={s.floatCardHeading}>{item.title}</span>
-          </span>
-          <span className={s.floatLeadRow} aria-hidden="true">
-            <span className={s.floatLeadIcon}>
-              <Check size={13} weight="bold" color="var(--primitive-brand-800)" aria-hidden="true" />
-            </span>
-            <span className={s.floatTitle}>{item.checkLead}</span>
-          </span>
-          <span className={s.floatCheckList}>
-            {item.checkItems.map((line) => (
-              <span key={line} className={s.floatCheckItem}>
-                <Check size={11} weight="bold" color="var(--primitive-brand-700)" aria-hidden="true" />
-                <span>{line}</span>
-              </span>
-            ))}
-          </span>
+          <div className={s.floatBadge}>{item.badge}</div>
+          <h3 className={s.floatCardHeading}>{item.title}</h3>
+          <div className="p-3 border-2 border-dashed border-[var(--accent)] rounded-2xl text-center text-sm">← Focus ring example</div>
         </>
       );
-    case 'ui':
+
+    case 'touch':
       return (
         <>
-          <span className={s.floatCardHeader}>
-            <span className={s.floatBadge}>{item.badge}</span>
-            <span className={s.floatCardHeading}>{item.title}</span>
-          </span>
-          <span className={s.floatBtnStack}>
-            <span className={s.floatBtnPrimary}>Get started</span>
-            <span className={s.floatBtnOutline}>Learn more</span>
-            <span className={s.floatBtnMuted}>Secondary</span>
-          </span>
+          <div className={s.floatBadge}>{item.badge}</div>
+          <h3 className={s.floatCardHeading}>{item.title}</h3>
+          <div className={s.floatBtnStack}>
+            <span className={s.floatBtnPrimary}>Tap me</span>
+          </div>
         </>
       );
-    case 'type':
+
+    case 'ai':
       return (
         <>
-          <span className={s.floatCardHeader}>
-            <span className={s.floatBadge}>{item.badge}</span>
-            <span className={s.floatTitle}>{item.title}</span>
-          </span>
-          <span className={s.floatTypeList}>
-            {item.typeRows.map((row) => (
-              <span key={row.l} className={s.floatTypeRow}>
-                <span className={s.floatTypeLabel}>{row.l}</span>
-                <span className={s.floatTypeSample} style={{ fontSize: row.fs, fontWeight: row.w }}>
-                  Aa
-                </span>
-              </span>
-            ))}
-          </span>
+          <div className={s.floatBadge}>{item.badge}</div>
+          <h3 className={s.floatCardHeading}>{item.title}</h3>
+          <div className="flex items-center gap-2 text-red-600 text-xs font-medium">⚠️ Common AI mistake</div>
         </>
       );
-    case 'audit':
-      return (
-        <>
-          <span className={s.floatCardHeader}>
-            <span className={s.floatBadge}>{item.badge}</span>
-            <span className={s.floatTitle}>{item.title}</span>
-          </span>
-          <span className={s.floatScoreBlock}>
-            <span className={s.floatScoreRow}>
-              <span className={s.floatScoreLabel}>Score</span>
-              <span className={s.floatScoreValue}>{item.score}</span>
-            </span>
-            <span className={s.floatMeter}>
-              <span className={s.floatMeterFill} style={{ width: `${item.score}%` }} />
-            </span>
-            <span className={s.floatScoreMeta}>{item.scoreMeta}</span>
-          </span>
-        </>
-      );
+
+    // Default clean layout for all other cards
     default:
       return (
-        <span className={s.floatCardHeader}>
-          <span className={s.floatBadge}>{item.badge}</span>
-          <span className={s.floatCardHeading}>{item.title}</span>
-        </span>
+        <>
+          <div className={s.floatBadge}>{item.badge}</div>
+          <h3 className={s.floatCardHeading}>{item.title}</h3>
+        </>
       );
   }
 }
