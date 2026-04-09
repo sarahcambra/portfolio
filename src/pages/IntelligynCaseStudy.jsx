@@ -6,52 +6,10 @@ import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 import { csLayout, csTw } from '../utils/siteLayout';
+import { CaseImg, Img } from '../components/caseStudy/CaseStudyImages';
 
 const project = projects.find(p => p.slug === 'intelligyn-redesign');
 const next = getNextCaseStudy('intelligyn-redesign');
-
-/* ── Image helpers ── */
-function CaseImg({ src, filename, alt, tall, short, className }) {
-  const placeholderClass = [
-    csTw.placeholder,
-    tall ? csTw.placeholderTall : '',
-    short ? csTw.placeholderShort : '',
-  ].filter(Boolean).join(' ');
-
-  return (
-    <>
-      <img
-        src={src}
-        alt={alt}
-        className={`${csTw.img} ${s.img} ${className || ''}`}
-        onError={e => {
-          e.currentTarget.style.display = 'none';
-          e.currentTarget.nextSibling.style.display = 'flex';
-        }}
-      />
-      <div className={placeholderClass} style={{ display: 'none' }} role="img" aria-label={alt}>
-        <div className={csTw.placeholderIcon} aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-            <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        <code className={csTw.placeholderFile}>{filename}</code>
-        <p className={csTw.placeholderLabel}>{alt}</p>
-      </div>
-    </>
-  );
-}
-
-function Img({ src, filename, alt, tall, caption }) {
-  return (
-    <div className={csLayout.imgWrap}>
-      <CaseImg src={src} filename={filename} alt={alt} tall={tall} />
-      {caption && <p className={s.imgCaption}>{caption}</p>}
-    </div>
-  );
-}
 
 export default function IntelligynCaseStudy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -443,6 +401,7 @@ export default function IntelligynCaseStudy() {
               src={img('final-design.png')}
               filename="intelligyn/final-design.png"
               alt="High-fidelity design for the Intelligyn homepage showing lighter palette, physician-centred copy, and investor section"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Final design — lighter palette, physician-centred copy</p>
           </div>

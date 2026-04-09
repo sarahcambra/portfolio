@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight, ChatCircleDots } from '@phosphor-icons/react';
 import ProjectCard from '../components/ProjectCard';
 import PortfolioWidget from '../components/PortfolioWidget';
 import FloatCard from '../components/FloatCard';
@@ -75,13 +75,26 @@ export default function HomePage() {
   const heroFloatLayout = getHeroFloatLayoutOnce();
   const heroRef = useRef(null);
   const [openFloatId, setOpenFloatId] = useState(null);
-  const [widgetView, setWidgetView] = useState('cases');
+  const [widgetView, setWidgetView] = useState('chat');
   /** Fixed scroll-deck only after hero has cleared the viewport — avoids stacking on hero floats */
   const [scrollDeckActive, setScrollDeckActive] = useState(false);
 
   const handleWidgetViewChange = useCallback((id) => {
     setOpenFloatId(null);
     setWidgetView(id);
+  }, []);
+
+  /** Scroll to hero widget and open Chat tab (for CTA below the fold) */
+  const goToChat = useCallback(() => {
+    setWidgetView('chat');
+    setOpenFloatId(null);
+    const el = heroRef.current;
+    if (!el) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      document.getElementById('widget-tab-chat')?.focus();
+    }, reduceMotion ? 0 : 450);
   }, []);
 
   const toggleFloat = useCallback((id, force) => {
@@ -203,6 +216,20 @@ export default function HomePage() {
         {/* ── PROJECTS ──────────────────────────────────── */}
         <section className={s.homeSectionPaper} aria-labelledby="projects-heading" id="projects">
           <div className={s.homeSectionInner}>
+            <div className={`${s.homeChatCtaRow} reveal`}>
+              <p className={s.homeChatCtaLead}>Have a question? I can chat about my work in my own words.</p>
+              <Button
+                type="button"
+                variant="primary"
+                size="md"
+                onClick={goToChat}
+                className={s.homeChatCtaBtn}
+              >
+                <ChatCircleDots size={18} weight="bold" aria-hidden="true" />
+                Chat with me
+              </Button>
+            </div>
+
             <div className="reveal" style={{ marginBottom: '3rem' }}>
               <div className={s.homeSectionEyebrow}>
                 <span aria-hidden="true" className={s.homeEyebrowLine} />

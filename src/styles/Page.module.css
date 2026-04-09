@@ -152,6 +152,36 @@
   line-height: 1.1;
 }
 
+/* ── Home: Chat CTA above case studies (jumps back to hero widget) ── */
+.homeChatCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--primitive-brand-400) 14%, var(--primitive-secondary-200) 86%);
+}
+
+.homeChatCtaLead {
+  margin: 0;
+  flex: 1 1 14rem;
+  max-width: 36rem;
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+  color: var(--color-ink);
+}
+
+.homeChatCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
 /* ── Projects grid — fills homeSectionInner (widget width); slightly smaller card min ── */
 .homeProjectsGrid {
   display: grid;

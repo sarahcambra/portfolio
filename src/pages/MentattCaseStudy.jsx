@@ -6,52 +6,10 @@ import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
 import { csLayout, csTw } from '../utils/siteLayout';
+import { CaseImg, Img } from '../components/caseStudy/CaseStudyImages';
 
 const project = projects.find(p => p.slug === 'mentatt-research');
 const next = getNextCaseStudy('mentatt-research');
-
-/* ── Image helpers ── */
-function CaseImg({ src, filename, alt, tall, short, className }) {
-  const placeholderClass = [
-    csTw.placeholder,
-    tall ? csTw.placeholderTall : '',
-    short ? csTw.placeholderShort : '',
-  ].filter(Boolean).join(' ');
-
-  return (
-    <>
-      <img
-        src={src}
-        alt={alt}
-        className={`${csTw.img} ${s.img} ${className || ''}`}
-        onError={e => {
-          e.currentTarget.style.display = 'none';
-          e.currentTarget.nextSibling.style.display = 'flex';
-        }}
-      />
-      <div className={placeholderClass} style={{ display: 'none' }} role="img" aria-label={alt}>
-        <div className={csTw.placeholderIcon} aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-            <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        <code className={csTw.placeholderFile}>{filename}</code>
-        <p className={csTw.placeholderLabel}>{alt}</p>
-      </div>
-    </>
-  );
-}
-
-function Img({ src, filename, alt, tall, caption }) {
-  return (
-    <div className={csLayout.imgWrap}>
-      <CaseImg src={src} filename={filename} alt={alt} tall={tall} />
-      {caption && <p className={s.imgCaption}>{caption}</p>}
-    </div>
-  );
-}
 
 export default function MentattCaseStudy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -327,6 +285,7 @@ export default function MentattCaseStudy() {
               src={img('survey-final.png')}
               filename="mentatt/survey-final.png"
               alt="Final design of the Mentatt chatbot survey showing a conversational interface with calming green tones and progress indicator"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Chatbot survey — final design</p>
           </div>
@@ -391,6 +350,7 @@ export default function MentattCaseStudy() {
               src={img('results-final.png')}
               filename="mentatt/results-final.png"
               alt="Final design of the Mentatt results screen showing a colour-coded pie and bar chart with the user's mental health stage and personalised recommendations"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Results dashboard — final design with colour-coded stages</p>
           </div>
@@ -464,6 +424,7 @@ export default function MentattCaseStudy() {
               src={img('final-home.png')}
               filename="mentatt/final-home.png"
               alt="Final Mentatt app home screen showing the user's current mental health stage with a colour-coded indicator and quick access to the chatbot survey"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Home — current stage + quick survey access</p>
           </div>
@@ -472,6 +433,7 @@ export default function MentattCaseStudy() {
               src={img('final-chat.png')}
               filename="mentatt/final-chat.png"
               alt="Final Mentatt chatbot survey screen showing a conversational message bubble interface with a progress bar"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Chatbot survey — conversational format</p>
           </div>
@@ -480,6 +442,7 @@ export default function MentattCaseStudy() {
               src={img('final-results.png')}
               filename="mentatt/final-results.png"
               alt="Final Mentatt results screen showing colour-coded pie and bar charts, health stage label, and personalised exercise recommendations"
+              watermark="Migrating from Framer to Code"
             />
             <p className={s.imgCaption}>Results — colour-coded charts + recommendations</p>
           </div>
