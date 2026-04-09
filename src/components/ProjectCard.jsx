@@ -23,6 +23,14 @@ export default function ProjectCard({ project, index, className, style, ...rest 
             src={resolvePublicUrl(project.imageUrl)}
             alt={`${project.company} project screenshot`}
             className={s.image}
+            style={{
+              ...(project.imageObjectPosition != null && {
+                objectPosition: project.imageObjectPosition,
+              }),
+              ...(project.imageObjectFit != null && {
+                objectFit: project.imageObjectFit,
+              }),
+            }}
             onError={e => {
               e.target.style.display = 'none';
               e.target.parentElement.classList.add(s.placeholder);

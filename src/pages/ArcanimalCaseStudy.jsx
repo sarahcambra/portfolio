@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { projects } from '../data';
-import s from '../styles/ArcanimalCaseStudy.module.css';
+import s from '../styles/CaseStudy.module.css';
 import CaseStudyBreadcrumb from '../components/caseStudy/CaseStudyBreadcrumb';
 import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
+import { csLayout, csTw } from '../utils/siteLayout';
 
 const project = projects.find(p => p.slug === 'arcanimal-platform');
 const next = getNextCaseStudy('arcanimal-platform');
@@ -12,9 +13,9 @@ const next = getNextCaseStudy('arcanimal-platform');
 /* ── Image helpers ── */
 function CaseImg({ src, filename, alt, tall, short, className }) {
   const placeholderClass = [
-    s.placeholder,
-    tall  ? s.placeholderTall  : '',
-    short ? s.placeholderShort : '',
+    csTw.placeholder,
+    tall ? csTw.placeholderTall : '',
+    short ? csTw.placeholderShort : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -22,22 +23,22 @@ function CaseImg({ src, filename, alt, tall, short, className }) {
       <img
         src={src}
         alt={alt}
-        className={`${s.img} ${className || ''}`}
+        className={`${csTw.img} ${s.img} ${className || ''}`}
         onError={e => {
           e.currentTarget.style.display = 'none';
           e.currentTarget.nextSibling.style.display = 'flex';
         }}
       />
       <div className={placeholderClass} style={{ display: 'none' }} role="img" aria-label={alt}>
-        <div className={s.placeholderIcon} aria-hidden="true">
+        <div className={csTw.placeholderIcon} aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.5"/>
             <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
             <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-        <code className={s.placeholderFile}>{filename}</code>
-        <p className={s.placeholderLabel}>{alt}</p>
+        <code className={csTw.placeholderFile}>{filename}</code>
+        <p className={csTw.placeholderLabel}>{alt}</p>
       </div>
     </>
   );
@@ -45,7 +46,7 @@ function CaseImg({ src, filename, alt, tall, short, className }) {
 
 function Img({ src, filename, alt, tall, caption }) {
   return (
-    <div className={s.imgWrap}>
+    <div className={csLayout.imgWrap}>
       <CaseImg src={src} filename={filename} alt={alt} tall={tall} />
       {caption && <p className={s.imgCaption}>{caption}</p>}
     </div>
@@ -58,46 +59,33 @@ export default function ArcanimalCaseStudy() {
   const img = (name) => resolvePublicUrl(`/assets/projects/arcanimal/${name}`);
 
   return (
-    <main className={s.page} id="main-content">
-
+    <main
+      className={`${s.page} ${s.pageThemeArcanimal}`}
+      id="main-content"
+      style={project ? { '--case-canvas': project.color } : undefined}
+    >
       <CaseStudyBreadcrumb />
 
-      {/* ── Hero ── */}
-      <header className={s.hero}>
-        <div className={s.heroInner}>
+      <header className={`${csTw.heroBg} ${csLayout.heroPad} px-4 sm:px-6 lg:px-8 xl:px-10`}>
+        <div className={csLayout.prose}>
           <p className={s.heroEyebrow}>Arcanimal · Animal Welfare · 6 Weeks</p>
-          <h1 className={s.heroTitle}>Animal Welfare<br />Platform</h1>
-          <p className={s.heroSub}>
+          <h1 className={`${s.heroTitle} ${csTw.heroTitle}`}>Animal Welfare<br />Platform</h1>
+          <p className={csTw.heroSub}>
             Shelters running animal operations from spreadsheets and group chats.
             Six weeks to design a platform that actually worked the way they did.
           </p>
-          <div className={s.tags} role="group" aria-label="Project tags">
-            {project.tags.map(tag => <span key={tag} className={s.tag}>{tag}</span>)}
+
+          <div className={csTw.tagsRow} role="group" aria-label="Project tags">
+            {project.tags.map(tag => (
+              <span key={tag} className={csTw.tagPill}>{tag}</span>
+            ))}
           </div>
+
           <p className={s.heroRole}>{project.role}</p>
         </div>
       </header>
 
-      {/* ── Stat bar ── */}
-      <div className={s.statBar} role="group" aria-label="Project at a glance">
-        <div className={s.statBarInner}>
-          {[
-            { label: 'Client',   value: 'Arcanimal' },
-            { label: 'Timeline', value: '6 Weeks' },
-            { label: 'My Role',  value: 'Product Design & Project Manager' },
-            { label: 'Tools',    value: 'Figma · Figjam · Notion · Asana · Octopus' },
-            { label: 'Website',  value: 'arcanimal.com.br' },
-          ].map(({ label, value }) => (
-            <div key={label} className={s.stat}>
-              <span className={s.statLabel}>{label}</span>
-              <span className={s.statValue}>{value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Cover ── */}
-      <div className={s.wide} style={{ paddingTop: '3rem', paddingBottom: '1rem' }}>
+      <div className={csLayout.cover}>
         <Img
           src={img('cover.png')}
           filename="arcanimal/cover.png"
@@ -107,13 +95,31 @@ export default function ArcanimalCaseStudy() {
         />
       </div>
 
+      <div className={`${csTw.statBar} ${csLayout.statBarPad}`}>
+        <div className={csLayout.statBarInner}>
+          {[
+            { label: 'Client',   value: 'Arcanimal' },
+            { label: 'Timeline', value: '6 Weeks' },
+            { label: 'My Role',  value: 'Product Design & Project Manager' },
+            { label: 'Tools',    value: 'Figma · Figjam · Notion · Asana · Octopus' },
+            { label: 'Website',  value: 'arcanimal.com.br' },
+          ].map(({ label, value }) => (
+            <div key={label} className={csTw.statCol}>
+              <span className={s.statLabel}>{label}</span>
+              <span className={csTw.statVal}>{value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
       {/* ══════════════════════════════════════════════════════
           CONTEXT
       ══════════════════════════════════════════════════════ */}
-      <div className={s.prose} style={{ paddingTop: '4rem' }}>
-        <section className={s.section} aria-labelledby="context-heading">
-          <p className={s.sectionEyebrow}>Context</p>
-          <h2 id="context-heading" className={s.h2}>A shelter problem disguised as a technology gap</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <section className={csTw.section} aria-labelledby="context-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Context</p>
+          <h2 id="context-heading" className={`${s.h2} ${csTw.h2}`}>A shelter problem disguised as a technology gap</h2>
           <p className={s.body}>
             Arcanimal is a platform connecting animal shelters with adopters in Brazil.
             The mission was clear: improve adoption rates by giving shelters better tools.
@@ -130,10 +136,10 @@ export default function ArcanimalCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           CHALLENGE
       ══════════════════════════════════════════════════════ */}
-      <div className={s.prose}>
-        <section className={s.section} aria-labelledby="challenge-heading">
-          <p className={s.sectionEyebrow}>Challenge</p>
-          <h2 id="challenge-heading" className={s.h2}>Four operational problems, one platform to solve them</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <section className={csTw.section} aria-labelledby="challenge-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Challenge</p>
+          <h2 id="challenge-heading" className={`${s.h2} ${csTw.h2}`}>Four operational problems, one platform to solve them</h2>
           <p className={s.body}>
             The research surfaced four distinct problems. Each one was causing real
             harm — animals staying in shelters longer, adoption matches failing, and
@@ -142,8 +148,8 @@ export default function ArcanimalCaseStudy() {
         </section>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '2rem' }}>
-        <div className={s.challengeGrid} role="list">
+      <div className={`${csLayout.wide} ${csLayout.pb.lg}`}>
+        <div className={csLayout.gridChallenge} role="list">
           {[
             {
               num: '01',
@@ -161,9 +167,9 @@ export default function ArcanimalCaseStudy() {
               body: "Who was doing what, when, and which animals needed attention — none of that was visible to anyone. Volunteers were turning up to find duplicated tasks or nothing to do.",
             },
           ].map(c => (
-            <article key={c.num} className={s.challengeCard} role="listitem">
-              <span className={s.challengeNum}>{c.num}</span>
-              <h3 className={s.challengeTitle}>{c.title}</h3>
+            <article key={c.num} className={`${s.challengeCard} ${csTw.cardLeft}`} role="listitem">
+              <span className={csTw.challengeNum}>{c.num}</span>
+              <h3 className={csTw.challengeTitle}>{c.title}</h3>
               <p className={s.challengeBody}>{c.body}</p>
             </article>
           ))}
@@ -173,17 +179,17 @@ export default function ArcanimalCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           PHASE 01 — RESEARCH
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Phase 01</p>
-          <p className={s.dividerTitle}>Shelter Interviews and User Personas</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Phase 01</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>Shelter Interviews and User Personas</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Research</p>
-          <h2 className={s.h2}>Three shelter managers who changed the brief</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Research</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Three shelter managers who changed the brief</h2>
           <p className={s.body}>
             I started with the people doing the hardest part of the work: shelter
             managers. Not adopters. Not volunteers. The people responsible for keeping
@@ -196,7 +202,7 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
+      <div className={csLayout.wide}>
         <Img
           src={img('interview-notes.png')}
           filename="arcanimal/interview-notes.png"
@@ -205,15 +211,15 @@ export default function ArcanimalCaseStudy() {
         />
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '2rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Key Insights</p>
-          <h2 className={s.h2}>What three shelter managers told me</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Key Insights</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>What three shelter managers told me</h2>
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '2rem' }}>
-        <div className={s.insightGrid} role="list">
+      <div className={`${csLayout.wide} ${csLayout.pb.lg}`}>
+        <div className={csLayout.gridInsight} role="list">
           {[
             {
               num: '01',
@@ -228,23 +234,23 @@ export default function ArcanimalCaseStudy() {
               label: 'Volunteers needed structure, not just enthusiasm. Without clear task assignment and visibility, duplicated effort and gaps were the norm.',
             },
           ].map(i => (
-            <article key={i.num} className={s.insightCard} role="listitem">
-              <span className={s.insightNum}>{i.num}</span>
-              <p className={s.insightLabel}>{i.label}</p>
+            <article key={i.num} className={csTw.insightCard} role="listitem">
+              <span className={csTw.insightNum}>{i.num}</span>
+              <p className={csTw.insightLabel}>{i.label}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <div className={s.prose}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>User Personas</p>
-          <h2 className={s.h2}>Who the platform had to serve</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>User Personas</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Who the platform had to serve</h2>
           <p className={s.body}>
             The interviews gave me three distinct users — all using the same platform,
             all needing different things from it.
           </p>
-          <ul className={s.list}>
+          <ul className={csTw.list}>
             <li className={s.listItem}><strong>Shelter Manager</strong> — Operational control. Needs to register animals, approve volunteers, manage health records, and track adoption status from one place.</li>
             <li className={s.listItem}><strong>Volunteer</strong> — Task clarity. Needs to see what animals need attention today, log completed care, and communicate with the shelter team without a phone call.</li>
             <li className={s.listItem}><strong>Potential Adopter</strong> — Trust and discovery. Needs to browse animals, understand care needs, and complete a screening process that doesn't require showing up in person first.</li>
@@ -252,7 +258,7 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+      <div className={`${csLayout.wide} ${csLayout.pt.spacing1} ${csLayout.pb.sm}`}>
         <Img
           src={img('personas.png')}
           filename="arcanimal/personas.png"
@@ -264,17 +270,17 @@ export default function ArcanimalCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           PHASE 02 — INFORMATION ARCHITECTURE
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Phase 02</p>
-          <p className={s.dividerTitle}>Features, Roadmap, and Information Architecture</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Phase 02</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>Features, Roadmap, and Information Architecture</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Feature Definition</p>
-          <h2 className={s.h2}>Scoping six weeks of design without scope creep</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Feature Definition</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Scoping six weeks of design without scope creep</h2>
           <p className={s.body}>
             Six weeks is short. I couldn't design everything at once — and trying to
             would have produced nothing useful. Based on the interviews, I built a
@@ -288,8 +294,8 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '1.5rem' }}>
-        <div className={s.priorityList}>
+      <div className={`${csLayout.wide} ${csLayout.pb.b15}`}>
+        <div className="flex flex-col gap-3">
           {[
             { badge: 'P1 · Sprint 1–2', text: 'Shelter registration and verification — the foundation. No shelter, no platform.' },
             { badge: 'P1 · Sprint 2–3', text: 'Animal profiles — health records, photos, care notes, vaccination history. The core data layer.' },
@@ -297,18 +303,18 @@ export default function ArcanimalCaseStudy() {
             { badge: 'P2 · Sprint 4–5', text: 'Volunteer management — task assignment, schedule visibility, care logging.' },
             { badge: 'P3 · Sprint 5–6', text: 'Education content — onboarding resources for new adopters and volunteers.' },
           ].map(p => (
-            <div key={p.badge} className={s.priorityItem}>
-              <span className={s.priorityBadge}>{p.badge}</span>
-              <p className={s.priorityText}>{p.text}</p>
+            <div key={p.badge} className={csTw.priorityItem}>
+              <span className={csTw.priorityBadge}>{p.badge}</span>
+              <p className={csTw.priorityText}>{p.text}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '1rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Site Map</p>
-          <h2 className={s.h2}>Building the architecture with everyone who'd use it</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Site Map</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Building the architecture with everyone who'd use it</h2>
           <p className={s.body}>
             The site map wasn't a solo exercise — I developed it alongside stakeholders
             including volunteers, developers, data entry staff, and the NGO board.
@@ -323,8 +329,8 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
-        <div className={s.imgGrid2}>
+      <div className={csLayout.wide}>
+        <div className={csLayout.gridImg2}>
           <div>
             <CaseImg
               src={img('sitemap-shelter.png')}
@@ -347,17 +353,17 @@ export default function ArcanimalCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           PHASE 03 — DESIGN
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Phase 03</p>
-          <p className={s.dividerTitle}>User Flows and Final Designs</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Phase 03</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>User Flows and Final Designs</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>User Flows</p>
-          <h2 className={s.h2}>Mapping shelter registration before designing a screen</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>User Flows</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Mapping shelter registration before designing a screen</h2>
           <p className={s.body}>
             Shelter registration was the highest-priority flow — and the most complex.
             A shelter registering on the platform needs to: submit their organisation
@@ -374,7 +380,7 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
+      <div className={csLayout.wide}>
         <Img
           src={img('user-flow.png')}
           filename="arcanimal/user-flow.png"
@@ -383,7 +389,7 @@ export default function ArcanimalCaseStudy() {
         />
       </div>
 
-      <div className={s.callout} style={{ margin: '2.5rem auto', maxWidth: '720px', padding: '0 2.5rem' }}>
+      <div className={`${csLayout.prose} max-w-[720px] mx-auto my-10 px-6`}>
         <div className={s.callout}>
           <p className={s.calloutText}>
             The data field specification was the most important deliverable.
@@ -393,10 +399,10 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '1rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Final Designs</p>
-          <h2 className={s.h2}>Shelter registration — designed to reduce friction and errors</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Final Designs</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Shelter registration — designed to reduce friction and errors</h2>
           <p className={s.body}>
             The registration screens had three design goals: make the required data
             obvious, reduce the chance of input errors, and give the shelter manager
@@ -407,8 +413,8 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
-        <div className={s.imgGrid3}>
+      <div className={csLayout.wide}>
+        <div className={csLayout.gridImg3}>
           <div>
             <CaseImg
               src={img('design-step1.png')}
@@ -436,8 +442,8 @@ export default function ArcanimalCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '1rem' }}>
-        <div className={s.imgGrid2}>
+      <div className={`${csLayout.wide} ${csLayout.pt.spacing1}`}>
+        <div className={csLayout.gridImg2}>
           <div>
             <CaseImg
               src={img('animal-profile.png')}
@@ -460,16 +466,16 @@ export default function ArcanimalCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           OUTCOMES
       ══════════════════════════════════════════════════════ */}
-      <div className={s.prose} style={{ paddingTop: '4rem' }}>
-        <section className={s.section} aria-labelledby="outcomes-heading">
-          <p className={s.sectionEyebrow}>Outcomes</p>
-          <h2 id="outcomes-heading" className={s.h2}>What the project delivered</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <section className={csTw.section} aria-labelledby="outcomes-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Outcomes</p>
+          <h2 id="outcomes-heading" className={`${s.h2} ${csTw.h2}`}>What the project delivered</h2>
           <p className={s.body}>
             Six weeks from kickoff to final handoff. Every deliverable was tied
             directly to something a shelter manager said they needed.
           </p>
 
-          <div className={s.outcomes} role="list">
+          <div className={csLayout.gridOutcomes} role="list">
             {[
               { num: '3',       label: 'Shelter manager interviews — the research that shaped every design decision' },
               { num: '3',       label: 'User personas defined across shelter manager, volunteer, and adopter roles' },
@@ -478,17 +484,17 @@ export default function ArcanimalCaseStudy() {
               { num: '100%',    label: 'Data fields defined for shelter registration before a wireframe was drawn' },
               { num: '6 wks',   label: 'End-to-end: research, IA, flows, and final designs' },
             ].map(o => (
-              <div key={o.num + o.label} className={s.outcomeStat} role="listitem">
-                <span className={s.outcomeNum}>{o.num}</span>
+              <div key={o.num + o.label} className={csTw.outcomeStat} role="listitem">
+                <span className={csTw.outcomeNum}>{o.num}</span>
                 <span className={s.outcomeLabel}>{o.label}</span>
               </div>
             ))}
           </div>
         </section>
 
-        <section className={s.section} aria-labelledby="reflection-heading">
-          <p className={s.sectionEyebrow}>Reflection</p>
-          <h2 id="reflection-heading" className={s.h2}>What I took away</h2>
+        <section className={csTw.section} aria-labelledby="reflection-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Reflection</p>
+          <h2 id="reflection-heading" className={`${s.h2} ${csTw.h2}`}>What I took away</h2>
           <p className={s.body}>
             Running design and project management simultaneously is a different kind
             of discipline. The constant temptation is to design everything interesting

@@ -1,7 +1,7 @@
 /**
  * Site data — import from `../data` (this folder) only.
  */
-export { projects } from './projects';
+export { projects, visibleProjects } from './projects';
 /* caseStudyRegistry is imported only from App.jsx — not re-exported here to avoid
    circular imports (case study pages import ../data, which would load the registry). */
 export {

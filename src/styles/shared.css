@@ -15,10 +15,18 @@ body {
   font-size: var(--sys-font-size-base);
   font-weight: 400;
   line-height: var(--leading-normal);
-  background: var(--color-paper);
+  /* Match app shell so overscroll / edges never flash a flat flat */
+  background-color: var(--shell-hero-base);
+  background-image: var(--shell-hero-wash);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Site-wide atmospheric background (same tokens as home hero — radial brand wash) */
+.site-atmosphere {
+  background-color: var(--shell-hero-base);
+  background-image: var(--shell-hero-wash);
 }
 
 img { display: block; max-width: 100%; }
@@ -209,7 +217,7 @@ img { display: block; max-width: 100%; }
   padding-top: var(--nav-height);
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--color-bg);
+  background: transparent;
   font-family: var(--font-body);
   color: var(--color-ink);
 }

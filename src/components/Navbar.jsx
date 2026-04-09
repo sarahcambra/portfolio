@@ -50,6 +50,15 @@ export default function Navbar() {
 
   useEffect(() => { setMenuOpen(false); }, [location]);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1280px)');
+    const close = () => {
+      if (mq.matches) setMenuOpen(false);
+    };
+    mq.addEventListener('change', close);
+    return () => mq.removeEventListener('change', close);
+  }, []);
+
   // Focus trap + Escape for mobile drawer (WCAG 2.1.2, 2.4.3)
   useEffect(() => {
     if (!menuOpen || !drawerRef.current) return;
@@ -89,7 +98,7 @@ export default function Navbar() {
         <div
           aria-hidden="true"
           onClick={() => setMenuOpen(false)}
-          className={s.backdrop}
+          className={`${s.backdrop} xl:hidden`}
         />
       )}
 
@@ -97,8 +106,12 @@ export default function Navbar() {
         aria-label="Main navigation"
         className={[
           s.nav,
+          'flex w-[min(92%,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] flex-row flex-wrap items-center justify-between gap-3',
+          'rounded-3xl px-5 py-3',
+          'xl:w-auto xl:min-w-fit xl:max-w-[calc(100vw-2rem)] xl:flex-nowrap xl:justify-center xl:gap-[clamp(1rem,3vw,2rem)]',
+          'xl:rounded-full xl:px-[clamp(1.25rem,3vw,2.5rem)] xl:py-[0.65rem]',
           scrolled ? s.navScrolled : '',
-          dark     ? s.navDark     : '',
+          dark ? s.navDark : '',
         ].filter(Boolean).join(' ')}
       >
         {/* Logo — FIX: single file, CSS filter inverts for dark mode.
@@ -121,8 +134,11 @@ export default function Navbar() {
           )}
         </Link>
 
-        {/* Desktop links */}
-        <ul className={s.list} role="list">
+        {/* Desktop / wide: inline links — hidden below xl (drawer + hamburger) */}
+        <ul
+          className="m-0 hidden list-none items-center gap-8 p-0 xl:flex"
+          role="list"
+        >
           {links.map(({ label, to }) => (
             <li key={to}>
               <Link
@@ -136,11 +152,8 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className={s.right}>
-          {/* FIX: gap was too large — both .right and .extrasDesktop
-              had 1.5rem making toggle+CTA appear glued at smaller widths.
-              Now .extrasDesktop has 0.75rem gap (see Navbar.module.css). */}
-          <div className={s.extrasDesktop}>
+        <div className="flex shrink-0 items-center gap-3">
+          <div className="hidden items-center gap-3 xl:flex">
             <Button
               type="button"
               onClick={toggle}
@@ -154,7 +167,7 @@ export default function Navbar() {
               </span>
             </Button>
 
-            <Button as={Link} to="/about#contact" variant="primary">
+            <Button as={Link} to="/about" variant="primary">
               Let&apos;s Talk
             </Button>
           </div>
@@ -163,8 +176,8 @@ export default function Navbar() {
           <button
             ref={hamburgerRef}
             type="button"
-            className={s.hamburger}
-            onClick={() => setMenuOpen(!menuOpen)}
+            className="xl:hidden flex items-center justify-center w-10 h-10" 
+                        onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav-drawer"
           >
@@ -177,10 +190,10 @@ export default function Navbar() {
                 <line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
             ) : (
-              <>
-                <span className={s.bar} />
-                <span className={s.bar} />
-              </>
+              <div className="space-y-1.5">
+              <span className="block w-6 h-0.5 bg-current rounded"></span>
+              <span className="block w-6 h-0.5 bg-current rounded"></span>
+            </div>
             )}
           </button>
         </div>
@@ -195,8 +208,9 @@ export default function Navbar() {
         aria-label="Navigation menu"
         className={[
           s.drawer,
+          'xl:hidden',
           menuOpen ? s.open : '',
-          dark     ? s.drawerDark : '',
+          dark ? s.drawerDark : '',
         ].filter(Boolean).join(' ')}
       >
         <div className={s.drawerContent}>
@@ -211,7 +225,7 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <Button as={Link} to="/about#contact" variant="primary" className={s.drawerCta}>
+          <Button as={Link} to="/about" variant="primary" className={s.drawerCta}>
             Let&apos;s Talk
           </Button>
 

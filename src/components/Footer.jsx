@@ -1,98 +1,52 @@
 import { Link } from 'react-router-dom';
-import {
-  EnvelopeSimple,
-  LinkedinLogo,
-  GithubLogo,
-  ArrowUp,
-} from '@phosphor-icons/react';
+import { EnvelopeSimple, LinkedinLogo, GithubLogo, ArrowUp } from '@phosphor-icons/react';
 import Button from './Button';
 import s from '../styles/Footer.module.css';
 
-const navLinks = [
-  { label: 'Home',     to: '/' },
-  { label: 'Case Studies', to: '/projects' },
-  { label: 'About',    to: '/about' },
-];
-
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <footer className={s.footer} aria-label="Site footer">
-      <div className={s.inner}>
-
-        {/* ── Column 1: Brand ── */}
-        <div className={s.brandCol}>
+      <div className={s.cta}>
+        <div className={s.ctaText}>
           <p className={s.brandName}>Sarah Beú</p>
-          <p className={s.brandSub}>Accessible Product Designer</p>
-          <p className={s.brandDesc}>
-            Designing inclusive digital products with 14 years of experience
-            across UX, accessibility, and design systems.
-          </p>
+          <p className={s.ctaEyebrow}><span className={s.ctaEyebrowDot} aria-hidden />Available</p>
+          <h2 className={s.brandSub}>Let&apos;s build something <em>great</em>.</h2>
+          <div className={s.socialRow}>
+            <a href="mailto:sarahborgesbeu@gmail.com" className={s.socialIcon} aria-label="Email sarahborgesbeu@gmail.com">
+              <EnvelopeSimple size={22} aria-hidden />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sarahbeu/"
+              className={s.socialIcon}
+              aria-label="Sarah Beú on LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinLogo size={22} aria-hidden />
+            </a>
+            <a
+              href="https://github.com/sarahcambra"
+              className={s.socialIcon}
+              aria-label="Sarah on GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubLogo size={22} aria-hidden />
+            </a>
+          </div>
         </div>
-
-        {/* ── Column 2: Navigation ── */}
-        <nav className={s.navCol} aria-label="Footer navigation">
-          <p className={s.colTitle}>Navigation</p>
-          <ul className={s.linkStack}>
-            {navLinks.map(({ label, to }) => (
-              <li key={to}>
-                <Link to={to} className={s.linkItem}>
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* ── Column 3: Connect ── */}
-        <div className={s.contactCol}>
-          <p className={s.colTitle}>Connect</p>
-          <ul className={s.linkStack}>
-            <li>
-              <a href="mailto:sarahborgesbeu@gmail.com" className={s.linkItem}>
-                <EnvelopeSimple size={20} />
-                <span>Email</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com/in/sarahbeu/" target="_blank" rel="noreferrer" className={s.linkItem}>
-                <LinkedinLogo size={20} />
-                <span>LinkedIn</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/sarahbeu" target="_blank" rel="noreferrer" className={s.linkItem}>
-                <GithubLogo size={20} />
-                <span>GitHub</span>
-              </a>
-            </li>
-          </ul>
+        <div className={s.ctaActions}>
+          <Button as={Link} to="/about" variant="primary" surface="inverse">Get in touch</Button>
+          <Button as={Link} to="/projects" variant="secondary" surface="inverse">View work</Button>
         </div>
       </div>
 
-      {/* ── Bottom Bar ── */}
       <div className={s.bottom}>
-        <div className={s.bottomLeft}>
-          <span className={s.copy}>© 2026 Sarah Beú. All rights reserved.</span>
-          <span className={s.available} role="status">
-            <span className={s.availableDot} />
-            Available for new projects
-          </span>
-        </div>
-        
-        <Button
-          type="button"
-          onClick={scrollToTop}
-          variant="secondary"
-          surface="inverse"
-          size="sm"
-          className={s.backToTop}
-        >
-          <ArrowUp size={14} weight="bold" aria-hidden="true" />
-          <span>Back to top</span>
+        <span className={s.copy}>© 2026 Sarah Beú</span>
+        <Button onClick={scrollToTop} variant="ghost" size="xs" surface="inverse">
+          <ArrowUp size={14} weight="bold" aria-hidden /> Back to top
         </Button>
       </div>
     </footer>

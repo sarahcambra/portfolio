@@ -1,0 +1,1261 @@
+/* ============================================================
+   PAGE — shared layout + page-specific blocks
+   Typography tokens: tokens.css. Prefer Tailwind + pageLayout / pageTw in siteLayout.js where possible.
+   ============================================================ */
+/* --- Shared shells --- */
+.pageMain {
+  font-family: var(--font-body);
+  background: transparent;
+  width: 100%;
+  min-width: 0;
+}
+.pageMainNav {
+  padding-top: var(--nav-height);
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: transparent;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+}
+
+/* ========== HOME ========== */
+/* ============================================================
+   HOME PAGE — CSS Module
+   Page-level styles only: hero shell, float cards, sections.
+   Widget styles live in PortfolioWidget.module.css.
+   Dark mode is automatic via tokens.css (html.dark {}).
+   ============================================================ */
+
+/* ── Page root: .pageMain is defined in shared shells above ── */
+
+/* ── Hero — atmospheric wash + soft precision grid (studio / vibe-coding energy) ── */
+.homeHero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  /* visible so expanded float-card detail isn’t clipped (grid stays inside masked ::before) */
+  overflow: visible;
+  padding-top: 0.5rem;
+  /* Wash lives on .site-atmosphere (App) — keep grid + bottom feather only here */
+  background: transparent;
+}
+
+.homeHero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--shell-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--shell-grid-line) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 45%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 45%, black 0%, transparent 70%);
+}
+
+/* Soft landing into the projects slab — sits under widget (z-index 2+) + floats */
+.homeHero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 62%,
+    color-mix(in srgb, var(--primitive-secondary-100) 72%, transparent) 100%
+  );
+}
+
+/* ── Page sections — Case Studies (slate paper) → Testimonials (solid, then footer) ── */
+.homeSectionPaper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: none;
+  box-shadow: none;
+  /* Mostly slate paper; bottom eases slightly toward the seam only */
+  background: linear-gradient(
+    to bottom,
+    var(--primitive-secondary-100) 0%,
+    var(--primitive-secondary-100) 42%,
+    color-mix(in srgb, var(--primitive-brand-050) 52%, var(--primitive-secondary-100) 48%) 100%
+  );
+}
+
+.homeSectionPaper .homeSectionInner {
+  padding-top: clamp(4.5rem, 10vw, 6.25rem);
+}
+
+/* Colleagues & clients — solid end surface (no gradient into footer) */
+.homeSectionTestimonials {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: none;
+  background: var(--primitive-white);
+}
+
+.homeSectionInner {
+  width: var(--home-content-width);
+  max-width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: clamp(3.5rem, 8vw, 5.5rem) var(--page-pad-x);
+}
+
+.homeSectionEyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft); /* #374151 — 7.9:1 on #f0f0ee, was #6b7280 at 3.66:1 (WCAG 1.4.3 fail) */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Accent marker — dot, not a rule */
+.homeEyebrowLine {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.homeSectionTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.homeSectionTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ── Projects grid — fills homeSectionInner (widget width); slightly smaller card min ── */
+.homeProjectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 1.25rem;
+}
+
+.homeCardLift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.homeCardLift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px color-mix(in srgb, var(--primitive-black) 9%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-gray-300) 35%, transparent);
+}
+
+/* ── Testimonials (compact cards) ── */
+.homeTestiGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.homeTestimonialCard {
+  background: var(--primitive-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 1.25rem 1.375rem 1.125rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 4px 24px color-mix(in srgb, var(--primitive-black) 5%, transparent);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.homeTestimonialCard:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--primitive-brand-300) 35%, var(--color-border) 65%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 12px 40px color-mix(in srgb, var(--primitive-black) 8%, transparent);
+}
+
+.homeTestimonialMark {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--primitive-brand-200);
+  margin-bottom: 0.25rem;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.homeTestimonialQuote {
+  font-family: var(--font-body);
+  font-size: var(--text-sm, 0.9375rem);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+  margin: 0 0 1.125rem;
+  flex: 1;
+  font-style: italic;
+}
+
+.homeTestimonialFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.homeTestimonialAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primitive-brand-050);
+  border: 1.5px solid color-mix(in srgb, var(--primitive-brand-200) 60%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--primitive-brand-700);
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.homeTestimonialName {
+  font-family: var(--font-body);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.3;
+}
+
+.homeTestimonialRole {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-muted);
+  margin-top: 0.1rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .homeSectionInner { padding: 4rem var(--space-6); }
+  .homeSectionPaper .homeSectionInner { padding-top: 4.75rem; }
+  .homeTestiGrid { grid-template-columns: 1fr; }
+}
+
+:global(html.dark) .homeSectionPaper {
+  /* Case studies: neutral raised surface */
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-card) 0%,
+    var(--color-bg-card) 40%,
+    color-mix(in srgb, var(--primitive-brand-900) 45%, var(--color-bg-card) 55%) 100%
+  );
+}
+
+:global(html.dark) .homeSectionTestimonials {
+  background: var(--color-bg-alt);
+}
+
+:global(html.dark) .homeHero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 55%,
+    color-mix(in srgb, var(--primitive-gray-900) 55%, transparent) 100%
+  );
+}
+
+:global(html.dark) .homeTestimonialCard {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
+}
+
+:global(html.dark) .homeTestimonialCard:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--primitive-brand-600) 35%, var(--primitive-gray-600) 65%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+:global(html.dark) .homeTestimonialMark {
+  color: color-mix(in srgb, var(--primitive-brand-700) 55%, transparent);
+}
+
+:global(html.dark) .homeTestimonialAvatar {
+  background: color-mix(in srgb, var(--primitive-brand-900) 55%, var(--primitive-gray-800) 45%);
+  border-color: color-mix(in srgb, var(--primitive-brand-700) 40%, transparent);
+  color: var(--primitive-brand-300);
+}
+
+:global(html.dark) .homeTestimonialFooter {
+  border-top-color: var(--color-border);
+}
+
+/* ========== PROJECTS ========== */
+/* ============================================================
+   PROJECTS PAGE — aligned with site tokens + Home rhythm
+   ============================================================ */
+
+/* Full-width band so ::after gradient spans edge-to-edge */
+.projectsTopBand {
+  position: relative;
+}
+
+.projectsTopBand::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: clamp(4rem, 10vw, 7rem);
+  background: linear-gradient(to bottom, transparent, var(--primitive-secondary-100));
+  pointer-events: none;
+  z-index: 1;
+}
+
+:global(html.dark) .projectsTopBand::after {
+  background: linear-gradient(to bottom, transparent, var(--color-bg-card));
+}
+
+.projectsHeader {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 5rem) var(--page-pad-x) clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.projectsEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin: 0 0 var(--space-3);
+}
+
+.projectsEyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.projectsTitle {
+  font-family: var(--font-body);
+  font-size: var(--type-page-hero);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-4);
+  line-height: 1.05;
+}
+
+.projectsSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  font-weight: 400;
+  max-width: var(--max-width-prose);
+}
+
+/* Full-width band so background spans edge-to-edge */
+.projectsContentBand {
+  background: var(--primitive-secondary-100);
+}
+
+:global(html.dark) .projectsContentBand {
+  background: var(--color-bg-card);
+}
+
+.projectsGrid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x) var(--spacing-20);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+@media (max-width: 860px) {
+  .projectsHeader {
+    padding-inline: var(--space-6);
+  }
+
+  .projectsGrid {
+    padding: 0 var(--space-6) var(--space-16);
+  }
+}
+
+@media (max-width: 640px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .projectsHeader {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-8);
+  }
+}
+
+/* ========== CASE STUDY (GENERIC /projects/:slug) ========== */
+/* ============================================================
+   CASE STUDY PAGE (generic /projects/:slug)
+   Per-project hero via --hero-bg inline from JSX
+   ============================================================ */
+
+.cspHero {
+  background: var(--hero-bg, var(--color-bg));
+  padding: clamp(3rem, 6vw, 4.5rem) var(--page-pad-x);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.cspHeroInner {
+  max-width: var(--max-width-hero);
+  margin: 0 auto;
+}
+
+.cspCompany {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--sys-fg-brand);
+  margin: 0 0 var(--space-3);
+}
+
+.cspTitle {
+  font-family: var(--font-body);
+  font-size: var(--type-page-hero);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-3);
+  line-height: 1.1;
+}
+
+.cspSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: var(--color-ink-soft);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 var(--space-6);
+  font-weight: 400;
+}
+
+.cspTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.cspTag {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  background: color-mix(in srgb, var(--primitive-brand-600) 12%, var(--color-bg-card) 88%);
+  color: var(--sys-fg-brand);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+:global(html.dark) .cspTag {
+  background: color-mix(in srgb, var(--primitive-brand-500) 14%, var(--color-bg-card) 86%);
+  color: var(--primitive-brand-300);
+}
+
+.cspRole {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  letter-spacing: var(--tracking-wide);
+  margin: 0;
+}
+
+.cspCoverWrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x) var(--space-12);
+}
+
+.cspCover {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  display: block;
+  box-shadow: var(--shadow-lg);
+}
+
+.cspArticle {
+  max-width: var(--max-width-prose);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x) var(--spacing-20);
+}
+
+.cspSection {
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.cspH2 {
+  font-family: var(--font-body);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-4);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cspBody {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.cspMetaSummary {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--space-5);
+  margin: 0 0 var(--space-6);
+}
+
+.cspMetaRow {
+  margin: 0;
+}
+
+.cspMetaDt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin: 0 0 var(--space-1);
+}
+
+.cspMetaDd {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+@media (max-width: 600px) {
+  .cspHero {
+    padding-inline: var(--space-6);
+  }
+
+  .cspCoverWrap {
+    padding-inline: var(--space-6);
+    padding-bottom: var(--space-10);
+  }
+
+  .cspArticle {
+    padding-inline: var(--space-6);
+    padding-bottom: var(--space-16);
+  }
+}
+
+/* ========== ABOUT ========== */
+/* ============================================================
+   ABOUT PAGE — CSS Module
+   Three distinct section identities, one cohesive page.
+   ============================================================ */
+
+/* ── Page wrapper: .pageMainNav in shared shells ── */
+
+/* ════════════════════════════════════════════════════════════
+   HERO — atmospheric, matches homepage hero feel
+   ════════════════════════════════════════════════════════════ */
+.aboutHero {
+  background: transparent;
+  padding: var(--space-12) var(--space-10) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.aboutHeroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--shell-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--shell-grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
+.aboutHeroInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-16);
+  position: relative;
+  z-index: 1;
+}
+
+.aboutHeroText {
+  flex: 1 1 480px;
+  padding-bottom: var(--space-10);
+}
+
+.aboutHeroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-6);
+}
+.aboutHeroEyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.aboutHeroTitle {
+  font-family: var(--font-body);
+  font-size: clamp(3.75rem, 8vw, 6.5rem);
+  font-weight: 800;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-4);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.aboutHeroTitleAccent { color: var(--primitive-brand-600); }
+
+/* Role line — mono, sits between name and bio */
+.aboutHeroRole {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--color-ink-soft);
+  letter-spacing: var(--tracking-wide);
+  margin: 0 0 var(--space-8);
+}
+
+.aboutHeroRoleDot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-ink) 25%, transparent);
+  flex-shrink: 0;
+}
+
+.aboutHeroBio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.aboutHeroBioText {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: var(--leading-loose);
+  color: var(--color-ink-soft);
+  margin: 0;
+  font-weight: 400;
+}
+
+.aboutHeroLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.aboutHeroLinkPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--sys-button-primary-fg);
+  background: var(--sys-button-primary-bg);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  box-shadow: var(--sys-shadow-button);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+.aboutHeroLinkPrimary:hover {
+  background: var(--sys-button-primary-bg-hover);
+  box-shadow: var(--sys-shadow-button-hover);
+  transform: translateY(-1px);
+}
+.aboutHeroLinkPrimary:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.aboutHeroLinkGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--sys-button-secondary-fg);
+  padding: 0.65rem 1.375rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  min-height: var(--min-touch);
+  border: 1px solid var(--sys-button-secondary-border);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.aboutHeroLinkGhost:hover {
+  background: var(--sys-button-secondary-bg-hover);
+  border-color: color-mix(in srgb, var(--sys-button-secondary-border) 70%, var(--primitive-brand-600) 30%);
+}
+.aboutHeroLinkGhost:focus-visible {
+  outline: var(--focus-ring-on-light);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.aboutHeroImgWrap {
+  flex: 0 0 340px;
+  height: 480px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--primitive-brand-200) 35%, transparent),
+    color-mix(in srgb, var(--primitive-secondary-200) 25%, transparent)
+  );
+  align-self: flex-end;
+  position: relative;
+}
+
+.aboutHeroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.aboutHeroImgOverlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to top, var(--shell-hero-base), transparent);
+}
+
+/*
+  Section transition bridges.
+  Pattern: atmospheric (transparent) ↔ warm paper (secondary-100)
+  Each bridge handles one boundary — ::before fades IN, ::after fades OUT.
+*/
+
+/* Hero (atmospheric) → SkillsTable (warm paper) */
+.aboutSkillsBridge {
+  position: relative;
+}
+.aboutSkillsBridge::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: clamp(4rem, 10vw, 7rem);
+  background: linear-gradient(to bottom, var(--shell-hero-base), var(--primitive-secondary-100));
+  pointer-events: none;
+  z-index: 2;
+}
+/* SkillsTable (warm paper) → pathSection (atmospheric) */
+.aboutSkillsBridge::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: clamp(4rem, 10vw, 7rem);
+  background: linear-gradient(to bottom, var(--primitive-secondary-100), var(--shell-hero-base));
+  pointer-events: none;
+  z-index: 2;
+}
+
+:global(html.dark) .aboutSkillsBridge::before {
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-dark),
+    color-mix(in srgb, var(--primitive-gray-950) 88%, var(--primitive-brand-950) 12%)
+  );
+}
+:global(html.dark) .aboutSkillsBridge::after {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primitive-gray-950) 88%, var(--primitive-brand-950) 12%),
+    var(--color-bg-dark)
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   SHARED SECTION UTILITIES
+   ════════════════════════════════════════════════════════════ */
+.aboutSectionInner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.aboutSectionHeader {
+  margin-bottom: var(--space-10);
+}
+
+.aboutSectionEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.aboutEyebrowLine {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primitive-brand-600);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primitive-brand-400) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.aboutSectionTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MY PATH — milestone cards + visual column (matches Skills rhythm)
+   ════════════════════════════════════════════════════════════ */
+/* pathSection → moreSection: ::after lands on same surface token as .aboutMoreSection (no wrong-tone seam) */
+.aboutPathSection {
+  background: transparent;
+  padding: clamp(3.5rem, 9vw, 5.5rem) var(--section-x);
+  position: relative;
+}
+
+.aboutPathSection::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: clamp(4rem, 10vw, 7rem);
+  background: linear-gradient(to bottom, transparent, var(--color-bg-alt));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.aboutPathHeader {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  max-width: 48rem;
+}
+
+.aboutPathHeaderRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .aboutPathHeaderRow {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-10);
+    max-width: none;
+  }
+
+  .aboutPathTitle {
+    flex: 0 1 auto;
+  }
+
+  .aboutPathLead {
+    flex: 1 1 18rem;
+    max-width: 26rem;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.aboutPathTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.65rem, 2.8vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.12;
+}
+
+.aboutPathLead {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.aboutPathGrid {
+  display: grid;
+  grid-template-columns: 1.55fr minmax(0, 360px);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.aboutPathStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.aboutPathCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--primitive-white);
+  border: 1px solid color-mix(in srgb, var(--primitive-gray-300) 45%, var(--primitive-brand-200) 55%);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--primitive-black) 4%, transparent),
+    0 16px 36px color-mix(in srgb, var(--primitive-brand-900) 5%, transparent);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.aboutPathCard:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-500) 22%, var(--primitive-gray-300) 78%);
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--primitive-black) 5%, transparent),
+    0 20px 44px color-mix(in srgb, var(--primitive-brand-800) 7%, transparent);
+}
+
+.aboutPathCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.aboutPathStep {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--primitive-brand-600);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--primitive-brand-100) 65%, var(--primitive-white) 35%);
+  border: 1px solid color-mix(in srgb, var(--primitive-brand-300) 30%, transparent);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.aboutPathCardTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.aboutPathCardText {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.aboutPathVisual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: calc(var(--nav-height, 72px) + 1rem);
+}
+
+.aboutPathFigure {
+  margin: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primitive-gray-300) 50%, var(--primitive-brand-200) 50%);
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--primitive-black) 6%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-white) 70%, transparent) inset;
+  background: color-mix(in srgb, var(--primitive-secondary-100) 80%, var(--primitive-white) 20%);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.aboutPathFigure:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 32px color-mix(in srgb, var(--primitive-black) 8%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primitive-white) 80%, transparent) inset;
+}
+
+.aboutPathPhoto {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+:global(html.dark) .aboutPathCard {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+:global(html.dark) .aboutPathCard:hover {
+  border-color: color-mix(in srgb, var(--primitive-brand-600) 35%, var(--primitive-gray-700) 65%);
+}
+
+:global(html.dark) .aboutPathTitle {
+  color: var(--primitive-gray-100);
+}
+
+:global(html.dark) .aboutPathLead,
+:global(html.dark) .aboutPathCardText {
+  color: var(--primitive-gray-400);
+}
+
+:global(html.dark) .aboutPathCardTitle {
+  color: var(--primitive-gray-100);
+}
+
+:global(html.dark) .aboutPathStep {
+  color: var(--primitive-brand-300);
+  background: color-mix(in srgb, var(--primitive-brand-900) 55%, var(--primitive-gray-900) 45%);
+  border-color: color-mix(in srgb, var(--primitive-brand-700) 40%, var(--primitive-gray-700) 60%);
+}
+
+:global(html.dark) .aboutPathFigure {
+  border-color: var(--color-border);
+  background: var(--primitive-gray-900);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+:global(html.dark) .aboutPathSection {
+  border-top-color: color-mix(in srgb, var(--primitive-brand-800) 22%, var(--primitive-gray-800) 78%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aboutPathCard,
+  .aboutPathFigure {
+    transition: none;
+  }
+
+  .aboutPathFigure:hover {
+    transform: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   A LITTLE MORE
+   ════════════════════════════════════════════════════════════ */
+/* Last content band — solid surface, clean edge to site footer (no fade into footer tones) */
+.aboutMoreSection {
+  padding: var(--section-y) var(--section-x);
+  background: var(--color-bg-alt);
+}
+
+:global(html.dark) .aboutMoreSection {
+  background: var(--color-bg-alt);
+}
+
+.aboutMoreHeader {
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-10);
+}
+
+.aboutMoreGrid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 380px) 1.6fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* Left — 2 photos stacked, capped width */
+.aboutMorePhotoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.aboutMorePhotoImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-slow);
+}
+
+.aboutMorePhotoImg:hover { transform: scale(1.02); }
+
+/* Right — pull quote + body */
+.aboutMoreTextCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.aboutMorePullQuote {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 3px solid var(--primitive-brand-500);
+  background: color-mix(in srgb, var(--primitive-brand-050) 70%, transparent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  font-style: italic;
+}
+
+:global(html.dark) .aboutMorePullQuote {
+  background: color-mix(in srgb, var(--primitive-brand-950) 60%, transparent);
+  border-left-color: var(--primitive-brand-500);
+  color: var(--primitive-gray-100);
+}
+
+.aboutMoreBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.aboutMoreBody p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.aboutMasonry {
+  columns: 2;
+  column-gap: var(--space-2);
+  padding: var(--space-2);
+}
+
+.aboutMasonryItem {
+  break-inside: avoid;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-warm-border);
+}
+
+.aboutMasonryImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+.aboutMasonryImg:hover { transform: scale(1.04); }
+
+:global(html.dark) .aboutMasonryItem {
+  background: var(--primitive-gray-700);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 1160px) {
+  .aboutHeroInner     { flex-direction: column; align-items: stretch; }
+  .aboutHeroImgWrap   { width: 100%; height: 320px; flex: none; }
+  .aboutHeroRole      { flex-wrap: wrap; }
+  .aboutPathGrid      { grid-template-columns: 1fr; gap: var(--space-10); }
+  .aboutMoreGrid      { grid-template-columns: 1fr; }
+  .aboutMorePhotoCol  { flex-direction: row; }
+  .aboutMorePhotoImg  { flex: 1; }
+  .aboutHero          { padding: var(--space-12) var(--space-6) 0; }
+  .aboutPathSection   { padding: var(--space-16) var(--space-6); }
+  .aboutMoreSection   { padding-inline: var(--space-6); }
+  .aboutMoreHeader    { padding: var(--space-12) 0 var(--space-6); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   REDUCED MOTION — WCAG 2.3.3
+   ════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .aboutMasonryImg,
+  .aboutMasonryImg:hover {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,19 +1,13 @@
 /* ============================================================
    NAVBAR MODULE
-   All colors via design tokens — no hardcoded hex.
-   Dark mode handled automatically by token flipping in
-   html.dark {} (tokens.css).
+   Layout breakpoints: Tailwind (Navbar.jsx). This file keeps
+   glass shell, link/drawer tokens, and motion preferences.
    ============================================================ */
 
-/* ── Backdrop ─────────────────────────────────────────────── */
+/* ── Backdrop (mobile menu) ───────────────────────────────── */
 .backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  /* FIX: was rgba(0,0,0,0.02) — invisible. Needs to visually
-     separate the drawer from page content behind it. */
+  inset: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -27,12 +21,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: 0.65rem clamp(1.25rem, 3vw, 2.5rem);
-  /* Warm studio glass — blend shell tint with a light frost so the bar
-     stays readable on the hero (plain 88% shell + transparent read as empty). */
+  /* Warm studio glass */
   background: color-mix(
     in srgb,
     color-mix(in srgb, var(--shell-nav-fill) 92%, var(--primitive-secondary-100)) 88%,
@@ -40,15 +29,13 @@
   );
   backdrop-filter: blur(22px) saturate(1.12);
   -webkit-backdrop-filter: blur(22px) saturate(1.12);
-  border-radius: var(--radius-full);
+  /* border-radius: responsive in Navbar.jsx (Tailwind) */
   border: 1px solid color-mix(in srgb, var(--shell-nav-border) 58%, transparent);
   box-shadow:
     var(--shadow-md),
     inset 0 1px 0 color-mix(in srgb, var(--primitive-white) 55%, transparent);
   transition: top var(--transition-base), box-shadow var(--transition-base);
   min-width: fit-content;
-  /* Keep the pill inside the viewport — otherwise flex row overflows and
-     “Let’s Talk” sits past the right edge while the bar stays centered. */
   max-width: calc(100vw - 2rem);
   box-sizing: border-box;
 }
@@ -90,24 +77,11 @@
   display: block;
 }
 
-/* ── Desktop nav links ────────────────────────────────────── */
-.list {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-  flex-shrink: 1;
-}
-
+/* ── Nav links (desktop) ──────────────────────────────────── */
 .link {
   font-family: var(--font-body);
   font-size: var(--text-md);
-  /* ink-soft: AA on light frosted nav + dark html.dark nav (#d1d5db on #1a1a19) */
   color: var(--color-ink-soft);
-  /* WCAG 1.4.1: not color-only — underline on hover/active; 2.5.8: min target */
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 0.18em;
@@ -146,26 +120,7 @@ html.dark .link:hover {
   text-decoration-color: currentColor;
 }
 
-/* ── Right side ───────────────────────────────────────────── */
-.right {
-  display: flex;
-  align-items: center;
-  /* FIX: gap was correct here but extrasDesktop also had 1.5rem
-     creating double-spacing. Unified to one gap level. */
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.extrasDesktop {
-  display: flex;
-  align-items: center;
-  /* FIX: reduced from 1.5rem — this was causing the toggle and
-     CTA to appear glued with no visual separation at smaller
-     widths, and too spread at larger widths. */
-  gap: 0.75rem;
-}
-
-/* ── Theme toggle — design-system primary + inverse (filled) ── */
+/* ── Theme toggle (design-system primary + inverse) ───────── */
 .themeToggleBtn {
   width: 44px;
   min-width: 44px;
@@ -175,16 +130,9 @@ html.dark .link:hover {
   flex-shrink: 0;
 }
 
-/* Mobile drawer — full-width primary CTA (uses Button component) */
-.drawerCta {
-  width: 100%;
-  justify-content: center;
-  margin-top: var(--spacing-2);
-}
-
 /* ── Hamburger ────────────────────────────────────────────── */
 .hamburger {
-  display: none;
+  display: flex;
   background: none;
   border: none;
   cursor: pointer;
@@ -216,17 +164,16 @@ html.dark .link:hover {
 /* ── Mobile drawer ────────────────────────────────────────── */
 .drawer {
   position: fixed;
-  top: 85px;
+  top: 5.5rem;
   left: 50%;
-  width: 90%;
-  max-width: 400px;
-  background: color-mix(in srgb, var(--shell-drawer-fill) 96%, transparent);
+  width: min(90%, 400px);
+  background: color-mix(in srgb, var(--color-bg-alt) 97%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 2rem;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-xl);
-  z-index: 100;
+  z-index: 95;
   padding: 2rem;
   opacity: 0;
   visibility: hidden;
@@ -244,7 +191,7 @@ html.dark .link:hover {
 }
 
 .drawerDark {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 40px color-mix(in srgb, var(--primitive-black) 55%, transparent);
 }
 
 .drawerContent {
@@ -256,8 +203,8 @@ html.dark .link:hover {
 
 .drawerLink {
   font-family: var(--font-body);
-  font-size: 1.4rem;
-  color: var(--color-ink-soft);
+  font-size: 1.25rem;
+  color: var(--color-ink-muted);
   text-decoration: none;
   font-weight: 400;
   transition: letter-spacing var(--transition-base), color var(--transition-base);
@@ -267,55 +214,23 @@ html.dark .link:hover {
 }
 
 .drawerLink:hover {
-  letter-spacing: 1px;
-  color: color-mix(in srgb, var(--color-green) 78%, var(--primitive-secondary-800) 22%);
-}
-
-html.dark .drawerLink:hover {
-  color: color-mix(in srgb, var(--color-green) 86%, var(--primitive-secondary-300) 14%);
+  letter-spacing: 0.04em;
+  color: var(--color-green);
 }
 
 .drawerLink:focus-visible {
   outline: var(--focus-ring-on-light);
   outline-offset: var(--focus-ring-offset);
-  text-decoration-color: currentColor;
 }
 
 .drawerLinkActive {
   font-weight: 700;
   color: var(--color-ink);
-  text-decoration-color: currentColor;
 }
 
-/* ── Mid widths: tighten row ── */
-@media (max-width: 1320px) and (min-width: 1241px) {
-  .nav {
-    gap: 0.65rem;
-    padding: 0.65rem 0.875rem;
-  }
-
-  .list {
-    gap: 1rem;
-  }
-}
-
-/* ── Compact / tablet: hamburger + drawer (above this, full desktop row must fit in max-width: calc(100vw - 2rem)) ── */
-@media (max-width: 1240px) {
-  .list,
-  .extrasDesktop {
-    display: none !important;
-  }
-
-  .hamburger {
-    display: flex !important;
-  }
-
-  .nav {
-    width: min(92%, calc(100vw - 2rem)) !important;
-    max-width: calc(100vw - 2rem);
-    padding: 0 1.25rem !important;
-    height: 60px !important;
-  }
+.drawerCta {
+  width: 100%;
+  justify-content: center;
 }
 
 /* ── Reduced motion ───────────────────────────────────────── */
@@ -324,14 +239,12 @@ html.dark .drawerLink:hover {
   .drawer,
   .link,
   .drawerLink,
-  .themeToggleBtn,
-  .cta {
+  .themeToggleBtn {
     transition: none !important;
   }
 
   .link:hover,
-  .themeToggleBtn:hover,
-  .cta:hover {
+  .themeToggleBtn:hover {
     transform: none !important;
   }
 }

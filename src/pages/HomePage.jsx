@@ -6,7 +6,7 @@ import PortfolioWidget from '../components/PortfolioWidget';
 import FloatCard from '../components/FloatCard';
 import ScrollFloatDeck, { renderFloatDeckCardBody } from '../components/ScrollFloatDeck';
 import Button from '../components/Button';
-import s from '../styles/HomePage.module.css';
+import s from '../styles/Page.module.css';
 import { projects, FLOAT_CARDS_DECK, FLOAT_ANIM_CLASSES } from '../data';
 
 /** Screen positions for the five hero floats (which *deck* row shows is random — see below). */
@@ -163,11 +163,11 @@ export default function HomePage() {
         }
       `}</style>
 
-      <main id="main-content" className={s.main}>
+      <main id="main-content" className={s.pageMain}>
         <h1 className="sr-only">Portfolio — Sarah Beú</h1>
 
         {/* ── HERO ────────────────────────────────────────── */}
-        <section ref={heroRef} className={s.hero} aria-labelledby="dashboard-heading">
+        <section ref={heroRef} className={s.homeHero} aria-labelledby="dashboard-heading">
 
           <h2 id="dashboard-heading" className="sr-only">
             Dashboard &amp; Design Resources
@@ -201,15 +201,15 @@ export default function HomePage() {
         />
 
         {/* ── PROJECTS ──────────────────────────────────── */}
-        <section className={s.sectionPaper} aria-labelledby="projects-heading" id="projects">
-          <div className={s.sectionInner}>
+        <section className={s.homeSectionPaper} aria-labelledby="projects-heading" id="projects">
+          <div className={s.homeSectionInner}>
             <div className="reveal" style={{ marginBottom: '3rem' }}>
-              <div className={s.sectionEyebrow}>
-                <span aria-hidden="true" className={s.eyebrowLine} />
+              <div className={s.homeSectionEyebrow}>
+                <span aria-hidden="true" className={s.homeEyebrowLine} />
                 Selected work
               </div>
-              <div className={s.sectionTitleRow}>
-                <h2 id="projects-heading" className={s.sectionTitle}>Selected Case Studies</h2>
+              <div className={s.homeSectionTitleRow}>
+                <h2 id="projects-heading" className={s.homeSectionTitle}>Selected Case Studies</h2>
                 <Button
                   as={Link}
                   to="/projects"
@@ -220,13 +220,13 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className={`${s.projectsGrid} reveal`}>
+            <div className={`${s.homeProjectsGrid} reveal`}>
               {homeFeaturedProjects.map((project, i) => (
                 <ProjectCard
                   key={project.slug}
                   project={project}
                   index={i}
-                  className={s.cardLift}
+                  className={s.homeCardLift}
                 />
               ))}
             </div>
@@ -234,26 +234,27 @@ export default function HomePage() {
         </section>
 
         {/* ── TESTIMONIALS ──────────────────────────────── */}
-        <section className={s.sectionWhite} aria-labelledby="testimonials-heading">
-          <div className={s.sectionInner}>
+        <section className={s.homeSectionTestimonials} aria-labelledby="testimonials-heading">
+          <div className={s.homeSectionInner}>
             <div className="reveal" style={{ marginBottom: '3rem' }}>
-              <div className={s.sectionEyebrow}>
-                <span aria-hidden="true" className={s.eyebrowLine} />
-                Feedback
+              <div className={s.homeSectionEyebrow}>
+                <span aria-hidden="true" className={s.homeEyebrowLine} />
+                What they say
               </div>
-              <h2 id="testimonials-heading" className={s.sectionTitle}>
+              <h2 id="testimonials-heading" className={s.homeSectionTitle}>
                 Colleagues &amp; clients
               </h2>
             </div>
-            <div className={`${s.testiGrid} reveal`}>
+            <div className={`${s.homeTestiGrid} reveal`}>
               {testimonials.map((t) => (
-                <blockquote key={t.name} className={s.testimonialCard}>
-                  <p className={s.testimonialQuote}>"{t.quote}"</p>
-                  <footer className={s.testimonialFooter}>
-                    <div aria-hidden="true" className={s.testimonialAvatar}>{t.initials}</div>
+                <blockquote key={t.name} className={s.homeTestimonialCard}>
+                  <span aria-hidden="true" className={s.homeTestimonialMark}>&ldquo;</span>
+                  <p className={s.homeTestimonialQuote}>{t.quote}</p>
+                  <footer className={s.homeTestimonialFooter}>
+                    <div aria-hidden="true" className={s.homeTestimonialAvatar}>{t.initials}</div>
                     <div>
-                      <div className={s.testimonialName}>{t.name}</div>
-                      <div className={s.testimonialRole}>{t.role}</div>
+                      <div className={s.homeTestimonialName}>{t.name}</div>
+                      <div className={s.homeTestimonialRole}>{t.role}</div>
                     </div>
                   </footer>
                 </blockquote>
@@ -261,6 +262,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
 
       </main>
     </>

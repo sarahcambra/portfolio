@@ -182,14 +182,6 @@ export default function PortfolioWidget({ view, onViewChange }) {
       aria-label="Sarah Beú — portfolio dashboard"
     >
       <div className={s.widgetHeader}>
-        <img
-          src={resolvePublicUrl('/assets/sarah-logo.png')}
-          alt=""
-          className={s.widgetLogo}
-          onError={(e) => {
-            e.target.style.display = 'none';
-          }}
-        />
         <div className={s.widgetNameGroup}>
           <p className={s.widgetName}>Sarah Beú</p>
           <p className={s.widgetSubtitle}>Sr. Product Designer · Design Systems &amp; Accessibility</p>

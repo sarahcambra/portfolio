@@ -5,3 +5,34 @@
    Tailwind loads first; App.jsx then imports tokens, animations,
    shared — see import order there.
    ============================================================ */
+
+/*
+  Expose only brand + secondary palettes as Tailwind utilities.
+  Values stay in tokens.css (--primitive-*) — single source of truth.
+  Usage: bg-brand-600, text-secondary-200, border-brand-300, etc.
+*/
+@theme {
+  --color-brand-050: #f5f0ff;
+  --color-brand-100: #ede5ff;
+  --color-brand-200: #dbccff;
+  --color-brand-300: #c2aaff;
+  --color-brand-400: #a366ff;
+  --color-brand-500: #9266ff;
+  --color-brand-600: #7a33ff;
+  --color-brand-700: #6600ff;
+  --color-brand-800: #5200cc;
+  --color-brand-900: #3d0099;
+  --color-brand-950: #1a0040;
+
+  --color-secondary-050: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+  --color-secondary-950: #020617;
+}

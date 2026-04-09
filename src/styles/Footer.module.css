@@ -1,162 +1,169 @@
-.footer {
-  position: relative;
-  isolation: isolate;
-  background-color: var(--color-bg-dark, #0f0f0e);
-  padding: 6rem 2.5rem 3rem;
-  border-top: none;
-  color: var(--color-white, #ffffff);
-  overflow: hidden;
-}
+/* ============================================================
+   FOOTER — CTA on brand-950 canvas
+   ============================================================ */
 
-.footer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: var(--shell-footer-overlay);
-  opacity: 1;
-}
+   .footer {
+    position: relative;
+    isolation: isolate;
+    background: var(--primitive-brand-950);
+    color: var(--color-white, #ffffff);
+    overflow: hidden;
+  }
+  
+  /* Dual radial glow — matches homepage CTA atmosphere */
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 30%, color-mix(in srgb, var(--primitive-brand-700) 28%, transparent) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 80% at 85% 10%, color-mix(in srgb, var(--primitive-brand-800) 22%, transparent) 0%, transparent 60%);
+  }
+  
+  .footer > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ── CTA area ── */
+  .cta {
+    max-width: var(--max-width, 1200px);
+    margin: 0 auto;
+    padding: clamp(4rem, 10vw, 6.5rem) var(--page-pad-x, 2.5rem) clamp(2.5rem, 6vw, 4rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .ctaText {
+    flex: 1;
+    min-width: min(100%, 280px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.footer > * {
-  position: relative;
-  z-index: 1;
-}
+  .brandName {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+  }
+  
+  .ctaEyebrow {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--shell-footer-eyebrow);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1rem;
+  }
+  
+  .ctaEyebrowDot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primitive-brand-300);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--primitive-brand-400) 85%, transparent);
+    flex-shrink: 0;
+    animation: cta-pulse 2s infinite ease-in-out;
+  }
+  
+  @keyframes cta-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px color-mix(in srgb, var(--primitive-brand-400) 85%, transparent); }
+    50%       { opacity: 0.65; box-shadow: 0 0 16px color-mix(in srgb, var(--primitive-brand-300) 70%, transparent); }
+  }
+  
+  .brandSub {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-base);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--shell-footer-brand-sub);
+    margin: 0 0 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: 22ch;
+  }
 
-.inner {
-  max-width: var(--max-width, 1200px);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 4rem;
-  padding-bottom: 4rem;
-  border-bottom: none;
-}
+  .brandSub em {
+    font-style: normal;
+    color: var(--primitive-brand-200);
+  }
+  
+  .ctaActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  
+  /* ── Bottom bar ── */
+  .bottom {
+    max-width: var(--max-width, 1200px);
+    margin: 0 auto;
+    padding: 1.75rem var(--page-pad-x, 2.5rem) 3rem;
+    border-top: 1px solid var(--shell-footer-divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .copy {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-sm);
+    color: var(--shell-footer-meta);
+  }
 
-.brandName {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-  letter-spacing: -0.02em;
-  color: var(--color-white);
-}
+  .socialRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
-.brandSub {
-  font-family: var(--font-mono, monospace);
-  font-size: var(--text-base);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: color-mix(in srgb, var(--primitive-brand-400) 55%, var(--primitive-secondary-400) 45%);
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
+  .socialIcon {
+    display: inline-flex;
+    color: var(--shell-footer-link);
+    opacity: 0.95;
+    transition: color var(--transition-base), opacity var(--transition-base);
+  }
 
-.brandDesc {
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9); /* Pure white with soft opacity for text reading */
-  max-width: 38ch;
-}
+  .socialIcon:hover {
+    color: var(--primitive-brand-200);
+    opacity: 1;
+  }
 
-.colTitle {
-  font-family: var(--font-mono, monospace);
-  font-size: var(--text-base);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.6); /* Clear title visibility */
-  margin-bottom: 1.8rem;
-  font-weight: 600;
-}
-
-/* ── Harmonized Link Stack ── */
-.linkStack {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.linkItem {
-  color: #ffffff; /* High contrast text start */
-  text-decoration: none;
-  font-size: var(--text-base);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: color var(--transition-base), transform var(--transition-base);
-  min-height: var(--min-touch);
-}
-
-.linkItem:hover {
-  color: var(--primitive-brand-300);
-  transform: translateX(6px);
-}
-
-.linkItem:focus-visible {
-  outline: var(--focus-ring-on-dark);
-  outline-offset: var(--focus-ring-offset);
-  color: var(--primitive-brand-300);
-}
-
-/* ── Bottom Bar ── */
-.bottom {
-  max-width: var(--max-width, 1200px);
-  margin: 0 auto;
-  padding-top: 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.bottomLeft {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-}
-
-.copy {
-  font-family: var(--font-mono, monospace);
-  font-size: var(--text-base);
-  /* ≥4.5:1 vs #0f0f0e (was 0.4 ≈3.8:1) */
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.available {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono, monospace);
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.availableDot {
-  width: 10px;
-  height: 10px;
-  background: var(--color-available); /* Pulling your bright lime/green */
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--color-available);
-  animation: pulse 2s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
-
-/* ── Back to top — matches inverse secondary Button ── */
-.backToTop {
-  text-transform: none;
-  font-family: var(--font-body);
-  font-weight: 600;
-  gap: 0.5rem;
-}
-
-@media (max-width: 860px) {
-  .inner { grid-template-columns: 1fr; gap: 3.5rem; }
-  .bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .bottomLeft { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
-  .backToTop { width: 100%; justify-content: center; }
-}
+  .socialIcon:focus-visible {
+    outline: var(--focus-ring-on-dark);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: 4px;
+  }
+  
+  .backToTop {
+    font-family: var(--font-body);
+    font-weight: 600;
+    gap: 0.5rem;
+  }
+  
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .cta { flex-direction: column; align-items: flex-start; }
+    .ctaActions { width: 100%; }
+    .bottom { flex-direction: column; align-items: flex-start; }
+    .backToTop { width: 100%; justify-content: center; }
+  }
+  
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .ctaEyebrowDot { animation: none; }
+  }

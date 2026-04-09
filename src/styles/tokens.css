@@ -12,37 +12,37 @@
 /* ============================================================
    PRIMITIVES — color (from design tokens JSON)
    Gray scale = Tailwind Slate-compatible ramp (--primitive-gray-*)
-   Brand      = olive/sage (--primitive-brand-*)
+   Brand      = violet / purple (--primitive-brand-*); 700 = primary brand (#6600FF)
    Secondary  = warm stone / paper (--primitive-secondary-*)
    ============================================================ */
 :root {
-  /* Pure white — mint (#eefffd) read as nursery on large surfaces; brand lives in --primitive-brand-* */
+  /* Pure white — canvas tints use --primitive-brand-050+ */
   --primitive-white:       #ffffff;
   --primitive-black:       #0f0f0e;
 
-  --primitive-brand-050:   #fefefe;
-  --primitive-brand-100:   #e1e8e1;
-  --primitive-brand-200:   #c2d1c1;
-  --primitive-brand-300:   #a1b5a0;
-  --primitive-brand-400:   #7d967c;
-  --primitive-brand-500:   #5b785a;
-  --primitive-brand-600:   #4a6149;
-  --primitive-brand-700:   #436a45;
-  --primitive-brand-800:   #2b3a2c;
-  --primitive-brand-900:   #1e291f;
-  --primitive-brand-950:   #0f140f;
+  --primitive-brand-050:   #f5f0ff;
+  --primitive-brand-100:   #ede5ff;
+  --primitive-brand-200:   #dbccff;
+  --primitive-brand-300:   #c2aaff;
+  --primitive-brand-400:   #a366ff;
+  --primitive-brand-500:   #9266ff;
+  --primitive-brand-600:   #7a33ff;
+  --primitive-brand-700:   #6600ff;
+  --primitive-brand-800:   #5200cc;
+  --primitive-brand-900:   #3d0099;
+  --primitive-brand-950:   #1a0040;
 
-  --primitive-secondary-050: #faf9f6;
-  --primitive-secondary-100: #f4f1e8;
-  --primitive-secondary-200: #e8e0c4;
-  --primitive-secondary-300: #d9cba0;
-  --primitive-secondary-400: #c9b88a;
-  --primitive-secondary-500: #b3a070;
-  --primitive-secondary-600: #928156;
-  --primitive-secondary-700: #716342;
-  --primitive-secondary-800: #50462f;
-  --primitive-secondary-900: #3b271c;
-  --primitive-secondary-950: #1f140e;
+  --primitive-secondary-050: #f8fafc;
+  --primitive-secondary-100: #f1f5f9;
+  --primitive-secondary-200: #e2e8f0;
+  --primitive-secondary-300: #cbd5e1;
+  --primitive-secondary-400: #94a3b8;
+  --primitive-secondary-500: #64748b;
+  --primitive-secondary-600: #475569;
+  --primitive-secondary-700: #334155;
+  --primitive-secondary-800: #1e293b;
+  --primitive-secondary-900: #0f172a;
+  --primitive-secondary-950: #020617;
 
   --primitive-gray-050:    #f8fafc;
   --primitive-gray-50:     var(--primitive-gray-050); /* alias: same value, no leading zero */
@@ -163,7 +163,7 @@
   --sys-text-inverse:       var(--primitive-black);
 
   --sys-bg-canvas:          var(--primitive-brand-050);
-  /* Warm paper bands (testimonials, alt sections) — pairs with olive canvas */
+  /* Warm paper bands (testimonials, alt sections) — pairs with brand-tinted canvas */
   --sys-bg-surface:         var(--primitive-secondary-050);
   --sys-bg-surface-muted:   var(--primitive-secondary-100);
   --sys-bg-inverse:         var(--primitive-black);
@@ -192,7 +192,7 @@
   --sys-button-secondary-bg:       transparent;
   --sys-button-secondary-bg-hover: var(--primitive-secondary-100);
   --sys-button-secondary-fg:       var(--primitive-brand-800);
-  /* Outline = olive ledge + stone undertone (secondary palette visible) */
+  /* Outline = brand + stone undertone (secondary palette visible) */
   --sys-button-secondary-border:   color-mix(in srgb, var(--primitive-brand-800) 68%, var(--primitive-secondary-700) 32%);
 
   --sys-button-ghost-bg:           transparent;
@@ -267,15 +267,15 @@
   --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.22);
 
   --nav-height:      68px;
-  --max-width:       1080px;
-  --max-width-prose: 720px;
+  --max-width:       1160px;
+  --max-width-prose: 1160px;
   /* Case study heroes, breadcrumbs — one readable column */
-  --max-width-hero:  800px;
-  --section-x:       var(--spacing-10);
-  --section-y:       var(--spacing-20);
-  /* Routed pages: alias section padding for clarity in modules */
+  --max-width-hero:  920px;
+  /* Homepage: PortfolioWidget + section content share this column width */
+  --home-content-width: min(720px, calc(100vw - 2rem));
+  --section-x:       var(--spacing-0);  /* Routed pages: alias section padding for clarity in modules */
   --page-pad-x:      var(--section-x);
-  --page-pad-y:      var(--section-y);
+  --page-pad-y:      var(--spacing-0);
 
   --transition-fast: 0.15s ease;
   --transition-base: 0.22s ease;
@@ -284,12 +284,12 @@
 
   --min-touch: var(--spacing-11);
 
-  /* Focus — brand greens tuned for contrast on light / dark */
+  /* Focus — brand violet tuned for contrast on light / dark */
   --focus-ring-on-light: 2px solid var(--primitive-brand-800);
   --focus-ring-on-dark:  2px solid var(--primitive-emerald-400);
   --focus-ring-offset:   3px;
 
-  /* Brand (UI) — aligned to primitive brand + emerald accents */
+  /* Brand (UI) — legacy “green” aliases point at primitive brand + emerald accents */
   --color-green:        var(--primitive-brand-800);
   --color-green-hover:  var(--primitive-brand-900);
   --color-green-light:  var(--primitive-emerald-100);
@@ -307,7 +307,7 @@
   --color-ink:         var(--sys-text-inverse);
   --color-ink-soft:    var(--sys-text-body);
   --color-ink-muted:   var(--sys-text-body-subtle);
-  /* Was gray-400 (~2.5:1 on canvas) — gray-500 ≥4.5:1 on #fefefe for normal text */
+  /* Was gray-400 (~2.5:1 on canvas) — gray-500 ≥4.5:1 on brand-050 / gray-050 for normal text */
   --color-ink-faint:   var(--primitive-gray-500);
 
   --color-border:      var(--sys-border-default);
@@ -354,7 +354,7 @@
   /* Body alias (shared.css) */
   --color-paper:   var(--color-bg);
 
-  /* ── Shell — homepage hero, nav, footer (designer × AI studio, olive + precision) ── */
+  /* ── Shell — homepage hero, nav, footer (designer × AI studio, violet brand + precision) ── */
   --shell-hero-base: var(--color-bg);
   --shell-hero-wash:
     radial-gradient(ellipse 115% 70% at 50% -5%, color-mix(in srgb, var(--primitive-brand-100) 65%, transparent) 0%, transparent 55%),
@@ -373,10 +373,30 @@
     ) 0%,
     transparent 58%
   );
+  /* Mono label on dark footer (brand-950 + glows): lighter than brand-400 mix for contrast */
+  --shell-footer-brand-sub: color-mix(
+    in srgb,
+    var(--primitive-brand-300) 50%,
+    var(--primitive-secondary-300) 50%
+  );
+  /* Supporting text on dark footer — tuned for contrast on brand-950 + radial glows */
+  --shell-footer-eyebrow: var(--primitive-brand-300);
+  --shell-footer-body-muted: color-mix(in srgb, var(--primitive-white) 78%, transparent);
+  --shell-footer-nav-label: color-mix(in srgb, var(--primitive-white) 66%, transparent);
+  --shell-footer-link: color-mix(in srgb, var(--primitive-white) 90%, transparent);
+  --shell-footer-meta: color-mix(in srgb, var(--primitive-white) 60%, transparent);
+  --shell-footer-divider: color-mix(in srgb, var(--primitive-white) 16%, transparent);
   --shell-widget-shadow:
     0 28px 72px color-mix(in srgb, var(--primitive-black) 42%, transparent),
     0 0 0 1px color-mix(in srgb, var(--primitive-brand-400) 14%, rgba(255, 255, 255, 0.06) 86%),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Navbar stacks (logo / links / actions) below 1240px — extra top padding for main */
+@media (max-width: 1240px) {
+  :root {
+    --nav-height: 172px;
+  }
 }
 
 /* ============================================================
@@ -479,6 +499,17 @@ html.dark {
     ) 0%,
     transparent 55%
   );
+  --shell-footer-brand-sub: color-mix(
+    in srgb,
+    var(--primitive-brand-300) 50%,
+    var(--primitive-secondary-300) 50%
+  );
+  --shell-footer-eyebrow: var(--primitive-brand-300);
+  --shell-footer-body-muted: color-mix(in srgb, var(--primitive-white) 78%, transparent);
+  --shell-footer-nav-label: color-mix(in srgb, var(--primitive-white) 66%, transparent);
+  --shell-footer-link: color-mix(in srgb, var(--primitive-white) 90%, transparent);
+  --shell-footer-meta: color-mix(in srgb, var(--primitive-white) 60%, transparent);
+  --shell-footer-divider: color-mix(in srgb, var(--primitive-white) 16%, transparent);
   --shell-widget-shadow:
     0 32px 80px rgba(0, 0, 0, 0.55),
     0 0 0 1px color-mix(in srgb, var(--primitive-brand-500) 18%, rgba(255, 255, 255, 0.05) 82%),

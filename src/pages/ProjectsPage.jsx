@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
-import { projects } from '../data';
-import s from '../styles/ProjectsPage.module.css';
+import { visibleProjects } from '../data';
+import s from '../styles/Page.module.css';
 
 export default function ProjectsPage() {
   useEffect(() => {
@@ -18,27 +18,30 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <main id="main-content" className={s.main}>
-      <header className={s.header}>
-        <p className={s.eyebrow}>Selected Work</p>
-        <h1 className={s.title}>Case Studies</h1>
-        <p className={s.subtitle}>
-          A selection of projects spanning accessible design systems,<br />
-          platform design, UX audits, and research.
-        </p>
-      </header>
+    <main id="main-content" className={s.pageMainNav}>
+      <div className={s.projectsTopBand}>
+        <header className={s.projectsHeader}>
+          <p className={s.projectsEyebrow}>Selected Work</p>
+          <h1 className={s.projectsTitle}>Case Studies</h1>
+          <p className={s.projectsSubtitle}>
+            A selection of projects spanning accessible design systems, platform design, UX audits, and research.
+          </p>
+        </header>
+      </div>
 
-      <section className={s.grid} aria-label="All projects">
-        {projects.map((project, i) => (
-          <ProjectCard
-            key={project.slug}
-            project={project}
-            index={i}
-            className="reveal"
-            style={{ animationDelay: `${i * 0.1}s` }}
-          />
-        ))}
-      </section>
+      <div className={s.projectsContentBand}>
+        <section className={s.projectsGrid} aria-label="All projects">
+          {visibleProjects.map((project, i) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              index={i}
+              className="reveal"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            />
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

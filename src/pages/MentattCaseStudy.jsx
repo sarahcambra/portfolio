@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { projects } from '../data';
-import s from '../styles/MentattCaseStudy.module.css';
+import s from '../styles/CaseStudy.module.css';
 import CaseStudyBreadcrumb from '../components/caseStudy/CaseStudyBreadcrumb';
 import CaseStudyNextProject from '../components/caseStudy/CaseStudyNextProject';
 import { getNextCaseStudy } from '../utils/caseStudyNav';
 import { resolvePublicUrl } from '../utils/resolvePublicUrl';
+import { csLayout, csTw } from '../utils/siteLayout';
 
 const project = projects.find(p => p.slug === 'mentatt-research');
 const next = getNextCaseStudy('mentatt-research');
@@ -12,9 +13,9 @@ const next = getNextCaseStudy('mentatt-research');
 /* ── Image helpers ── */
 function CaseImg({ src, filename, alt, tall, short, className }) {
   const placeholderClass = [
-    s.placeholder,
-    tall  ? s.placeholderTall  : '',
-    short ? s.placeholderShort : '',
+    csTw.placeholder,
+    tall ? csTw.placeholderTall : '',
+    short ? csTw.placeholderShort : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -22,22 +23,22 @@ function CaseImg({ src, filename, alt, tall, short, className }) {
       <img
         src={src}
         alt={alt}
-        className={`${s.img} ${className || ''}`}
+        className={`${csTw.img} ${s.img} ${className || ''}`}
         onError={e => {
           e.currentTarget.style.display = 'none';
           e.currentTarget.nextSibling.style.display = 'flex';
         }}
       />
       <div className={placeholderClass} style={{ display: 'none' }} role="img" aria-label={alt}>
-        <div className={s.placeholderIcon} aria-hidden="true">
+        <div className={csTw.placeholderIcon} aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.5"/>
             <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
             <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-        <code className={s.placeholderFile}>{filename}</code>
-        <p className={s.placeholderLabel}>{alt}</p>
+        <code className={csTw.placeholderFile}>{filename}</code>
+        <p className={csTw.placeholderLabel}>{alt}</p>
       </div>
     </>
   );
@@ -45,7 +46,7 @@ function CaseImg({ src, filename, alt, tall, short, className }) {
 
 function Img({ src, filename, alt, tall, caption }) {
   return (
-    <div className={s.imgWrap}>
+    <div className={csLayout.imgWrap}>
       <CaseImg src={src} filename={filename} alt={alt} tall={tall} />
       {caption && <p className={s.imgCaption}>{caption}</p>}
     </div>
@@ -58,47 +59,30 @@ export default function MentattCaseStudy() {
   const img = (name) => resolvePublicUrl(`/assets/projects/mentatt/${name}`);
 
   return (
-    <main className={s.page} id="main-content">
+    <main
+      className={`${s.page} ${s.pageThemeMentatt}`}
+      id="main-content"
+      style={project ? { '--case-canvas': project.color } : undefined}
+    >
 
       <CaseStudyBreadcrumb />
 
-      {/* ── Hero ── */}
-      <header className={s.hero}>
-        <div className={s.heroInner}>
+      <header className={`${csTw.heroBg} ${csLayout.heroPad} px-4 sm:px-6 lg:px-8 xl:px-10`}>
+        <div className={csLayout.prose}>
           <p className={s.heroEyebrow}>Mentatt · Mental Health App · 9 Weeks</p>
-          <h1 className={s.heroTitle}>Mental Health<br />App Design</h1>
-          <p className={s.heroSub}>
+          <h1 className={`${s.heroTitle} ${csTw.heroTitle}`}>Mental Health<br />App Design</h1>
+          <p className={csTw.heroSub}>
             Students weren't completing mental health surveys. The data was hard to
             read. And nobody would pay for a subscription. We redesigned all three.
           </p>
-          <div className={s.tags} role="group" aria-label="Project tags">
-            {project.tags.map(tag => <span key={tag} className={s.tag}>{tag}</span>)}
+          <div className={csTw.tagsRow} role="group" aria-label="Project tags">
+            {project.tags.map(tag => <span key={tag} className={csTw.tagPill}>{tag}</span>)}
           </div>
           <p className={s.heroRole}>{project.role}</p>
         </div>
       </header>
 
-      {/* ── Stat bar ── */}
-      <div className={s.statBar} role="group" aria-label="Project at a glance">
-        <div className={s.statBarInner}>
-          {[
-            { label: 'Client',   value: 'Mentatt' },
-            { label: 'Timeline', value: '9 Weeks' },
-            { label: 'Team',     value: '5 UX Designers · 2 Mentatt members' },
-            { label: 'My Role',  value: 'UX Researcher · UX Designer · UI Designer' },
-            { label: 'Tools',    value: 'Figma · Figjam · Miro' },
-            { label: 'Website',  value: 'mentatt.com' },
-          ].map(({ label, value }) => (
-            <div key={label} className={s.stat}>
-              <span className={s.statLabel}>{label}</span>
-              <span className={s.statValue}>{value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Cover ── */}
-      <div className={s.wide} style={{ paddingTop: '3rem', paddingBottom: '1rem' }}>
+      <div className={csLayout.cover}>
         <Img
           src={img('cover.png')}
           filename="mentatt/cover.png"
@@ -108,13 +92,31 @@ export default function MentattCaseStudy() {
         />
       </div>
 
+      <div className={`${csTw.statBar} ${csLayout.statBarPad}`} role="group" aria-label="Project at a glance">
+        <div className={csLayout.statBarInner}>
+          {[
+            { label: 'Client',   value: 'Mentatt' },
+            { label: 'Timeline', value: '9 Weeks' },
+            { label: 'Team',     value: '5 UX Designers · 2 Mentatt members' },
+            { label: 'My Role',  value: 'UX Researcher · UX Designer · UI Designer' },
+            { label: 'Tools',    value: 'Figma · Figjam · Miro' },
+            { label: 'Website',  value: 'mentatt.com' },
+          ].map(({ label, value }) => (
+            <div key={label} className={csTw.statCol}>
+              <span className={s.statLabel}>{label}</span>
+              <span className={csTw.statVal}>{value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ══════════════════════════════════════════════════════
           CONTEXT
       ══════════════════════════════════════════════════════ */}
-      <div className={s.prose} style={{ paddingTop: '4rem' }}>
-        <section className={s.section} aria-labelledby="context-heading">
-          <p className={s.sectionEyebrow}>Context</p>
-          <h2 id="context-heading" className={s.h2}>A mental health app for students — with three unsolved problems</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <section className={csTw.section} aria-labelledby="context-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Context</p>
+          <h2 id="context-heading" className={`${s.h2} ${csTw.h2}`}>A mental health app for students — with three unsolved problems</h2>
           <p className={s.body}>
             Mentatt is a startup focused on early mental health intervention for students.
             The product idea was solid: a mobile app with regular mental health assessments,
@@ -132,24 +134,24 @@ export default function MentattCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           RESEARCH
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Research</p>
-          <p className={s.dividerTitle}>Five competitors and eight conversations</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Research</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>Five competitors and eight conversations</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Competitor Analysis</p>
-          <h2 className={s.h2}>What the category was already doing</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Competitor Analysis</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>What the category was already doing</h2>
           <p className={s.body}>
             Mentatt pointed me at five direct competitors: Nilo Health, Yumuuv,
             Official Vibe, Bamboo HR, and BOB. I looked specifically at engagement
             features — what kept users coming back — and what was being used to
             add value beyond the basic survey.
           </p>
-          <ul className={s.list}>
+          <ul className={csTw.list}>
             <li className={s.listItem}>Most competitors used monthly surveys and educational content as their primary engagement loop</li>
             <li className={s.listItem}>Nilo Health and Yumuuv focused on mental health and employee engagement — the closest category matches</li>
             <li className={s.listItem}>Several products added gamification, social features, and rewards to push participation</li>
@@ -158,7 +160,7 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '1rem' }}>
+      <div className={`${csLayout.wide} ${csLayout.pt.spacing1}`}>
         <Img
           src={img('benchmarking.png')}
           filename="mentatt/benchmarking.png"
@@ -167,16 +169,16 @@ export default function MentattCaseStudy() {
         />
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>User Interviews</p>
-          <h2 className={s.h2}>Eight participants, three countries, one recurring problem</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>User Interviews</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Eight participants, three countries, one recurring problem</h2>
           <p className={s.body}>
             Semi-structured interviews with 8 participants aged 20–38, from Sweden,
             Brazil, and Canada. I wanted diverse perspectives on mental health tracking
             — not just one cultural context. Three things I specifically explored:
           </p>
-          <ul className={s.list}>
+          <ul className={csTw.list}>
             <li className={s.listItem}><strong>Current habits</strong> — How often did they track their mental health? What methods? What got in the way?</li>
             <li className={s.listItem}><strong>Survey perceptions</strong> — What did weekly surveys feel like? How long was too long?</li>
             <li className={s.listItem}><strong>Feature value</strong> — What would they actually use — recommendations, therapy, activities, learning content, support groups?</li>
@@ -184,8 +186,8 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
-        <div className={s.imgGrid2}>
+      <div className={csLayout.wide}>
+        <div className={csLayout.gridImg2}>
           <div>
             <CaseImg
               src={img('interview-notes.png')}
@@ -205,15 +207,15 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '2rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Key Insights</p>
-          <h2 className={s.h2}>Three things the research made unavoidable</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Key Insights</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Three things the research made unavoidable</h2>
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '2rem' }}>
-        <div className={s.insightGrid} role="list">
+      <div className={`${csLayout.wide} ${csLayout.pb.lg}`}>
+        <div className={csLayout.gridInsight} role="list">
           {[
             {
               num: '01',
@@ -228,9 +230,9 @@ export default function MentattCaseStudy() {
               label: 'Zero willingness to pay at the proposed subscription price. Not hesitation — zero. The revenue model had to change.',
             },
           ].map(i => (
-            <article key={i.num} className={s.insightCard} role="listitem">
-              <span className={s.insightNum}>{i.num}</span>
-              <p className={s.insightLabel}>{i.label}</p>
+            <article key={i.num} className={csTw.insightCard} role="listitem">
+              <span className={csTw.insightNum}>{i.num}</span>
+              <p className={csTw.insightLabel}>{i.label}</p>
             </article>
           ))}
         </div>
@@ -239,24 +241,24 @@ export default function MentattCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           DESIGN CHALLENGES
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Design Challenges</p>
-          <p className={s.dividerTitle}>Four questions that shaped every design decision</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Design Challenges</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>Four questions that shaped every design decision</p>
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '3.5rem', paddingBottom: '2rem' }}>
-        <div className={s.hmwGrid} role="list">
+      <div className={`${csLayout.wide} ${csLayout.pt.section} ${csLayout.pb.lg}`}>
+        <div className={csLayout.gridHmw} role="list">
           {[
             'How might we balance data collection with user experience to reduce survey fatigue without losing the clinical value of the data?',
             'How might we create educational content that is genuinely accessible — not just readable — to users with different mental health literacy levels?',
             'How might we visualise mental health results in a way that is both accurate and empowering, rather than clinical and distressing?',
             'How might we create a positive experience around receiving a mental health score — one that motivates action rather than avoidance?',
           ].map((q, i) => (
-            <div key={i} className={s.hmwCard} role="listitem">
-              <span className={s.hmwLabel}>How Might We</span>
-              <p className={s.hmwQuestion}>{q}</p>
+            <div key={i} className={csTw.hmwCard} role="listitem">
+              <span className={csTw.hmwLabel}>How Might We</span>
+              <p className={csTw.hmwQuestion}>{q}</p>
             </div>
           ))}
         </div>
@@ -265,17 +267,17 @@ export default function MentattCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           DESIGN
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>Design</p>
-          <p className={s.dividerTitle}>Redesigning the survey and the result</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>Design</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>Redesigning the survey and the result</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>The Survey Problem</p>
-          <h2 className={s.h2}>From form to conversation</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>The Survey Problem</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>From form to conversation</h2>
           <p className={s.body}>
             The traditional monthly survey was the core engagement problem. Users were
             opening it, seeing a form, and leaving. The content was fine — the format
@@ -289,19 +291,19 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '2rem' }}>
-        <div className={s.solutionGrid}>
-          <div className={s.solutionBefore}>
-            <span className={s.solutionLabel}>Before</span>
-            <p className={s.solutionText}>
+      <div className={`${csLayout.wide} ${csLayout.pb.lg}`}>
+        <div className={csLayout.gridSolution}>
+          <div className={csTw.solutionBefore}>
+            <span className={`${csTw.solutionLabel} text-(--color-ink-muted)`}>Before</span>
+            <p className={csTw.solutionText}>
               Traditional monthly survey — a list of questions on a single screen.
               Users felt overwhelmed before the first answer. Completion rates were low.
               The data wasn't reaching the product.
             </p>
           </div>
-          <div className={s.solutionAfter}>
-            <span className={s.solutionLabel}>After</span>
-            <p className={s.solutionText}>
+          <div className={csTw.solutionAfter}>
+            <span className={`${csTw.solutionLabel} text-(--accent)`}>After</span>
+            <p className={csTw.solutionText}>
               AI chatbot format — one question at a time, conversational pacing, max
               10 questions. Feels like a check-in, not an assessment. Completion rates
               increased significantly after the format change.
@@ -310,8 +312,8 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide}>
-        <div className={s.imgGrid2}>
+      <div className={csLayout.wide}>
+        <div className={csLayout.gridImg2}>
           <div>
             <CaseImg
               src={img('survey-wireframe.png')}
@@ -331,10 +333,10 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>The Results Problem</p>
-          <h2 className={s.h2}>Making a mental health score feel human</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>The Results Problem</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>Making a mental health score feel human</h2>
           <p className={s.body}>
             Showing someone their mental health score is a design problem with real
             consequences. Get it wrong and users disengage, feel judged, or dismiss
@@ -350,11 +352,11 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.prose}>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
         <p className={s.body} style={{ marginBottom: '0.5rem' }}>
           Colour system for mental health stages:
         </p>
-        <div className={s.palette} role="list" aria-label="Colour palette for mental health stages">
+        <div className={csTw.palette} role="list" aria-label="Colour palette for mental health stages">
           {[
             { color: '#4ade80', label: 'Healthy' },
             { color: '#facc15', label: 'Mild stress' },
@@ -362,20 +364,20 @@ export default function MentattCaseStudy() {
             { color: '#93c5fd', label: 'Low mood' },
             { color: '#c4b5fd', label: 'High stress' },
           ].map(p => (
-            <div key={p.label} className={s.paletteItem} role="listitem">
+            <div key={p.label} className={csTw.paletteItem} role="listitem">
               <div
-                className={s.paletteSwatch}
+                className={csTw.paletteSwatch}
                 style={{ background: p.color }}
                 aria-hidden="true"
               />
-              <span className={s.paletteLabel}>{p.label}</span>
+              <span className={csTw.paletteLabel}>{p.label}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '2rem' }}>
-        <div className={s.imgGrid2}>
+      <div className={`${csLayout.wide} ${csLayout.pt.spacing2}`}>
+        <div className={csLayout.gridImg2}>
           <div>
             <CaseImg
               src={img('results-wireframe.png')}
@@ -395,7 +397,7 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingTop: '1rem' }}>
+      <div className={`${csLayout.wide} ${csLayout.pt.spacing1}`}>
         <Img
           src={img('results-annual.png')}
           filename="mentatt/results-annual.png"
@@ -407,17 +409,17 @@ export default function MentattCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           USER TESTING
       ══════════════════════════════════════════════════════ */}
-      <div className={s.divider} aria-hidden="true">
-        <div className={s.dividerInner}>
-          <p className={s.dividerLabel}>User Testing</p>
-          <p className={s.dividerTitle}>What we removed, what we kept</p>
+      <div className={`${csLayout.divider}`} aria-hidden="true">
+        <div className={csLayout.dividerInner}>
+          <p className={`${s.dividerLabel} ${csTw.dividerLabel}`}>User Testing</p>
+          <p className={`${s.dividerTitle} ${csTw.dividerTitle}`}>What we removed, what we kept</p>
         </div>
       </div>
 
-      <div className={s.prose} style={{ paddingTop: '3.5rem' }}>
-        <div className={s.sectionSm}>
-          <p className={s.sectionEyebrow}>Testing Findings</p>
-          <h2 className={s.h2}>The prototype showed us two things to change</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <div className={csTw.sectionSm}>
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Testing Findings</p>
+          <h2 className={`${s.h2} ${csTw.h2}`}>The prototype showed us two things to change</h2>
           <p className={s.body}>
             We put the wireframes in front of users before finalising the design.
             Two findings came back clearly enough to act on immediately.
@@ -425,8 +427,8 @@ export default function MentattCaseStudy() {
         </div>
       </div>
 
-      <div className={s.wide} style={{ paddingBottom: '2rem' }}>
-        <div className={s.testingList}>
+      <div className={`${csLayout.wide} ${csLayout.pb.lg}`}>
+        <div className={csTw.findingsList}>
           {[
             {
               type: 'removed',
@@ -446,17 +448,17 @@ export default function MentattCaseStudy() {
           ].map((item, i) => (
             <div
               key={i}
-              className={`${s.testingItem} ${item.type === 'removed' ? s.testingRemoved : s.testingKept}`}
+              className={`${csTw.testingItem} ${item.type === 'removed' ? csTw.testingRemoved : csTw.testingKept}`}
             >
-              <span className={s.testingBadge}>{item.badge}</span>
-              <p className={s.testingText}>{item.text}</p>
+              <span className={csTw.testingBadge}>{item.badge}</span>
+              <p className={csTw.testingText}>{item.text}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className={s.wide}>
-        <div className={s.imgGrid3}>
+      <div className={csLayout.wide}>
+        <div className={csLayout.gridImg3}>
           <div>
             <CaseImg
               src={img('final-home.png')}
@@ -487,10 +489,10 @@ export default function MentattCaseStudy() {
       {/* ══════════════════════════════════════════════════════
           OUTCOMES
       ══════════════════════════════════════════════════════ */}
-      <div className={s.prose} style={{ paddingTop: '4rem' }}>
-        <section className={s.section} aria-labelledby="outcomes-heading">
-          <p className={s.sectionEyebrow}>Outcomes</p>
-          <h2 id="outcomes-heading" className={s.h2}>What the project delivered</h2>
+      <div className={`${csLayout.prose} ${csLayout.pt.section}`}>
+        <section className={csTw.section} aria-labelledby="outcomes-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Outcomes</p>
+          <h2 id="outcomes-heading" className={`${s.h2} ${csTw.h2}`}>What the project delivered</h2>
           <p className={s.body}>
             The most consequential recommendation wasn't a design decision — it was a
             business one. The research found zero willingness to pay for a subscription.
@@ -507,7 +509,7 @@ export default function MentattCaseStudy() {
             </p>
           </div>
 
-          <div className={s.outcomes} role="list">
+          <div className={csLayout.gridOutcomes} role="list">
             {[
               { num: '5',       label: 'Competitors analysed for engagement patterns and feature benchmarking' },
               { num: '8',       label: 'Participants interviewed across Sweden, Brazil, and Canada' },
@@ -516,17 +518,17 @@ export default function MentattCaseStudy() {
               { num: '1',       label: 'Feature removed after testing — the daily emotion calendar' },
               { num: 'Adopted', label: 'Revenue model recommendation — corporate partnerships and grants over subscriptions' },
             ].map(o => (
-              <div key={o.num + o.label} className={s.outcomeStat} role="listitem">
-                <span className={s.outcomeNum}>{o.num}</span>
+              <div key={o.num + o.label} className={csTw.outcomeStat} role="listitem">
+                <span className={csTw.outcomeNum}>{o.num}</span>
                 <span className={s.outcomeLabel}>{o.label}</span>
               </div>
             ))}
           </div>
         </section>
 
-        <section className={s.section} aria-labelledby="reflection-heading">
-          <p className={s.sectionEyebrow}>Reflection</p>
-          <h2 id="reflection-heading" className={s.h2}>What I took away</h2>
+        <section className={csTw.section} aria-labelledby="reflection-heading">
+          <p className={`${s.sectionEyebrow} ${csTw.sectionEyebrow}`}>Reflection</p>
+          <h2 id="reflection-heading" className={`${s.h2} ${csTw.h2}`}>What I took away</h2>
           <p className={s.body}>
             The format of an interaction is as consequential as its content. The survey
             data didn't change — we just changed how it was collected. But that format

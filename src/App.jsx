@@ -15,7 +15,7 @@ function App() {
       {/* 1. The Basename handles the /portfolio/ sub-folder */}
       <Router basename={import.meta.env.BASE_URL}>
                 <DocumentTitle />
-        <div className="flex flex-col min-h-screen bg-page-bg text-page-text transition-colors duration-300">
+        <div className="site-atmosphere flex flex-col min-h-screen text-page-text transition-colors duration-300">
           <Navbar />
 
           <div className="flex-grow">
